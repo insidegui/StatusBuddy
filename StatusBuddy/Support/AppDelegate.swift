@@ -27,8 +27,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var popover = NSPopover()
 
     private lazy var statusController: StatusViewController = {
-        StatusViewController(provider: provider)
+        StatusViewController(provider: provider, preferences: preferences)
     }()
+
+    private let preferences = Preferences()
 
     private var eventMonitor: EventMonitor?
 

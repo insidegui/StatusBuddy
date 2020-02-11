@@ -23,6 +23,8 @@
 		DD88E58A23F371BF009C4060 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E58923F371BF009C4060 /* EventMonitor.swift */; };
 		DD88E59323F37452009C4060 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E59123F3744A009C4060 /* Sparkle.framework */; };
 		DD88E59523F37488009C4060 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E59123F3744A009C4060 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DD88E59923F37583009C4060 /* SharedFileList.m in Sources */ = {isa = PBXBuildFile; fileRef = DD88E59723F37583009C4060 /* SharedFileList.m */; };
+		DD88E59B23F375AB009C4060 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E59A23F375AB009C4060 /* Preferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,10 @@
 		DD88E58723F370AB009C4060 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		DD88E58923F371BF009C4060 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		DD88E59123F3744A009C4060 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		DD88E59623F37583009C4060 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		DD88E59723F37583009C4060 /* SharedFileList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedFileList.m; sourceTree = "<group>"; };
+		DD88E59823F37583009C4060 /* SharedFileList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedFileList.h; sourceTree = "<group>"; };
+		DD88E59A23F375AB009C4060 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,8 +180,12 @@
 		DD88E58B23F37395009C4060 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				DD88E59623F37583009C4060 /* BridgingHeader.h */,
+				DD88E59823F37583009C4060 /* SharedFileList.h */,
+				DD88E59723F37583009C4060 /* SharedFileList.m */,
 				DD88E55323F34ECE009C4060 /* AppDelegate.swift */,
 				DD88E58923F371BF009C4060 /* EventMonitor.swift */,
+				DD88E59A23F375AB009C4060 /* Preferences.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -348,6 +358,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD88E55623F34ECE009C4060 /* ContentView.swift in Sources */,
+				DD88E59923F37583009C4060 /* SharedFileList.m in Sources */,
+				DD88E59B23F375AB009C4060 /* Preferences.swift in Sources */,
 				DD88E58823F370AB009C4060 /* StatusViewController.swift in Sources */,
 				DD88E55423F34ECE009C4060 /* AppDelegate.swift in Sources */,
 				DD88E58A23F371BF009C4060 /* EventMonitor.swift in Sources */,
@@ -524,6 +536,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = StatusBuddy/Support/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -552,6 +565,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = StatusBuddy/Support/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

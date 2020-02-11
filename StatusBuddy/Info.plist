@@ -34,5 +34,7 @@
 	<true/>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
+	<key>SUFeedURL</key>
+	<string>https://su.statusbuddy.app/appcast.xml</string>
 </dict>
 </plist>

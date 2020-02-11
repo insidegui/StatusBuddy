@@ -88,7 +88,9 @@ extension Service {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(StatusProvider())
+        ContentView()
+            .environmentObject(StatusProvider())
+            .environmentObject(Preferences())
     }
 }
 

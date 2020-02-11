@@ -14,9 +14,11 @@ import StatusCore
 class StatusViewController: NSViewController {
 
     let provider: StatusProvider
+    let preferences: Preferences
 
-    init(provider: StatusProvider) {
+    init(provider: StatusProvider, preferences: Preferences) {
         self.provider = provider
+        self.preferences = preferences
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,7 +32,9 @@ class StatusViewController: NSViewController {
 
         preferredContentSize = NSSize(width: 340, height: 260)
 
-        let contentView = ContentView().environmentObject(provider)
+        let contentView = ContentView()
+            .environmentObject(provider)
+            .environmentObject(preferences)
         let hoster = NSHostingController(rootView: contentView)
         addChild(hoster)
         hoster.view.autoresizingMask = [.width, .height]
