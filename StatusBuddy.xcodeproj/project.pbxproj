@@ -21,6 +21,8 @@
 		DD88E58423F3598F009C4060 /* StatusProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E58323F3598F009C4060 /* StatusProvider.swift */; };
 		DD88E58823F370AB009C4060 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E58723F370AB009C4060 /* StatusViewController.swift */; };
 		DD88E58A23F371BF009C4060 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E58923F371BF009C4060 /* EventMonitor.swift */; };
+		DD88E59323F37452009C4060 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E59123F3744A009C4060 /* Sparkle.framework */; };
+		DD88E59523F37488009C4060 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E59123F3744A009C4060 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				DD88E57323F34EE1009C4060 /* StatusCore.framework in Embed Frameworks */,
+				DD88E59523F37488009C4060 /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,6 +68,7 @@
 		DD88E58323F3598F009C4060 /* StatusProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusProvider.swift; sourceTree = "<group>"; };
 		DD88E58723F370AB009C4060 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		DD88E58923F371BF009C4060 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		DD88E59123F3744A009C4060 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD88E57223F34EE1009C4060 /* StatusCore.framework in Frameworks */,
+				DD88E59323F37452009C4060 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,9 +94,11 @@
 		DD88E54723F34ECE009C4060 = {
 			isa = PBXGroup;
 			children = (
+				DD88E59023F3744A009C4060 /* Vendor */,
 				DD88E55223F34ECE009C4060 /* StatusBuddy */,
 				DD88E56C23F34EE1009C4060 /* StatusCore */,
 				DD88E55123F34ECE009C4060 /* Products */,
+				DD88E59223F37452009C4060 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,6 +196,21 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		DD88E59023F3744A009C4060 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				DD88E59123F3744A009C4060 /* Sparkle.framework */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		DD88E59223F37452009C4060 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -207,6 +229,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD88E56323F34ECE009C4060 /* Build configuration list for PBXNativeTarget "StatusBuddy" */;
 			buildPhases = (
+				DD88E59423F37462009C4060 /* Fix Sparkle for notarization */,
 				DD88E54C23F34ECE009C4060 /* Sources */,
 				DD88E54D23F34ECE009C4060 /* Frameworks */,
 				DD88E54E23F34ECE009C4060 /* Resources */,
@@ -297,6 +320,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DD88E59423F37462009C4060 /* Fix Sparkle for notarization */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fix Sparkle for notarization";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n    exit 0\nfi\nif [ \"${CONFIGURATION}\" = \"Beta-Debug\" ]; then\n    exit 0\nfi\n\nVENDOR_DIR=\"Vendor\"\nSPARKLE_AUTOUPDATE_PATH=\"${VENDOR_DIR}/Sparkle.framework/Resources/Autoupdate.app\"\ncodesign --force --deep -o runtime --sign \"$CODE_SIGN_IDENTITY\" \"$SPARKLE_AUTOUPDATE_PATH\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DD88E54C23F34ECE009C4060 /* Sources */ = {
@@ -468,6 +512,10 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				INFOPLIST_FILE = StatusBuddy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -492,6 +540,10 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				INFOPLIST_FILE = StatusBuddy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
