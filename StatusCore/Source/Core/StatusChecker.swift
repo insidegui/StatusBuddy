@@ -46,8 +46,8 @@ public final class StatusChecker: ObservableObject {
             .decode(type: StatusResponse.self, decoder: decoder)
             .retry(3)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in }, receiveValue: { value in
-                self.currentStatus = value
+            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] value in
+                self?.currentStatus = value
             })
 
         inFlightCheck = cancellable

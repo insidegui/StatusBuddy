@@ -28,6 +28,7 @@
 		DDCC3E6E23F377A0006BF12B /* ServiceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCC3E6D23F377A0006BF12B /* ServiceStatusView.swift */; };
 		DDCC3E7123F377E2006BF12B /* Service+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCC3E7023F377E2006BF12B /* Service+UI.swift */; };
 		DDCC3E7323F37824006BF12B /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCC3E7223F37824006BF12B /* PreferencesView.swift */; };
+		DDCC3E7623F38FC1006BF12B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCC3E7523F38FC1006BF12B /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		DDCC3E6D23F377A0006BF12B /* ServiceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceStatusView.swift; sourceTree = "<group>"; };
 		DDCC3E7023F377E2006BF12B /* Service+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+UI.swift"; sourceTree = "<group>"; };
 		DDCC3E7223F37824006BF12B /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		DDCC3E7523F38FC1006BF12B /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 				DD88E55523F34ECE009C4060 /* MainView.swift */,
 				DDCC3E6D23F377A0006BF12B /* ServiceStatusView.swift */,
 				DDCC3E7223F37824006BF12B /* PreferencesView.swift */,
+				DDCC3E7523F38FC1006BF12B /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				DD88E55623F34ECE009C4060 /* MainView.swift in Sources */,
 				DD88E59923F37583009C4060 /* SharedFileList.m in Sources */,
 				DD88E59B23F375AB009C4060 /* Preferences.swift in Sources */,
+				DDCC3E7623F38FC1006BF12B /* LoadingView.swift in Sources */,
 				DD88E58823F370AB009C4060 /* StatusViewController.swift in Sources */,
 				DDCC3E7323F37824006BF12B /* PreferencesView.swift in Sources */,
 				DD88E55423F34ECE009C4060 /* AppDelegate.swift in Sources */,

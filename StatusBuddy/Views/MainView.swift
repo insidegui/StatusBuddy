@@ -25,21 +25,25 @@ struct MainView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                TextField("Search", text: $searchTerm)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                PreferencesView()
-            }.padding(EdgeInsets(top: 10, leading: 14, bottom: 4, trailing: 14))
+            if dataSource.isPerformingInitialLoad {
+                LoadingView(spinning: true)
+            } else {
+                HStack {
+                    TextField("Search", text: $searchTerm)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    PreferencesView()
+                }.padding(EdgeInsets(top: 10, leading: 14, bottom: 4, trailing: 14))
 
-            Rectangle().frame(height: 1)
-                .foregroundColor(Color(.separatorColor))
-                .padding([.top, .bottom], 6)
+                Rectangle().frame(height: 1)
+                    .foregroundColor(Color(.separatorColor))
+                    .padding([.top, .bottom], 6)
 
-            List {
-                ForEach(sortedServices) { service in
-                    ServiceStatusView(service)
-                }
-            }.listStyle(SidebarListStyle())
+                List {
+                    ForEach(sortedServices) { service in
+                        ServiceStatusView(service)
+                    }
+                }.listStyle(SidebarListStyle())
+            }
         }
     }
 }

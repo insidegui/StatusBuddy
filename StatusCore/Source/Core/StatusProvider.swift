@@ -20,6 +20,8 @@ public final class StatusProvider: ObservableObject {
     @Published public var activeIssues = Set<Service.Event>()
     @Published public var resolvedIssues = Set<Service.Event>()
 
+    @Published public var isPerformingInitialLoad = true
+
     public private(set) lazy var developerChecker: StatusChecker = {
         StatusChecker(endpoint: URL(string: "https://www.apple.com/support/systemstatus/data/developer/system_status_en_US.js?callback=jsonCallback")!)
     }()
@@ -43,6 +45,14 @@ public final class StatusProvider: ObservableObject {
     }
 
     public init() {
+        let developerLoaded = developerChecker.$currentStatus.map({ $0 == nil ? false : true })
+        let consumerLoaded = consumerChecker.$currentStatus.map({ $0 == nil ? false : true })
+
+        let finishedLoad = developerLoaded.combineLatest(consumerLoaded, { $0 || $1 }).map({ !$0 })
+        let initialLoadFinishedBinding = finishedLoad.assign(to: \.isPerformingInitialLoad, on: self)
+
+        cancellables.append(initialLoadFinishedBinding)
+
         let activeDeveloperIssuesPublisher = mapIssues(in: developerChecker.$currentStatus, filter: { $0.epochEndDate == nil } )
         let activeConsumerIssuesPublisher = mapIssues(in: consumerChecker.$currentStatus, filter: { $0.epochEndDate == nil } )
         let activeIssuesBinding = activeDeveloperIssuesPublisher.append(activeConsumerIssuesPublisher).assign(to: \.activeIssues, on: self)
