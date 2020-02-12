@@ -17,12 +17,26 @@ public final class StatusChecker: ObservableObject {
     let endpoint: URL
     public var autoCheckInterval: TimeInterval?
 
-    public init(endpoint: URL, autoCheckInterval: TimeInterval? = 600) {
+    public init(endpoint: URL, autoCheckInterval: TimeInterval? = 300) {
         self.endpoint = endpoint
         self.autoCheckInterval = autoCheckInterval
 
         startAutoCheckTimer()
         check()
+    }
+
+    private var currentURL: URL {
+        guard var components = URLComponents(url: endpoint, resolvingAgainstBaseURL: false) else {
+            return endpoint
+        }
+
+        // Copying the same behavior from Apple's web UI.
+        var queryItems: [URLQueryItem] = components.queryItems ?? []
+        queryItems.append(URLQueryItem(name: "_", value: String(Date().timeIntervalSince1970)))
+
+        components.queryItems = queryItems
+
+        return components.url ?? endpoint
     }
 
     @Published public private(set) var currentStatus: StatusResponse?
@@ -40,13 +54,19 @@ public final class StatusChecker: ObservableObject {
         return decoder
     }()
 
+    func clear() {
+        currentStatus = nil
+    }
+
     @discardableResult public func check() -> Cancellable {
         os_log("%{public}@", log: log, type: .debug, #function)
 
         inFlightCheck?.cancel()
         inFlightCheck = nil
+
+        let url = currentURL
         
-        let cancellable = session.dataTaskPublisher(for: endpoint)
+        let cancellable = session.dataTaskPublisher(for: url)
             .map({ $0.data.demanglingAppleDeveloperStatusResponseIfNeeded })
             .decode(type: StatusResponse.self, decoder: decoder)
             .retry(3)
@@ -56,9 +76,9 @@ public final class StatusChecker: ObservableObject {
 
                 switch completion {
                 case .finished:
-                    os_log("Finished loading %{public}@", log: self.log, type: .debug, self.endpoint.absoluteString)
+                    os_log("Finished loading %{public}@", log: self.log, type: .debug, url.absoluteString)
                 case .failure(let error):
-                    os_log("Error loading %{public}@: %{public}@", log: self.log, type: .error, self.endpoint.absoluteString, String(describing: error))
+                    os_log("Error loading %{public}@: %{public}@", log: self.log, type: .error, url.absoluteString, String(describing: error))
                 }
             }, receiveValue: { [weak self] value in
                 self?.currentStatus = value

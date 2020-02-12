@@ -81,6 +81,11 @@ public final class StatusProvider: ObservableObject {
     }
 
     public func check() {
+        developerChecker.clear()
+        consumerChecker.clear()
+
+        isPerformingInitialLoad = true
+        
         developerChecker.check()
         consumerChecker.check()
     }
