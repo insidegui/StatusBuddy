@@ -15,9 +15,19 @@ final class Preferences: ObservableObject {
 
     private var appURL: URL { Bundle.main.bundleURL }
 
+    @Published private var _launchAtLoginEnabled: Bool = false
+
+    init() {
+        _launchAtLoginEnabled = launchAtLoginEnabled
+    }
+
     var launchAtLoginEnabled: Bool {
-        get { SharedFileList.sessionLoginItems().containsItem(appURL) }
+        get {
+            _launchAtLoginEnabled || SharedFileList.sessionLoginItems().containsItem(appURL)
+        }
         set {
+            _launchAtLoginEnabled = newValue
+
             if newValue {
                 SharedFileList.sessionLoginItems().addItem(appURL)
             } else {

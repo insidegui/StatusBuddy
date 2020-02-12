@@ -11,6 +11,7 @@ import StatusCore
 
 struct MainView: View {
     @EnvironmentObject var dataSource: StatusProvider
+    @EnvironmentObject var preferences: Preferences
 
     private var sortedServices: [Service] {
         let allServices = dataSource.consumerServices + dataSource.developerServices
@@ -24,9 +25,11 @@ struct MainView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TextField("Search", text: $searchTerm)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(EdgeInsets(top: 10, leading: 14, bottom: 4, trailing: 14))
+            HStack {
+                TextField("Search", text: $searchTerm)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                PreferencesView()
+            }.padding(EdgeInsets(top: 10, leading: 14, bottom: 4, trailing: 14))
 
             Rectangle().frame(height: 1)
                 .foregroundColor(Color(.separatorColor))
@@ -34,67 +37,9 @@ struct MainView: View {
 
             List {
                 ForEach(sortedServices) { service in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(service.serviceName)
-
-                            if !service.events.isEmpty {
-                                Text(service.eventMessage)
-                                    .foregroundColor(Color(.secondaryLabelColor))
-                                    .font(.system(size: 11))
-                                    .lineLimit(2)
-                            }
-                        }.padding([.top, .bottom], 4)
-                        Spacer()
-                        Circle()
-                            .frame(width: 10, height: 10, alignment: .center)
-                            .foregroundColor(service.statusColor)
-                    }
+                    ServiceStatusView(service)
                 }
             }.listStyle(SidebarListStyle())
         }
     }
-}
-
-extension Service {
-    var statusColor: Color {
-        guard !events.isEmpty else { return .green }
-
-        if events[0].epochEndDate == nil {
-            return .red
-        } else {
-            return .yellow
-        }
-    }
-
-    private static let dateFormatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateStyle = .short
-        f.timeStyle = .short
-        return f
-    }()
-
-    var eventMessage: String {
-        guard let event = events.first else { return "" }
-
-        var suffix = ""
-        if let endDate = event.epochEndDate {
-            suffix = "\n(Ended \(Self.dateFormatter.string(from: endDate)))"
-        }
-
-        return event.message + suffix
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-            .environmentObject(StatusProvider())
-            .environmentObject(Preferences())
-    }
-}
-
-extension Service: Identifiable {
-    public typealias ID = String
-    public var id: String { serviceName }
 }
