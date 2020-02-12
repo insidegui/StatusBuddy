@@ -16,7 +16,7 @@ struct MainView: View {
     private var sortedServices: [Service] {
         let allServices = dataSource.consumerServices + dataSource.developerServices
         return allServices
-            .filter({ searchTerm.isEmpty ? true : $0.serviceName.lowercased().contains(searchTerm) })
+            .filter({ searchTerm.isEmpty ? true : $0.serviceName.lowercased().contains(searchTerm.lowercased()) })
             .sorted(by: { $0.serviceName < $1.serviceName })
             .sorted(by: { $0.events.count > $1.events.count })
     }

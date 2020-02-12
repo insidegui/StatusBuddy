@@ -56,7 +56,7 @@ public final class StatusProvider: ObservableObject {
         publisher
             .map({ $0?.services })
             .replaceNil(with: [Service]())
-            .map({ $0.compactMap({ $0.events.sorted(by: { ($0.epochEndDate ?? .distantPast) < ($1.epochEndDate ?? .distantPast) }).last }) })
+            .map({ $0.compactMap({ $0.eventsSortedByEndDate.last }) })
             .map({ $0.filter({ filter($0) }) })
             .catch({ _ in Empty<[Service.Event], Never>() })
             .eraseToAnyPublisher()

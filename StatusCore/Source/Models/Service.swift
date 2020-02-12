@@ -21,3 +21,9 @@ public struct Service: Hashable, Codable {
     public let redirectUrl: URL?
     public let events: [Event]
 }
+
+public extension Service {
+    var eventsSortedByEndDate: [Event] {
+        events.sorted(by: { ($0.epochEndDate ?? .distantPast) < ($1.epochEndDate ?? .distantPast) })
+    }
+}
