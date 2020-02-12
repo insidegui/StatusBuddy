@@ -13,3 +13,5 @@ StatusBuddy is a simple app that shows an icon on your Mac's menu bar. When an A
 StatusBuddy is a side-project of mine and is available for free (it's also open-source). If you prefer, you can pay any amount you'd like in order to support its continued development.
 
 [You can always get the latest build on Gumroad](https://statusbuddy.app).
+
+**StatusBuddy is written in SwiftUI and requires macOS Catalina**
