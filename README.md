@@ -1,5 +1,3 @@
-![screenshot](./screenshots/icon.png | width=220)
-
 <img src="./screenshots/icon.png" width="220">
 
 # StatusBuddy
