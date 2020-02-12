@@ -32,7 +32,7 @@ class StatusViewController: NSViewController {
 
         preferredContentSize = NSSize(width: 340, height: 260)
 
-        let contentView = ContentView()
+        let contentView = MainView()
             .environmentObject(provider)
             .environmentObject(preferences)
         let hoster = NSHostingController(rootView: contentView)
