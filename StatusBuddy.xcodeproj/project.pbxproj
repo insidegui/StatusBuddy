@@ -259,7 +259,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD88E56323F34ECE009C4060 /* Build configuration list for PBXNativeTarget "StatusBuddy" */;
 			buildPhases = (
-				DD88E59423F37462009C4060 /* Fix Sparkle for notarization */,
 				DD88E54C23F34ECE009C4060 /* Sources */,
 				DD88E54D23F34ECE009C4060 /* Frameworks */,
 				DD88E54E23F34ECE009C4060 /* Resources */,
@@ -350,27 +349,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		DD88E59423F37462009C4060 /* Fix Sparkle for notarization */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Fix Sparkle for notarization";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n    exit 0\nfi\nif [ \"${CONFIGURATION}\" = \"Beta-Debug\" ]; then\n    exit 0\nfi\n\nVENDOR_DIR=\"Vendor\"\nSPARKLE_AUTOUPDATE_PATH=\"${VENDOR_DIR}/Sparkle.framework/Resources/Autoupdate.app\"\ncodesign --force --deep -o runtime --sign \"$CODE_SIGN_IDENTITY\" \"$SPARKLE_AUTOUPDATE_PATH\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DD88E54C23F34ECE009C4060 /* Sources */ = {
