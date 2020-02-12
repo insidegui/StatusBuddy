@@ -30,7 +30,7 @@ class StatusViewController: NSViewController {
     override func loadView() {
         view = NSView()
 
-        preferredContentSize = NSSize(width: 340, height: 260)
+        preferredContentSize = NSSize(width: 340, height: 280)
 
         let contentView = MainView()
             .environmentObject(provider)
