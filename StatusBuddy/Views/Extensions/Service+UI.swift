@@ -19,7 +19,7 @@ extension Service {
     var statusColor: Color {
         guard !events.isEmpty else { return .green }
 
-        if events[0].epochEndDate == nil {
+        if events.last?.epochEndDate == nil {
             return .red
         } else {
             return .yellow
@@ -34,7 +34,7 @@ extension Service {
     }()
 
     var eventMessage: String {
-        guard let event = events.first else { return "" }
+        guard let event = events.last else { return "" }
 
         var suffix = ""
         if let endDate = event.epochEndDate {

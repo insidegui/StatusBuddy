@@ -10,24 +10,42 @@ import Foundation
 import Combine
 
 typealias ServiceEventFilter = (Service.Event) -> Bool
-typealias AnyServiceEventPublisher = AnyPublisher<Set<Service.Event>, Never>
+typealias AnyServiceEventPublisher = AnyPublisher<[Service.Event], Never>
 
 public final class StatusProvider: ObservableObject {
 
     @Published public var developerServices: [Service] = []
     @Published public var consumerServices: [Service] = []
 
-    @Published public var activeIssues = Set<Service.Event>()
-    @Published public var resolvedIssues = Set<Service.Event>()
+    @Published public var activeIssues: [Service.Event] = []
+    @Published public var resolvedIssues: [Service.Event] = []
 
     @Published public var isPerformingInitialLoad = true
 
+    private var developerFeedURL: URL {
+        if let overrideStr = UserDefaults.standard.string(forKey: "SBDeveloperFeedURL"),
+            let overrideURL = URL(string: overrideStr) {
+            return overrideURL
+        } else {
+            return URL(string: "https://www.apple.com/support/systemstatus/data/developer/system_status_en_US.js?callback=jsonCallback")!
+        }
+    }
+
+    private var consumerFeedURL: URL {
+        if let overrideStr = UserDefaults.standard.string(forKey: "SBConsumerFeedURL"),
+            let overrideURL = URL(string: overrideStr) {
+            return overrideURL
+        } else {
+            return URL(string: "https://www.apple.com/support/systemstatus/data/system_status_en_US.js")!
+        }
+    }
+
     public private(set) lazy var developerChecker: StatusChecker = {
-        StatusChecker(endpoint: URL(string: "https://www.apple.com/support/systemstatus/data/developer/system_status_en_US.js?callback=jsonCallback")!)
+        StatusChecker(endpoint: developerFeedURL)
     }()
 
     public private(set) lazy var consumerChecker: StatusChecker = {
-        StatusChecker(endpoint: URL(string: "https://www.apple.com/support/systemstatus/data/system_status_en_US.js")!)
+        StatusChecker(endpoint: consumerFeedURL)
     }()
 
     private var cancellables: [Cancellable] = []
@@ -38,9 +56,9 @@ public final class StatusProvider: ObservableObject {
         publisher
             .map({ $0?.services })
             .replaceNil(with: [Service]())
-            .map({ $0.flatMap({ $0.events }) })
-            .map({ Set($0) })
-            .catch({ _ in Empty<Set<Service.Event>, Never>() })
+            .map({ $0.compactMap({ $0.events.sorted(by: { ($0.epochEndDate ?? .distantPast) < ($1.epochEndDate ?? .distantPast) }).last }) })
+            .map({ $0.filter({ filter($0) }) })
+            .catch({ _ in Empty<[Service.Event], Never>() })
             .eraseToAnyPublisher()
     }
 
@@ -55,7 +73,8 @@ public final class StatusProvider: ObservableObject {
 
         let activeDeveloperIssuesPublisher = mapIssues(in: developerChecker.$currentStatus, filter: { $0.epochEndDate == nil } )
         let activeConsumerIssuesPublisher = mapIssues(in: consumerChecker.$currentStatus, filter: { $0.epochEndDate == nil } )
-        let activeIssuesBinding = activeDeveloperIssuesPublisher.append(activeConsumerIssuesPublisher).assign(to: \.activeIssues, on: self)
+        let activeIssuesPublisher = activeDeveloperIssuesPublisher.combineLatest(activeConsumerIssuesPublisher).map({ $0.0 + $0.1 })
+        let activeIssuesBinding = activeIssuesPublisher.assign(to: \.activeIssues, on: self)
 
         cancellables.append(activeIssuesBinding)
 
