@@ -24,6 +24,11 @@ struct PreferencesView: View {
                 }.offset(x: -14, y: 0)
             })
             Button(action: checkForUpdates, label: { Text("Check for Updates") })
+            Button(action: openWebsite, label: { Text("Website") })
+            Button(action: openGithub, label: { Text("GitHub") })
+            VStack {
+                Divider()
+            }
             Button(action: quit, label: { Text("Quit") })
         }
         .menuButtonStyle(BorderlessButtonMenuButtonStyle())
@@ -36,6 +41,14 @@ struct PreferencesView: View {
 
     private func checkForUpdates() {
         SUUpdater.shared()?.checkForUpdates(nil)
+    }
+
+    private func openWebsite() {
+        _ = NSWorkspace.shared.open(URL(string: "https://statusbuddy.app")!)
+    }
+
+    private func openGithub() {
+        _ = NSWorkspace.shared.open(URL(string: "https://github.com/insidegui/StatusBuddy")!)
     }
 
     private func quit() {
