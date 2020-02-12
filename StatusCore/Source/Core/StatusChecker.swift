@@ -8,8 +8,11 @@
 
 import Foundation
 import Combine
+import os.log
 
 public final class StatusChecker: ObservableObject {
+
+    private let log = OSLog(subsystem: "StatusCore", category: String(describing: StatusChecker.self))
 
     let endpoint: URL
     public var autoCheckInterval: TimeInterval?
@@ -38,6 +41,8 @@ public final class StatusChecker: ObservableObject {
     }()
 
     @discardableResult public func check() -> Cancellable {
+        os_log("%{public}@", log: log, type: .debug, #function)
+
         inFlightCheck?.cancel()
         inFlightCheck = nil
         
@@ -46,7 +51,16 @@ public final class StatusChecker: ObservableObject {
             .decode(type: StatusResponse.self, decoder: decoder)
             .retry(3)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] value in
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
+
+                switch completion {
+                case .finished:
+                    os_log("Finished loading %{public}@", log: self.log, type: .debug, self.endpoint.absoluteString)
+                case .failure(let error):
+                    os_log("Error loading %{public}@: %{public}@", log: self.log, type: .error, self.endpoint.absoluteString, String(describing: error))
+                }
+            }, receiveValue: { [weak self] value in
                 self?.currentStatus = value
             })
 
@@ -59,6 +73,8 @@ public final class StatusChecker: ObservableObject {
     private var autoCheckTimer: Timer?
 
     private func startAutoCheckTimer() {
+        os_log("%{public}@", log: log, type: .debug, #function)
+
         autoCheckTimer?.invalidate()
 
         guard let interval = autoCheckInterval else { return }
