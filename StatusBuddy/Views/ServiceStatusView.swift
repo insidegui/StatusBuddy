@@ -29,12 +29,6 @@ struct ServiceStatusView: View {
                         .foregroundColor(Color(.secondaryLabelColor))
                         .font(.system(size: 11))
                         .fixedSize(horizontal: false, vertical: true)
-                    Text(service.eventStartDate)
-                        .foregroundColor(Color(.secondaryLabelColor))
-                        .font(.system(size: 11))
-                    Text(service.eventEndDate)
-                        .foregroundColor(Color(.secondaryLabelColor))
-                        .font(.system(size: 11))
                 }
             }.padding([.top, .bottom], (service.events.isEmpty ? 4 : 8))
             Spacer()
