@@ -12,6 +12,8 @@ import StatusCore
 struct ServiceStatusView: View {
     let service: Service
 
+    @State private var circleHover: Bool = false
+
     init(_ service: Service) {
         self.service = service
         print(service.eventMessage)
@@ -30,11 +32,26 @@ struct ServiceStatusView: View {
                         .font(.system(size: 11))
                         .fixedSize(horizontal: false, vertical: true)
                 }
-            }.padding([.top, .bottom], (service.events.isEmpty ? 4 : 8))
+            }.padding([.top, .bottom], (service.events.isEmpty ? 4.0 : 8.0))
             Spacer()
             Circle()
                 .frame(width: 10, height: 10, alignment: .center)
                 .foregroundColor(service.statusColor)
+                .onHover(perform: { _ in
+                    if !self.service.events.isEmpty {
+                        self.circleHover.toggle()
+                    }
+                })
+                .popover(isPresented: $circleHover, content: {
+                    Text(self.service.eventStartDate)
+                        .foregroundColor(Color(.secondaryLabelColor))
+                        .font(.system(size: 11))
+                        .padding([.all], 3)
+                    Text(self.service.eventEndDate)
+                        .foregroundColor(Color(.secondaryLabelColor))
+                        .font(.system(size: 11))
+                        .padding([.all], 3)
+                })
         }
     }
 }
