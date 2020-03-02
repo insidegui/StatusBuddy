@@ -36,11 +36,26 @@ extension Service {
     var eventMessage: String {
         guard let event = events.last else { return "" }
 
-        var suffix = ""
-        if let endDate = event.epochEndDate {
-            suffix = "\n(Ended \(Self.dateFormatter.string(from: endDate)))"
+        return event.message
+    }
+
+    var eventStartDate: String {
+        guard let event = events.last else { return "" }
+
+        if let startDate = event.epochStartDate {
+            return "Start: \(Self.dateFormatter.string(from: startDate))"
         }
 
-        return event.message + suffix
+        return ""
+    }
+
+    var eventEndDate: String {
+        guard let event = events.last else { return "" }
+
+        if let endDate = event.epochEndDate {
+            return "End: \(Self.dateFormatter.string(from: endDate))"
+        }
+
+        return "No end date given."
     }
 }

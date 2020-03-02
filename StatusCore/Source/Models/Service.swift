@@ -11,7 +11,7 @@ import Foundation
 public struct Service: Hashable, Codable {
 
     public struct Event: Hashable, Codable {
-        public let epochStartDate: Date
+        public let epochStartDate: Date?
         public let epochEndDate: Date?
         public let message: String
         public let eventStatus: String
