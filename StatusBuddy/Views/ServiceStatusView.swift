@@ -43,14 +43,13 @@ struct ServiceStatusView: View {
                     }
                 })
                 .popover(isPresented: $circleHover, content: {
-                    Text(self.service.eventStartDate)
-                        .foregroundColor(Color(.secondaryLabelColor))
-                        .font(.system(size: 11))
-                        .padding([.all], 3)
-                    Text(self.service.eventEndDate)
-                        .foregroundColor(Color(.secondaryLabelColor))
-                        .font(.system(size: 11))
-                        .padding([.all], 3)
+                    VStack(alignment: .trailing, spacing: 6) {
+                        Text(self.service.eventStartDate)
+                        Text(self.service.eventEndDate)
+                    }
+                    .foregroundColor(Color(.secondaryLabelColor))
+                    .font(.system(size: 11))
+                    .padding()
                 })
         }
     }

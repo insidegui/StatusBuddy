@@ -43,7 +43,7 @@ extension Service {
         guard let event = events.last else { return "" }
 
         if let startDate = event.epochStartDate {
-            return "Start: \(Self.dateFormatter.string(from: startDate)) PST"
+            return "Start: \(Self.dateFormatter.string(from: startDate))"
         }
 
         return ""
@@ -53,7 +53,7 @@ extension Service {
         guard let event = events.last else { return "" }
 
         if let endDate = event.epochEndDate {
-            return "End: \(Self.dateFormatter.string(from: endDate)) PST"
+            return "End: \(Self.dateFormatter.string(from: endDate))"
         }
 
         return "No end date given."
