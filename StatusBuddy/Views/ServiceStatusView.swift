@@ -16,7 +16,6 @@ struct ServiceStatusView: View {
 
     init(_ service: Service) {
         self.service = service
-        print(service.eventMessage)
     }
     
     var body: some View {
