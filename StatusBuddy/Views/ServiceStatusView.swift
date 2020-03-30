@@ -29,6 +29,7 @@ struct ServiceStatusView: View {
                     Text(service.eventMessage)
                         .foregroundColor(Color(.secondaryLabelColor))
                         .font(.system(size: 11))
+                        .lineLimit(2)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }.padding([.top, .bottom], (service.events.isEmpty ? 4.0 : 8.0))
