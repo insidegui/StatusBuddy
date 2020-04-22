@@ -37,9 +37,9 @@ struct ServiceStatusView: View {
             Circle()
                 .frame(width: 10, height: 10, alignment: .center)
                 .foregroundColor(service.statusColor)
-                .onHover(perform: { _ in
+                .onHover(perform: { hover in
                     if !self.service.events.isEmpty {
-                        self.circleHover.toggle()
+                        self.circleHover = hover
                     }
                 })
                 .popover(isPresented: $circleHover, content: {
