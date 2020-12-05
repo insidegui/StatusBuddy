@@ -28,10 +28,11 @@ struct MainView: View {
             if dataSource.isPerformingInitialLoad {
                 LoadingView(spinning: true)
             } else {
-                HStack {
+                HStack(spacing: 0) {
                     TextField("Search", text: $searchTerm)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     PreferencesView()
+                        .frame(width: 16, height: 16)
                 }.padding(EdgeInsets(top: 10, leading: 14, bottom: 4, trailing: 14))
 
                 Rectangle().frame(height: 1)

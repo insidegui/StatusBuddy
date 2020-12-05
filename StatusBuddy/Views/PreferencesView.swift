@@ -15,14 +15,13 @@ struct PreferencesView: View {
     @EnvironmentObject var preferences: Preferences
 
     var body: some View {
-        MenuButton(label: Image("gear").resizable().frame(width: 16, height: 16)) {
+        MenuButton(label: Text("")) {
             Button(action: refresh, label: { Text("Refresh") })
             Button(action: toggleLaunchAtLogin, label: {
                 HStack(spacing: 4) {
-                    Image("checkmark")
-                        .resizable()
-                        .frame(width: 10, height: 10)
-                        .opacity(self.preferences.launchAtLoginEnabled ? 1 : 0)
+                    if preferences.launchAtLoginEnabled {
+                        Image("checkmark")
+                    }
                     Text("Launch at Login")
                 }.offset(x: -14, y: 0)
             })
@@ -37,8 +36,7 @@ struct PreferencesView: View {
 
             Button(action: quit, label: { Text("Quit") })
         }
-        .menuButtonStyle(BorderlessButtonMenuButtonStyle())
-        .frame(width: 16, height: 16)
+        .menuButtonStyle(BorderlessPullDownMenuButtonStyle())
     }
 
     private func refresh() {
