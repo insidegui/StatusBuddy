@@ -24,15 +24,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var cancellables: [Cancellable] = []
 
-    private lazy var popover = NSPopover()
-
     private lazy var statusController: StatusViewController = {
         StatusViewController(provider: provider, preferences: preferences)
     }()
+    
+    private lazy var windowController: StatusBarMenuWindowController = {
+        StatusBarMenuWindowController(
+            statusItem: statusItem,
+            contentViewController: statusController
+        )
+    }()
 
     private let preferences = Preferences()
-
-    private var eventMonitor: EventMonitor?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let activeIssuesBinding = provider.$activeIssues.receive(on: DispatchQueue.main).map({ !$0.isEmpty }).sink { [weak self] value in
@@ -42,15 +45,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         cancellables.append(activeIssuesBinding)
 
         updateButton()
-
-        popover.contentViewController = statusController
-
-        eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
-            guard let self = self else { return }
-            guard self.popover.isShown else { return }
-
-            self.closePopover(sender: event)
-        }
     }
 
     private var imageForCurrentStatus: NSImage? {
@@ -62,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         button.image = imageForCurrentStatus
         button.image?.size = NSSize(width: 20, height: 20)
-        button.action = #selector(togglePopover)
+        button.action = #selector(toggleMenuVisible)
     }
 
     private var issueBadgeVisible: Bool = false {
@@ -95,30 +89,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         badgeView.isHidden = !issueBadgeVisible
     }
 
-    @objc func togglePopover(_ sender: Any?) {
-        if popover.isShown {
-            closePopover(sender: sender)
+    @objc func toggleMenuVisible(_ sender: Any?) {
+        if windowController.window == nil || windowController.window?.isVisible == false {
+            showMenu(sender: sender)
         } else {
-            showPopover(sender: sender)
+            hideMenu(sender: sender)
         }
     }
 
-    func showPopover(sender: Any?) {
-        guard let button = statusItem.button else { return }
-
-        eventMonitor?.start()
-
-        popover.show(
-            relativeTo: button.bounds,
-            of: button,
-            preferredEdge: NSRectEdge.minY
-        )
+    func showMenu(sender: Any?) {
+        windowController.showWindow(sender)
     }
 
-    func closePopover(sender: Any?) {
-        popover.performClose(sender)
-
-        eventMonitor?.stop()
+    func hideMenu(sender: Any?) {
+        windowController.close()
     }
 
 }

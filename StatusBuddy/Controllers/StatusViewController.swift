@@ -28,7 +28,7 @@ class StatusViewController: NSViewController {
     }
 
     override func loadView() {
-        view = NSView()
+        view = StatusBarMenuBackgroundView()
 
         preferredContentSize = NSSize(width: 340, height: 280)
 

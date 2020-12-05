@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD41692C257C4ACD00893A78 /* StatusBarMenuWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD41692B257C4ACD00893A78 /* StatusBarMenuWindowController.swift */; };
+		DD41692F257C4C1400893A78 /* StatusBarMenuBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD41692E257C4C1400893A78 /* StatusBarMenuBackgroundView.swift */; };
 		DD88E55423F34ECE009C4060 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E55323F34ECE009C4060 /* AppDelegate.swift */; };
 		DD88E55623F34ECE009C4060 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E55523F34ECE009C4060 /* MainView.swift */; };
 		DD88E55823F34ECE009C4060 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD88E55723F34ECE009C4060 /* Assets.xcassets */; };
@@ -57,6 +59,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DD41692B257C4ACD00893A78 /* StatusBarMenuWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarMenuWindowController.swift; sourceTree = "<group>"; };
+		DD41692E257C4C1400893A78 /* StatusBarMenuBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarMenuBackgroundView.swift; sourceTree = "<group>"; };
 		DD88E55023F34ECE009C4060 /* StatusBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StatusBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD88E55323F34ECE009C4060 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD88E55523F34ECE009C4060 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 				DDCC3E6D23F377A0006BF12B /* ServiceStatusView.swift */,
 				DDCC3E7223F37824006BF12B /* PreferencesView.swift */,
 				DDCC3E7523F38FC1006BF12B /* LoadingView.swift */,
+				DD41692E257C4C1400893A78 /* StatusBarMenuBackgroundView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 		DD88E58D23F373A6009C4060 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DD41692B257C4ACD00893A78 /* StatusBarMenuWindowController.swift */,
 				DD88E58723F370AB009C4060 /* StatusViewController.swift */,
 			);
 			path = Controllers;
@@ -359,8 +365,10 @@
 				DD88E59923F37583009C4060 /* SharedFileList.m in Sources */,
 				DD88E59B23F375AB009C4060 /* Preferences.swift in Sources */,
 				DDCC3E7623F38FC1006BF12B /* LoadingView.swift in Sources */,
+				DD41692F257C4C1400893A78 /* StatusBarMenuBackgroundView.swift in Sources */,
 				DD88E58823F370AB009C4060 /* StatusViewController.swift in Sources */,
 				DDCC3E7323F37824006BF12B /* PreferencesView.swift in Sources */,
+				DD41692C257C4ACD00893A78 /* StatusBarMenuWindowController.swift in Sources */,
 				DD88E55423F34ECE009C4060 /* AppDelegate.swift in Sources */,
 				DDCC3E7123F377E2006BF12B /* Service+UI.swift in Sources */,
 				DDCC3E6E23F377A0006BF12B /* ServiceStatusView.swift in Sources */,

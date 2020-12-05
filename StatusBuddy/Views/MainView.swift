@@ -22,6 +22,13 @@ struct MainView: View {
     }
 
     @State private var searchTerm = ""
+    
+    struct Metrics {
+        static let verticalMargin: CGFloat = 10
+        static let horizontalPadding: CGFloat = 14
+        static let statusViewInsets = EdgeInsets(top: 0, leading: Metrics.horizontalPadding, bottom: 0, trailing: Metrics.horizontalPadding)
+        static let headerInsets = EdgeInsets(top: Metrics.verticalMargin, leading: Metrics.horizontalPadding, bottom: 4, trailing: Metrics.horizontalPadding)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -33,18 +40,24 @@ struct MainView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     PreferencesView()
                         .frame(width: 16, height: 16)
-                }.padding(EdgeInsets(top: 10, leading: 14, bottom: 4, trailing: 14))
+                }
+                .padding(Metrics.headerInsets)
 
                 Rectangle().frame(height: 1)
                     .foregroundColor(Color(.separatorColor))
                     .padding([.top, .bottom], 6)
 
-                List {
-                    ForEach(sortedServices) { service in
-                        ServiceStatusView(service)
+                ScrollView {
+                    VStack {
+                        ForEach(sortedServices) { service in
+                            ServiceStatusView(service)
+                                .padding(Metrics.statusViewInsets)
+                        }
                     }
-                }.listStyle(SidebarListStyle())
+                    .padding(.bottom, Metrics.verticalMargin)
+                }
             }
         }
+        .edgesIgnoringSafeArea(.all)
     }
 }
