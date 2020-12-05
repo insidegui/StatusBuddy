@@ -18,7 +18,7 @@ public struct Service: Hashable, Codable {
     }
 
     public let serviceName: String
-    public let redirectUrl: URL?
+    public let redirectUrl: String?
     public let events: [Event]
 }
 
