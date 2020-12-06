@@ -36,8 +36,7 @@ struct MainView: View {
                 LoadingView(spinning: true)
             } else {
                 HStack(spacing: 0) {
-                    TextField("Search", text: $searchTerm)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    SearchField(searchTerm: $searchTerm)
                     PreferencesView()
                         .frame(width: 16, height: 16)
                 }

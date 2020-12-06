@@ -1,6 +1,6 @@
 //
 //  StatusBarMenuBackgroundView.swift
-//  AirUI
+//  StatusBuddy
 //
 //  Created by Gui Rambo on 04/12/20.
 //  Copyright © 2020 Guilherme Rambo. All rights reserved.
