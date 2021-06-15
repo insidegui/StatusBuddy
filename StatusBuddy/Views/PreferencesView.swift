@@ -19,10 +19,9 @@ struct PreferencesView: View {
             Button(action: refresh, label: { Text("Refresh") })
             Button(action: toggleLaunchAtLogin, label: {
                 HStack(spacing: 4) {
-                    Image("checkmark")
-                        .resizable()
-                        .frame(width: 10, height: 10)
-                        .opacity(self.preferences.launchAtLoginEnabled ? 1 : 0)
+                    if preferences.launchAtLoginEnabled {
+                        Image("checkmark")
+                    }
                     Text("Launch at Login")
                 }.offset(x: -14, y: 0)
             })
