@@ -1,5 +1,5 @@
 //
-//  PreferencesView.swift
+//  PreferencesMenuView.swift
 //  StatusBuddy
 //
 //  Created by Guilherme Rambo on 11/02/20.
@@ -7,16 +7,21 @@
 //
 
 import SwiftUI
-import Sparkle
+import Combine
 import StatusCore
 
-struct PreferencesView: View {
-    @EnvironmentObject var provider: StatusProvider
+#if ENABLE_SPARKLE
+import Sparkle
+#endif
+
+struct PreferencesMenuView: View {
+    let refresh: PassthroughSubject<Void, Never>
+    
     @EnvironmentObject var preferences: Preferences
 
     var body: some View {
         MenuButton(label: Image("gear").resizable().frame(width: 16, height: 16)) {
-            Button(action: refresh, label: { Text("Refresh") })
+            Button(action: refresh.send, label: { Text("Refresh") })
             Button(action: toggleLaunchAtLogin, label: {
                 HStack(spacing: 4) {
                     if preferences.launchAtLoginEnabled {
@@ -40,16 +45,14 @@ struct PreferencesView: View {
         .frame(width: 16, height: 16)
     }
 
-    private func refresh() {
-        provider.check()
-    }
-
     private func toggleLaunchAtLogin() {
         preferences.launchAtLoginEnabled.toggle()
     }
 
     private func checkForUpdates() {
+        #if ENABLE_SPARKLE
         SUUpdater.shared()?.checkForUpdates(nil)
+        #endif
     }
 
     private func openWebsite() {
@@ -65,8 +68,13 @@ struct PreferencesView: View {
     }
 }
 
-struct PreferencesView_Previews: PreviewProvider {
+struct PreferencesMenuView_Previews: PreviewProvider {
+    static let refresh = PassthroughSubject<Void, Never>()
     static var previews: some View {
-        PreferencesView()
+        PreferencesMenuView(refresh: refresh)
+            .onReceive(refresh) { _ in
+                print("REFRESH")
+            }
+            .environmentObject(Preferences())
     }
 }

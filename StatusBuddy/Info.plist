@@ -38,5 +38,7 @@
 	<string>dj8ljUPnwoLj/dLs6HyJg5Ayw+t8zWtgjQUfQsH56ww=</string>
 	<key>SUScheduledCheckInterval</key>
 	<integer>86400</integer>
+	<key>NSAccentColorName</key>
+	<string>AccentColor</string>
 </dict>
 </plist>
