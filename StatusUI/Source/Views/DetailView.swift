@@ -29,7 +29,6 @@ struct DetailView: View {
                 .padding()
             }
         }
-        .background(Color.background)
     }
 }
 

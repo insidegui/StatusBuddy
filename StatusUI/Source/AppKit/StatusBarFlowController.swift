@@ -11,10 +11,10 @@ import SwiftUI
 
 public final class StatusBarFlowController: NSViewController {
     
-    private lazy var viewModel = DashboardViewModel()
+    public private(set) lazy var viewModel = MenuViewModel()
     
     private lazy var rootView: NSView = {
-        NSHostingView(rootView: DashboardView(viewModel: self.viewModel))
+        NSHostingView(rootView: MenuContainerView().environmentObject(self.viewModel))
     }()
     
     public convenience init() {
@@ -22,10 +22,12 @@ public final class StatusBarFlowController: NSViewController {
     }
 
     public override func loadView() {
-        view = StatusBarFlowBackgroundView()
-
+        let containerView = NSView()
+        
+        view = containerView
+        
+        containerView.addSubview(rootView)
         rootView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(rootView)
         
         NSLayoutConstraint.activate([
             rootView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -33,12 +35,6 @@ public final class StatusBarFlowController: NSViewController {
             rootView.topAnchor.constraint(equalTo: view.topAnchor),
             rootView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-        
-        preferredContentSize = view.fittingSize
-    }
-    
-    public override func viewWillAppear() {
-        super.viewWillAppear()
         
         preferredContentSize = view.fittingSize
     }

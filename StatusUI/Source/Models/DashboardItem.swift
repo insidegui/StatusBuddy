@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct DashboardItem: Hashable, Identifiable {
-    var id: String { scope.id }
+public struct DashboardItem: Hashable, Identifiable {
+    public var id: String { scope.id }
     var title: String { scope.title }
     var iconName: String { scope.iconName }
     

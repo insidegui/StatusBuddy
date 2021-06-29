@@ -78,6 +78,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func toggleUI(_ sender: Any?) {
+        guard flowController.viewModel.selectedDashboardItem == nil else {
+            flowController.viewModel.selectedDashboardItem = nil
+            return
+        }
+        
         if windowController.window?.isVisible == true {
             hideUI(sender: sender)
         } else {
