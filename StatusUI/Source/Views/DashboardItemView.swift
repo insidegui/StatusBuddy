@@ -21,6 +21,7 @@ struct DashboardItemView: View {
                 .frame(width: 40, height: 40, alignment: .center)
                 .foregroundColor(.white)
                 .background(Circle().foregroundColor(item.iconColor))
+                .accessibility(hidden: true)
             VStack(alignment: .leading, spacing: 3) {
                 Text(item.title)
                     .foregroundColor(.primaryText)
@@ -29,8 +30,9 @@ struct DashboardItemView: View {
                     .foregroundColor(item.subtitleColor)
                     .font(.subheadline)
             }
-            Spacer()
+            .accessibilityElement(children: .combine)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .statusItemBackground()
     }
 }

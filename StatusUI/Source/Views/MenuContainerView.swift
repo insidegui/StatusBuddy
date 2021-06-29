@@ -11,23 +11,28 @@ import SwiftUI
 struct MenuContainerView: View {
     @EnvironmentObject var viewModel: MenuViewModel
     
-    private var preferredHeight: CGFloat? { viewModel.selectedDashboardItem != nil ? 323 : nil }
-
+    static let shadowRadius: CGFloat = 10
+    static let topPaddingToAccomodateShadow: CGFloat = 26
+    static let minWidth: CGFloat = 346
+    
     var body: some View {
         Group {
             if let selectedItem = viewModel.selectedDashboardItem {
                 #warning("TODO: respect selectedItem")
                 DetailView()
+                    .frame(minWidth: Self.minWidth, maxWidth: .infinity, minHeight: 323, maxHeight: .infinity, alignment: .topLeading)
+                    .windowChrome(shadowRadius: Self.shadowRadius, padding: Self.topPaddingToAccomodateShadow)
+                    .transition(.scale.combined(with: .opacity))
             } else {
                 DashboardView(
                     viewModel: viewModel.dashboard,
                     selectedItem: $viewModel.selectedDashboardItem
                 )
+                    .frame(minWidth: Self.minWidth, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .windowChrome(shadowRadius: Self.shadowRadius, padding: Self.topPaddingToAccomodateShadow)
+                    .transition(.scale.combined(with: .opacity))
             }
         }
-        .frame(minWidth: 346, maxWidth: .infinity, minHeight: preferredHeight, maxHeight: .infinity)
-        .background(Color.background)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 }
 

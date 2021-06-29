@@ -28,7 +28,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
     
     private lazy var windowController: StatusBarMenuWindowController = {
-        StatusBarMenuWindowController(statusItem: statusItem, contentViewController: flowController)
+        StatusBarMenuWindowController(
+            statusItem: statusItem,
+            contentViewController: flowController,
+            topMargin: StatusBarFlowController.topMargin
+        )
     }()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -78,11 +82,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func toggleUI(_ sender: Any?) {
-        guard flowController.viewModel.selectedDashboardItem == nil else {
-            flowController.viewModel.selectedDashboardItem = nil
-            return
-        }
-        
         if windowController.window?.isVisible == true {
             hideUI(sender: sender)
         } else {
@@ -95,8 +94,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func hideUI(sender: Any?) {
+        // Go back if showing detail.
+        guard flowController.viewModel.selectedDashboardItem == nil else {
+            withAnimation(.easeInOut(duration: StatusUI.transitionDuration)) { flowController.viewModel.selectedDashboardItem = nil }
+            return
+        }
+        
         windowController.close()
-
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

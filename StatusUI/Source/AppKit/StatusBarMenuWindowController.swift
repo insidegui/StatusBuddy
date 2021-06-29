@@ -15,9 +15,12 @@ public final class StatusBarMenuWindowController: NSWindowController {
     public let statusItem: NSStatusItem?
     
     public var windowWillClose: () -> Void = { }
+    
+    let topMargin: CGFloat
 
-    public init(statusItem: NSStatusItem?, contentViewController: NSViewController) {
+    public init(statusItem: NSStatusItem?, contentViewController: NSViewController, topMargin: CGFloat = 0) {
         self.statusItem = statusItem
+        self.topMargin = topMargin
         
         let window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 0, height: 0),
@@ -34,6 +37,7 @@ public final class StatusBarMenuWindowController: NSWindowController {
         window.contentViewController = contentViewController
         window.isOpaque = false
         window.backgroundColor = .clear
+        window.hasShadow = false
         
         super.init(window: window)
         
@@ -143,12 +147,12 @@ public final class StatusBarMenuWindowController: NSWindowController {
         
         let rect = NSRect(
             x: x,
-            y: referenceWindow.frame.origin.y - height - Metrics.margin,
+            y: (referenceWindow.frame.origin.y - height - Metrics.margin) + topMargin,
             width: width,
             height: height
         )
         
-        window.setFrame(rect, display: true, animate: false)
+        window.setFrame(rect, display: false, animate: false)
     }
     
     // MARK: - Auto size/position based on content controller

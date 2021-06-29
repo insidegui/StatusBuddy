@@ -11,6 +11,8 @@ import SwiftUI
 
 public final class StatusBarFlowController: NSViewController {
     
+    public static var topMargin: CGFloat { MenuContainerView.topPaddingToAccomodateShadow }
+    
     public private(set) lazy var viewModel = MenuViewModel()
     
     private lazy var rootView: NSView = {

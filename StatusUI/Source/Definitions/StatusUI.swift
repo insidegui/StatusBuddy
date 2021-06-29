@@ -6,8 +6,16 @@
 //  Copyright © 2021 Guilherme Rambo. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
-struct StatusUI {
+public struct StatusUI {
     static let subsystemName = "codes.rambo.StatusBuddy.StatusUI"
+    
+    public static var transitionDuration: TimeInterval {
+        if NSApp.currentEvent?.modifierFlags.contains(.shift) == true {
+            return 10
+        } else {
+            return 0.5
+        }
+    }
 }

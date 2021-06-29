@@ -46,6 +46,7 @@
 		F4AFF348268B6C29002C26FC /* StatusBarFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF347268B6C29002C26FC /* StatusBarFlowController.swift */; };
 		F4AFF34A268B72FA002C26FC /* MenuContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF349268B72FA002C26FC /* MenuContainerView.swift */; };
 		F4AFF34C268B730E002C26FC /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF34B268B730E002C26FC /* MenuViewModel.swift */; };
+		F4AFF34E268B88E3002C26FC /* WindowChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF34D268B88E3002C26FC /* WindowChrome.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		F4AFF347268B6C29002C26FC /* StatusBarFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarFlowController.swift; sourceTree = "<group>"; };
 		F4AFF349268B72FA002C26FC /* MenuContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContainerView.swift; sourceTree = "<group>"; };
 		F4AFF34B268B730E002C26FC /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		F4AFF34D268B88E3002C26FC /* WindowChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowChrome.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +348,7 @@
 		F4AFF324268B681C002C26FC /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
+				F4AFF34D268B88E3002C26FC /* WindowChrome.swift */,
 				F4AFF325268B681C002C26FC /* StatusItemBackgroundModifier.swift */,
 			);
 			path = Modifiers;
@@ -547,6 +550,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4AFF32D268B681C002C26FC /* ServiceScope.swift in Sources */,
+				F4AFF34E268B88E3002C26FC /* WindowChrome.swift in Sources */,
 				F4AFF32F268B681C002C26FC /* DetailView.swift in Sources */,
 				F4AFF330268B681C002C26FC /* StatusItemBackgroundModifier.swift in Sources */,
 				F4AFF34C268B730E002C26FC /* MenuViewModel.swift in Sources */,
