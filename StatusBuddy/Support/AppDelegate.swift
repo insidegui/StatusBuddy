@@ -37,6 +37,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         updateButton()
+        
+        windowController.handleEscape = { [weak self] _ in
+            self?.hideUI(sender: nil)
+        }
     }
 
     private var imageForCurrentStatus: NSImage? {
@@ -96,7 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func hideUI(sender: Any?) {
         // Go back if showing detail.
         guard flowController.viewModel.selectedDashboardItem == nil else {
-            withAnimation(.easeInOut(duration: StatusUI.transitionDuration)) { flowController.viewModel.selectedDashboardItem = nil }
+            flowController.viewModel.selectedDashboardItem = nil
             return
         }
         

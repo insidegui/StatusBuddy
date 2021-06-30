@@ -15,7 +15,7 @@ struct DashboardView: View {
         VStack(alignment: .leading, spacing: 12) {
             ForEach(viewModel.items) { item in
                 DashboardItemView(item)
-                    .onTapGesture { withAnimation(.easeInOut(duration: StatusUI.transitionDuration)) { selectedItem = item } }
+                    .onTapGesture { selectedItem = item }
             }
         }
         .padding()

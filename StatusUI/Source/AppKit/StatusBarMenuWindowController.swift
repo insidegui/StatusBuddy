@@ -74,12 +74,14 @@ public final class StatusBarMenuWindowController: NSWindowController {
         startMonitoringInterestingEvents()
     }
     
+    public var handleEscape: ((StatusBarMenuWindowController) -> Void)?
+    
     private func startMonitoringInterestingEvents() {
         clickOutsideEventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown], handler: { [weak self] event in
             guard let self = self else { return }
             
             #if DEBUG
-            guard !UserDefaults.standard.bool(forKey: "AMEnableStickyMenuBarWindow") else { return }
+            guard !UserDefaults.standard.bool(forKey: "EnableStickyMenuBarWindow") else { return }
             #endif
             
             self.close()
@@ -90,7 +92,11 @@ public final class StatusBarMenuWindowController: NSWindowController {
             guard let self = self else { return event }
 
             if event.keyCode == 53 {
-                self.close()
+                if let handleEscape = self.handleEscape {
+                    handleEscape(self)
+                } else {
+                    self.close()
+                }
                 return nil
             } else {
                 return event
