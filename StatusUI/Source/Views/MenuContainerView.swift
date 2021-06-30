@@ -22,7 +22,6 @@ struct MenuContainerView: View {
                 DetailView()
                     .frame(minWidth: Self.minWidth, maxWidth: .infinity, minHeight: 323, maxHeight: .infinity, alignment: .topLeading)
                     .windowChrome(shadowRadius: Self.shadowRadius, padding: Self.topPaddingToAccomodateShadow)
-                    .transition(.scale.combined(with: .opacity))
             } else {
                 DashboardView(
                     viewModel: viewModel.dashboard,
@@ -30,7 +29,6 @@ struct MenuContainerView: View {
                 )
                     .frame(minWidth: Self.minWidth, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .windowChrome(shadowRadius: Self.shadowRadius, padding: Self.topPaddingToAccomodateShadow)
-                    .transition(.scale.combined(with: .opacity))
             }
         }
     }
