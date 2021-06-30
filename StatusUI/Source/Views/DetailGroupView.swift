@@ -63,8 +63,16 @@ struct DetailGroupView: View {
                     VStack {
                         DetailGroupItemView(item)
                         if item.id != group.items.last?.id {
-                            Divider()
-                                .foregroundColor(.groupSeparator)
+                            if #available(macOS 12.0, *) {
+                                Rectangle()
+                                    .frame(height: 0.5)
+                                    .foregroundStyle(.tertiary)
+                                    .opacity(0.3)
+                                    .accessibility(hidden: true)
+                            } else {
+                                Divider()
+                                    .foregroundColor(.groupSeparator)
+                            }
                         }
                     }
                 }

@@ -22,23 +22,9 @@ public final class StatusBarMenuWindowController: NSWindowController {
         self.statusItem = statusItem
         self.topMargin = topMargin
         
-        let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 0, height: 0),
-            styleMask: [.fullSizeContentView, .borderless],
-            backing: .buffered,
-            defer: false,
-            screen: statusItem?.button?.window?.screen
-        )
-        
-        window.isMovable = false
-        window.titleVisibility = .hidden
-        window.titlebarAppearsTransparent = true
-        window.level = .statusBar
+        let window = StatusBarMenuWindow(statusItem: statusItem)
         window.contentViewController = contentViewController
-        window.isOpaque = false
-        window.backgroundColor = .clear
-        window.hasShadow = false
-        
+
         super.init(window: window)
         
         window.delegate = self
@@ -209,5 +195,31 @@ extension StatusBarMenuWindowController: NSWindowDelegate {
     public func windowDidResignKey(_ notification: Notification) {
         statusItem?.button?.highlight(false)
     }
+    
+}
+
+private final class StatusBarMenuWindow: NSWindow {
+    
+    convenience init(statusItem: NSStatusItem?) {
+        self.init(
+            contentRect: NSRect(x: 0, y: 0, width: 0, height: 0),
+            styleMask: [.fullSizeContentView, .borderless],
+            backing: .buffered,
+            defer: false,
+            screen: statusItem?.button?.window?.screen
+        )
+        
+        isMovable = false
+        titleVisibility = .hidden
+        titlebarAppearsTransparent = true
+        level = .statusBar
+        isOpaque = false
+        backgroundColor = .clear
+        hasShadow = false
+    }
+    
+    override var acceptsFirstResponder: Bool { true }
+    override var canBecomeKey: Bool { true }
+    override var canBecomeMain: Bool { true }
     
 }

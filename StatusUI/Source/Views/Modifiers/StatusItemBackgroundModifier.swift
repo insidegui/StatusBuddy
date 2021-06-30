@@ -16,13 +16,27 @@ fileprivate struct ItemBackgroundModifier: ViewModifier {
         self.padding = padding
     }
     
+    private struct BackgroundShape: ViewModifier {
+        let cornerRadius: CGFloat
+        
+        func body(content: Content) -> some View {
+            if #available(macOS 12.0, *) {
+                content
+                    .background(Material.thin, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+            } else {
+                content
+                    .background(Color.itemBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+            }
+        }
+    }
+
     func body(content: Content) -> some View {
         content
             .padding(.all, padding)
             .frame(maxWidth: maxWidth)
-            .background(Color.itemBackground)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .shadow(color: Color.black.opacity(0.09), radius: 9, x: 0, y: 0)
+            .modifier(BackgroundShape(cornerRadius: 10))
+            .shadow(color: .black.opacity(0.09), radius: 9, x: 0, y: 0)
     }
 }
 

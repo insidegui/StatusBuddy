@@ -19,6 +19,7 @@ struct DetailView: View {
                 .font(.system(size: 15, weight: .semibold, design: .rounded))
                 .padding([.top, .leading])
                 .padding(.leading, 6)
+                .foregroundColor(.primaryText)
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
