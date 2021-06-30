@@ -33,6 +33,8 @@ public final class AppleStatusChecker: StatusChecker {
 
         return components.url ?? endpoint
     }
+    
+    private lazy var cancellables = Set<AnyCancellable>()
 
     public private(set) var currentStatus: StatusResponse?
 
@@ -53,7 +55,7 @@ public final class AppleStatusChecker: StatusChecker {
         currentStatus = nil
     }
 
-    @discardableResult public func check(with completion: StatusCheckCompletionHandler? = nil) -> Cancellable {
+    @discardableResult public func check(with completionHandler: StatusCheckCompletionHandler? = nil) -> Cancellable {
         os_log("%{public}@", log: log, type: .debug, #function)
 
         let url = currentURL
@@ -71,10 +73,15 @@ public final class AppleStatusChecker: StatusChecker {
                     os_log("Finished loading %{public}@", log: self.log, type: .debug, url.absoluteString)
                 case .failure(let error):
                     os_log("Error loading %{public}@: %{public}@", log: self.log, type: .error, url.absoluteString, String(describing: error))
+                    
+                    completionHandler?(.failure(error))
                 }
             }, receiveValue: { [weak self] value in
                 self?.currentStatus = value
+                completionHandler?(.success(value))
             })
+        
+        cancellable.store(in: &cancellables)
 
         return cancellable
     }
