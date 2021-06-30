@@ -39,3 +39,8 @@ public extension Service {
     var hasActiveEvents: Bool { !activeEvents.isEmpty }
     var hasRecentEvents: Bool { !recentEvents.isEmpty }
 }
+
+public extension StatusResponse {
+    var hasActiveEvents: Bool { !services.filter({ $0.hasActiveEvents }).isEmpty }
+    var hasRecentEvents: Bool { !services.filter({ $0.hasRecentEvents }).isEmpty }
+}

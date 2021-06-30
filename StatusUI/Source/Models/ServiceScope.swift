@@ -8,6 +8,7 @@
 import Foundation
 
 struct ServiceScope: Hashable, Identifiable {
+    let order: Int
     let id: String
     let iconName: String
     let title: String
@@ -15,12 +16,14 @@ struct ServiceScope: Hashable, Identifiable {
 
 extension ServiceScope {
     static let developer = ServiceScope(
+        order: 1,
         id: "DEVELOPER",
         iconName: "hammer.fill",
         title: "Developer Services"
     )
     
     static let customer = ServiceScope(
+        order: 0,
         id: "CUSTOMER",
         iconName: "person.fill",
         title: "Customer Services"

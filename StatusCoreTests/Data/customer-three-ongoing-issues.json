@@ -1,0 +1,292 @@
+{
+  "services": [
+    {
+      "serviceName": "App Store",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Arcade",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Books",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Business Manager",
+      "events": [
+        {
+          "message": "Apple Business Manager was temporarily unavailable during system maintenance.",
+          "eventStatus": "ongoing",
+          "epochEndDate": null,
+          "epochStartDate": 646419600
+        },
+        {
+          "message": "Some users may have experienced an issue with the service.",
+          "eventStatus": "resolved",
+          "epochEndDate": 646430300,
+          "epochStartDate": 646419200
+        }
+      ]
+    },
+    {
+      "serviceName": "Apple Card",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Cash",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Fitness+",
+      "events": []
+    },
+    {
+      "serviceName": "Apple ID",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Music",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Music for Artists",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Music radio",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Music Subscriptions",
+      "events": []
+    },
+    {
+      "serviceName": "Apple Online Store",
+      "events": []
+    },
+    {
+      "events": [],
+      "serviceName": "Apple Pay",
+      "redirectUrl": "https://developer.apple.com/apple-pay/"
+    },
+    {
+      "serviceName": "Apple School Manager",
+      "events": [
+        {
+          "message": "This service may have been slow or unavailable.",
+          "eventStatus": "ongoing",
+          "epochEndDate": null,
+          "epochStartDate": 646419600
+        }
+      ]
+    },
+    {
+      "serviceName": "Apple TV Channels",
+      "events": []
+    },
+    {
+      "serviceName": "Apple TV+",
+      "events": []
+    },
+    {
+      "serviceName": "AppleCare on Device",
+      "events": []
+    },
+    {
+      "serviceName": "Device Enrollment Program",
+      "events": [
+        {
+          "message": "Device Enrollment Program was temporarily unavailable during system maintenance.",
+          "eventStatus": "ongoing",
+          "epochEndDate": null,
+          "epochStartDate": 646419600
+        }
+      ]
+    },
+    {
+      "serviceName": "Dictation",
+      "events": []
+    },
+    {
+      "serviceName": "Documents in the Cloud",
+      "events": []
+    },
+    {
+      "serviceName": "FaceTime",
+      "events": []
+    },
+    {
+      "serviceName": "Find My",
+      "events": []
+    },
+    {
+      "serviceName": "Fleetsmith",
+      "events": []
+    },
+    {
+      "serviceName": "Game Center",
+      "events": []
+    },
+    {
+      "serviceName": "Global Service Exchange",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Account & Sign In",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Backup",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Bookmarks & Tabs",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Calendar",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Contacts",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Drive",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Keychain",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Mail",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Notes",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Reminders",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Storage Upgrades",
+      "events": []
+    },
+    {
+      "serviceName": "iCloud Web Apps (iCloud.com)",
+      "events": []
+    },
+    {
+      "serviceName": "iMessage",
+      "events": []
+    },
+    {
+      "serviceName": "iOS Device Activation",
+      "events": []
+    },
+    {
+      "serviceName": "iTunes Match",
+      "events": []
+    },
+    {
+      "serviceName": "iTunes Store",
+      "events": []
+    },
+    {
+      "serviceName": "iTunes U",
+      "events": []
+    },
+    {
+      "serviceName": "iWork for iCloud",
+      "events": []
+    },
+    {
+      "serviceName": "Mac App Store",
+      "events": []
+    },
+    {
+      "serviceName": "macOS Software Update",
+      "events": []
+    },
+    {
+      "serviceName": "Mail Drop",
+      "events": []
+    },
+    {
+      "serviceName": "Maps Display",
+      "events": []
+    },
+    {
+      "serviceName": "Maps Routing & Navigation",
+      "events": []
+    },
+    {
+      "serviceName": "Maps Search",
+      "events": []
+    },
+    {
+      "serviceName": "Maps Traffic",
+      "events": []
+    },
+    {
+      "serviceName": "News",
+      "events": []
+    },
+    {
+      "serviceName": "Photos",
+      "events": []
+    },
+    {
+      "serviceName": "Podcasts",
+      "events": []
+    },
+    {
+      "serviceName": "Radio",
+      "events": []
+    },
+    {
+      "serviceName": "Schooltime",
+      "events": []
+    },
+    {
+      "serviceName": "Schoolwork",
+      "events": []
+    },
+    {
+      "serviceName": "Screen Time",
+      "events": []
+    },
+    {
+      "serviceName": "Sign in with Apple",
+      "events": []
+    },
+    {
+      "serviceName": "Siri",
+      "events": []
+    },
+    {
+      "serviceName": "Spotlight suggestions",
+      "events": []
+    },
+    {
+      "serviceName": "Stocks",
+      "events": []
+    },
+    {
+      "serviceName": "Volume Purchase Program",
+      "events": []
+    },
+    {
+      "serviceName": "Walkie-Talkie",
+      "events": []
+    },
+    {
+      "serviceName": "Weather",
+      "events": []
+    }
+  ]
+}

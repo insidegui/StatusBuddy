@@ -24,9 +24,18 @@
 		F414B5A6268CA70C00C98255 /* EventFilteringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414B5A5268CA70C00C98255 /* EventFilteringTests.swift */; };
 		F414B5A7268CA70C00C98255 /* StatusCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E56B23F34EE1009C4060 /* StatusCore.framework */; };
 		F414B5B0268CA7D400C98255 /* developer-one-resolved-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5AE268CA7D400C98255 /* developer-one-resolved-issue.json */; };
-		F414B5B1268CA7D400C98255 /* consumer-three-resolved-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5AF268CA7D400C98255 /* consumer-three-resolved-issues.json */; };
-		F414B5B3268CAC4100C98255 /* consumer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B2268CAC4000C98255 /* consumer-one-ongoing-issue.json */; };
+		F414B5B1268CA7D400C98255 /* customer-three-resolved-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5AF268CA7D400C98255 /* customer-three-resolved-issues.json */; };
+		F414B5B3268CAC4100C98255 /* customer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B2268CAC4000C98255 /* customer-one-ongoing-issue.json */; };
 		F414B5B5268CB27C00C98255 /* developer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */; };
+		F4A58BC9268CC7E100C11441 /* DashboardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */; };
+		F4A58BCA268CC7E100C11441 /* StatusUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AFF30C268B6807002C26FC /* StatusUI.framework */; };
+		F4A58BD2268CC81500C11441 /* Bundle+TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A58BD1268CC81500C11441 /* Bundle+TestData.swift */; };
+		F4A58BD3268CC88500C11441 /* customer-three-resolved-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5AF268CA7D400C98255 /* customer-three-resolved-issues.json */; };
+		F4A58BD4268CC88500C11441 /* customer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B2268CAC4000C98255 /* customer-one-ongoing-issue.json */; };
+		F4A58BD5268CC88500C11441 /* developer-one-resolved-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5AE268CA7D400C98255 /* developer-one-resolved-issue.json */; };
+		F4A58BD6268CC88500C11441 /* developer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */; };
+		F4A58BD7268CC88900C11441 /* Bundle+TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A58BD1268CC81500C11441 /* Bundle+TestData.swift */; };
+		F4A58BDA268CC89F00C11441 /* StatusCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E56B23F34EE1009C4060 /* StatusCore.framework */; };
 		F4AFF304268B628A002C26FC /* StatusChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF303268B628A002C26FC /* StatusChecker.swift */; };
 		F4AFF306268B62A1002C26FC /* StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF305268B62A1002C26FC /* StatusCore.swift */; };
 		F4AFF30F268B6807002C26FC /* StatusUI.h in Headers */ = {isa = PBXBuildFile; fileRef = F4AFF30E268B6807002C26FC /* StatusUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -53,6 +62,13 @@
 		F4AFF34A268B72FA002C26FC /* MenuContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF349268B72FA002C26FC /* MenuContainerView.swift */; };
 		F4AFF34C268B730E002C26FC /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF34B268B730E002C26FC /* MenuViewModel.swift */; };
 		F4AFF34E268B88E3002C26FC /* WindowChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF34D268B88E3002C26FC /* WindowChrome.swift */; };
+		F4D61CF0268CF1B50087B158 /* developer-no-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CEE268CF1B50087B158 /* developer-no-issues.json */; };
+		F4D61CF1268CF1B50087B158 /* developer-no-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CEE268CF1B50087B158 /* developer-no-issues.json */; };
+		F4D61CF2268CF1B50087B158 /* customer-no-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CEF268CF1B50087B158 /* customer-no-issues.json */; };
+		F4D61CF3268CF1B50087B158 /* customer-no-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CEF268CF1B50087B158 /* customer-no-issues.json */; };
+		F4D61CF5268CF20C0087B158 /* DashboardItem+StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D61CF4268CF20C0087B158 /* DashboardItem+StatusCore.swift */; };
+		F4D61CF7268D02D50087B158 /* customer-three-ongoing-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */; };
+		F4D61CF8268D02D50087B158 /* customer-three-ongoing-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +80,20 @@
 			remoteInfo = StatusCore;
 		};
 		F414B5A8268CA70C00C98255 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD88E56A23F34EE1009C4060;
+			remoteInfo = StatusCore;
+		};
+		F4A58BCB268CC7E100C11441 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F4AFF30B268B6807002C26FC;
+			remoteInfo = StatusUI;
+		};
+		F4A58BD8268CC89A00C11441 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
 			proxyType = 1;
@@ -125,9 +155,12 @@
 		F414B5A3268CA70C00C98255 /* StatusCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F414B5A5268CA70C00C98255 /* EventFilteringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilteringTests.swift; sourceTree = "<group>"; };
 		F414B5AE268CA7D400C98255 /* developer-one-resolved-issue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "developer-one-resolved-issue.json"; sourceTree = "<group>"; };
-		F414B5AF268CA7D400C98255 /* consumer-three-resolved-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "consumer-three-resolved-issues.json"; sourceTree = "<group>"; };
-		F414B5B2268CAC4000C98255 /* consumer-one-ongoing-issue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "consumer-one-ongoing-issue.json"; sourceTree = "<group>"; };
+		F414B5AF268CA7D400C98255 /* customer-three-resolved-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-three-resolved-issues.json"; sourceTree = "<group>"; };
+		F414B5B2268CAC4000C98255 /* customer-one-ongoing-issue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-one-ongoing-issue.json"; sourceTree = "<group>"; };
 		F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "developer-one-ongoing-issue.json"; sourceTree = "<group>"; };
+		F4A58BC6268CC7E100C11441 /* StatusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
+		F4A58BD1268CC81500C11441 /* Bundle+TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+TestData.swift"; sourceTree = "<group>"; };
 		F4AFF303268B628A002C26FC /* StatusChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusChecker.swift; sourceTree = "<group>"; };
 		F4AFF305268B62A1002C26FC /* StatusCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCore.swift; sourceTree = "<group>"; };
 		F4AFF30C268B6807002C26FC /* StatusUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StatusUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +185,10 @@
 		F4AFF349268B72FA002C26FC /* MenuContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContainerView.swift; sourceTree = "<group>"; };
 		F4AFF34B268B730E002C26FC /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		F4AFF34D268B88E3002C26FC /* WindowChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowChrome.swift; sourceTree = "<group>"; };
+		F4D61CEE268CF1B50087B158 /* developer-no-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "developer-no-issues.json"; sourceTree = "<group>"; };
+		F4D61CEF268CF1B50087B158 /* customer-no-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-no-issues.json"; sourceTree = "<group>"; };
+		F4D61CF4268CF20C0087B158 /* DashboardItem+StatusCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardItem+StatusCore.swift"; sourceTree = "<group>"; };
+		F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-three-ongoing-issues.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +216,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F4A58BC3268CC7E100C11441 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4A58BDA268CC89F00C11441 /* StatusCore.framework in Frameworks */,
+				F4A58BCA268CC7E100C11441 /* StatusUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4AFF309268B6807002C26FC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -198,6 +244,7 @@
 				DD88E56C23F34EE1009C4060 /* StatusCore */,
 				F4AFF30D268B6807002C26FC /* StatusUI */,
 				F414B5A4268CA70C00C98255 /* StatusCoreTests */,
+				F4A58BC7268CC7E100C11441 /* StatusUITests */,
 				DD88E55123F34ECE009C4060 /* Products */,
 				DD88E59223F37452009C4060 /* Frameworks */,
 			);
@@ -210,6 +257,7 @@
 				DD88E56B23F34EE1009C4060 /* StatusCore.framework */,
 				F4AFF30C268B6807002C26FC /* StatusUI.framework */,
 				F414B5A3268CA70C00C98255 /* StatusCoreTests.xctest */,
+				F4A58BC6268CC7E100C11441 /* StatusUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -321,12 +369,24 @@
 		F414B5AD268CA7A100C98255 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				F414B5AF268CA7D400C98255 /* consumer-three-resolved-issues.json */,
+				F4D61CEF268CF1B50087B158 /* customer-no-issues.json */,
+				F4D61CEE268CF1B50087B158 /* developer-no-issues.json */,
+				F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */,
+				F414B5AF268CA7D400C98255 /* customer-three-resolved-issues.json */,
 				F414B5AE268CA7D400C98255 /* developer-one-resolved-issue.json */,
-				F414B5B2268CAC4000C98255 /* consumer-one-ongoing-issue.json */,
+				F414B5B2268CAC4000C98255 /* customer-one-ongoing-issue.json */,
 				F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */,
+				F4A58BD1268CC81500C11441 /* Bundle+TestData.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		F4A58BC7268CC7E100C11441 /* StatusUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */,
+			);
+			path = StatusUITests;
 			sourceTree = "<group>";
 		};
 		F4AFF30D268B6807002C26FC /* StatusUI */ = {
@@ -377,6 +437,7 @@
 				F4AFF31E268B681C002C26FC /* DashboardItem.swift */,
 				F4AFF31F268B681C002C26FC /* DetailGroup.swift */,
 				F4AFF320268B681C002C26FC /* ServiceScope.swift */,
+				F4D61CF4268CF20C0087B158 /* DashboardItem+StatusCore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -499,6 +560,25 @@
 			productReference = F414B5A3268CA70C00C98255 /* StatusCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F4A58BC5268CC7E100C11441 /* StatusUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4A58BCF268CC7E100C11441 /* Build configuration list for PBXNativeTarget "StatusUITests" */;
+			buildPhases = (
+				F4A58BC2268CC7E100C11441 /* Sources */,
+				F4A58BC3268CC7E100C11441 /* Frameworks */,
+				F4A58BC4268CC7E100C11441 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F4A58BD9268CC89A00C11441 /* PBXTargetDependency */,
+				F4A58BCC268CC7E100C11441 /* PBXTargetDependency */,
+			);
+			name = StatusUITests;
+			productName = StatusUITests;
+			productReference = F4A58BC6268CC7E100C11441 /* StatusUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F4AFF30B268B6807002C26FC /* StatusUI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4AFF314268B6807002C26FC /* Build configuration list for PBXNativeTarget "StatusUI" */;
@@ -538,6 +618,9 @@
 					F414B5A2268CA70C00C98255 = {
 						CreatedOnToolsVersion = 13.0;
 					};
+					F4A58BC5268CC7E100C11441 = {
+						CreatedOnToolsVersion = 13.0;
+					};
 					F4AFF30B268B6807002C26FC = {
 						CreatedOnToolsVersion = 13.0;
 					};
@@ -560,6 +643,7 @@
 				DD88E56A23F34EE1009C4060 /* StatusCore */,
 				F4AFF30B268B6807002C26FC /* StatusUI */,
 				F414B5A2268CA70C00C98255 /* StatusCoreTests */,
+				F4A58BC5268CC7E100C11441 /* StatusUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -586,10 +670,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F414B5B1268CA7D400C98255 /* consumer-three-resolved-issues.json in Resources */,
+				F414B5B1268CA7D400C98255 /* customer-three-resolved-issues.json in Resources */,
 				F414B5B0268CA7D400C98255 /* developer-one-resolved-issue.json in Resources */,
+				F4D61CF2268CF1B50087B158 /* customer-no-issues.json in Resources */,
+				F4D61CF7268D02D50087B158 /* customer-three-ongoing-issues.json in Resources */,
+				F4D61CF0268CF1B50087B158 /* developer-no-issues.json in Resources */,
 				F414B5B5268CB27C00C98255 /* developer-one-ongoing-issue.json in Resources */,
-				F414B5B3268CAC4100C98255 /* consumer-one-ongoing-issue.json in Resources */,
+				F414B5B3268CAC4100C98255 /* customer-one-ongoing-issue.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4A58BC4268CC7E100C11441 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4A58BD4268CC88500C11441 /* customer-one-ongoing-issue.json in Resources */,
+				F4A58BD3268CC88500C11441 /* customer-three-resolved-issues.json in Resources */,
+				F4D61CF3268CF1B50087B158 /* customer-no-issues.json in Resources */,
+				F4D61CF8268D02D50087B158 /* customer-three-ongoing-issues.json in Resources */,
+				F4D61CF1268CF1B50087B158 /* developer-no-issues.json in Resources */,
+				F4A58BD6268CC88500C11441 /* developer-one-ongoing-issue.json in Resources */,
+				F4A58BD5268CC88500C11441 /* developer-one-resolved-issue.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +733,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F414B5A6268CA70C00C98255 /* EventFilteringTests.swift in Sources */,
+				F4A58BD2268CC81500C11441 /* Bundle+TestData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4A58BC2268CC7E100C11441 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4A58BC9268CC7E100C11441 /* DashboardViewModelTests.swift in Sources */,
+				F4A58BD7268CC88900C11441 /* Bundle+TestData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +754,7 @@
 				F4AFF34E268B88E3002C26FC /* WindowChrome.swift in Sources */,
 				F4AFF32F268B681C002C26FC /* DetailView.swift in Sources */,
 				F4AFF330268B681C002C26FC /* StatusItemBackgroundModifier.swift in Sources */,
+				F4D61CF5268CF20C0087B158 /* DashboardItem+StatusCore.swift in Sources */,
 				F4AFF34C268B730E002C26FC /* MenuViewModel.swift in Sources */,
 				F4AFF332268B681C002C26FC /* DashboardItemView.swift in Sources */,
 				F4AFF340268B6AB9002C26FC /* StatusBarMenuWindowController.swift in Sources */,
@@ -673,6 +785,16 @@
 			isa = PBXTargetDependency;
 			target = DD88E56A23F34EE1009C4060 /* StatusCore */;
 			targetProxy = F414B5A8268CA70C00C98255 /* PBXContainerItemProxy */;
+		};
+		F4A58BCC268CC7E100C11441 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F4AFF30B268B6807002C26FC /* StatusUI */;
+			targetProxy = F4A58BCB268CC7E100C11441 /* PBXContainerItemProxy */;
+		};
+		F4A58BD9268CC89A00C11441 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD88E56A23F34EE1009C4060 /* StatusCore */;
+			targetProxy = F4A58BD8268CC89A00C11441 /* PBXContainerItemProxy */;
 		};
 		F4AFF311268B6807002C26FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -749,7 +871,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -804,7 +926,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -836,7 +958,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 0.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -868,7 +989,6 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 0.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -896,7 +1016,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 0.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -927,7 +1046,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 0.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -951,7 +1069,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -973,9 +1090,50 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F4A58BCD268CC7E100C11441 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8C7439RJLG;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.experiment.StatusUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F4A58BCE268CC7E100C11441 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8C7439RJLG;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.experiment.StatusUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1002,7 +1160,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1034,7 +1191,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.StatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1081,6 +1237,15 @@
 			buildConfigurations = (
 				F414B5AA268CA70C00C98255 /* Debug */,
 				F414B5AB268CA70C00C98255 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4A58BCF268CC7E100C11441 /* Build configuration list for PBXNativeTarget "StatusUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4A58BCD268CC7E100C11441 /* Debug */,
+				F4A58BCE268CC7E100C11441 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
