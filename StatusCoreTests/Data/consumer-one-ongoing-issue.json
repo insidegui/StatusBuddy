@@ -1,0 +1,349 @@
+{
+  "drpost": false,
+  "drMessage": null,
+  "services": [
+    {
+      "redirectUrl": null,
+      "serviceName": "App Store",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Arcade",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Books",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Business Manager",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Card",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Cash",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Fitness+",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple ID",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Music",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Music radio",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Music Subscriptions",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple Online Store",
+      "events": []
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20210426135940/https://developer.apple.com/apple-pay/",
+      "serviceName": "Apple Pay",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple School Manager",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple TV Channels",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Apple TV+",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "AppleCare on Device",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Device Enrollment Program",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Dictation",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Documents in the Cloud",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "FaceTime",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Find My",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Fleetsmith",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Game Center",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Global Service Exchange",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Account &amp; Sign In",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Backup",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Bookmarks &amp; Tabs",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Calendar",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Contacts",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Drive",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Keychain",
+      "events": [
+        {
+          "usersAffected": "Some users were affected",
+          "epochStartDate": 1619291760000,
+          "epochEndDate": 1619304900000,
+          "messageId": "2000000560",
+          "statusType": "Issue",
+          "datePosted": "04/26/2021 06:30 PDT",
+          "startDate": "04/24/2021 12:16 PDT",
+          "endDate": "04/24/2021 15:55 PDT",
+          "affectedServices": null,
+          "eventStatus": "resolved",
+          "message": "Users experienced a problem with this service."
+        }
+      ]
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Mail",
+      "events": [
+        {
+          "usersAffected": "Some users are affected",
+          "epochStartDate": 1619435580000,
+          "epochEndDate": null,
+          "messageId": "1000000310",
+          "statusType": "Outage",
+          "datePosted": "04/26/2021 06:30 PDT",
+          "startDate": "04/26/2021 04:13 PDT",
+          "endDate": null,
+          "affectedServices": null,
+          "eventStatus": "ongoing",
+          "message": "Users may be experiencing intermittent issues with this service."
+        }
+      ]
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Notes",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Reminders",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Storage Upgrades",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iCloud Web Apps (iCloud.com)",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iMessage",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iOS Device Activation",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iTunes Match",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iTunes Store",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iTunes U",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "iWork for iCloud",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Mac App Store",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "macOS Software Update",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Mail Drop",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Maps Display",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Maps Routing &amp; Navigation",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Maps Search",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Maps Traffic",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "News",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Photos",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Radio",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Schooltime",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Schoolwork",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Screen Time",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Sign in with Apple",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Siri",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Spotlight suggestions",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Stocks",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Volume Purchase Program",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Walkie-Talkie",
+      "events": []
+    },
+    {
+      "redirectUrl": null,
+      "serviceName": "Weather",
+      "events": []
+    }
+  ]
+}

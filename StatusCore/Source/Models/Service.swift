@@ -15,15 +15,27 @@ public struct Service: Hashable, Codable {
         public let epochEndDate: Date?
         public let message: String
         public let eventStatus: String
+        
+        static let resolvedStatuses = ["resolved", "completed"]
     }
 
     public let serviceName: String
-    public let redirectUrl: URL?
+    public let redirectUrl: String?
     public let events: [Event]
 }
 
 public extension Service {
-    var eventsSortedByEndDate: [Event] {
-        events.sorted(by: { ($0.epochEndDate ?? .distantPast) < ($1.epochEndDate ?? .distantPast) })
+    var eventsSortedByStartDateDescending: [Event] {
+        events.sorted(by: { ($0.epochStartDate ?? .distantPast) > ($1.epochStartDate ?? .distantPast) })
     }
+    
+    var latestEvent: Event? { eventsSortedByStartDateDescending.first }
+}
+
+public extension Service {
+    var activeEvents: [Event] { events.filter { !Event.resolvedStatuses.contains($0.eventStatus) } }
+    var recentEvents: [Event] { events.filter { Event.resolvedStatuses.contains($0.eventStatus) } }
+    
+    var hasActiveEvents: Bool { !activeEvents.isEmpty }
+    var hasRecentEvents: Bool { !recentEvents.isEmpty }
 }
