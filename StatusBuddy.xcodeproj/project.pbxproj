@@ -27,6 +27,8 @@
 		F414B5B1268CA7D400C98255 /* customer-three-resolved-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5AF268CA7D400C98255 /* customer-three-resolved-issues.json */; };
 		F414B5B3268CAC4100C98255 /* customer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B2268CAC4000C98255 /* customer-one-ongoing-issue.json */; };
 		F414B5B5268CB27C00C98255 /* developer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */; };
+		F448920B268E04D400DBC803 /* DetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920A268E04D400DBC803 /* DetailViewModelTests.swift */; };
+		F448920D268E057100DBC803 /* DetailGroup+StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920C268E057100DBC803 /* DetailGroup+StatusCore.swift */; };
 		F4A58BC9268CC7E100C11441 /* DashboardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */; };
 		F4A58BCA268CC7E100C11441 /* StatusUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AFF30C268B6807002C26FC /* StatusUI.framework */; };
 		F4A58BD2268CC81500C11441 /* Bundle+TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A58BD1268CC81500C11441 /* Bundle+TestData.swift */; };
@@ -158,6 +160,8 @@
 		F414B5AF268CA7D400C98255 /* customer-three-resolved-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-three-resolved-issues.json"; sourceTree = "<group>"; };
 		F414B5B2268CAC4000C98255 /* customer-one-ongoing-issue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-one-ongoing-issue.json"; sourceTree = "<group>"; };
 		F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "developer-one-ongoing-issue.json"; sourceTree = "<group>"; };
+		F448920A268E04D400DBC803 /* DetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelTests.swift; sourceTree = "<group>"; };
+		F448920C268E057100DBC803 /* DetailGroup+StatusCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailGroup+StatusCore.swift"; sourceTree = "<group>"; };
 		F4A58BC6268CC7E100C11441 /* StatusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		F4A58BD1268CC81500C11441 /* Bundle+TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+TestData.swift"; sourceTree = "<group>"; };
@@ -385,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */,
+				F448920A268E04D400DBC803 /* DetailViewModelTests.swift */,
 			);
 			path = StatusUITests;
 			sourceTree = "<group>";
@@ -438,6 +443,7 @@
 				F4AFF31F268B681C002C26FC /* DetailGroup.swift */,
 				F4AFF320268B681C002C26FC /* ServiceScope.swift */,
 				F4D61CF4268CF20C0087B158 /* DashboardItem+StatusCore.swift */,
+				F448920C268E057100DBC803 /* DetailGroup+StatusCore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -743,6 +749,7 @@
 			files = (
 				F4A58BC9268CC7E100C11441 /* DashboardViewModelTests.swift in Sources */,
 				F4A58BD7268CC88900C11441 /* Bundle+TestData.swift in Sources */,
+				F448920B268E04D400DBC803 /* DetailViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +766,7 @@
 				F4AFF332268B681C002C26FC /* DashboardItemView.swift in Sources */,
 				F4AFF340268B6AB9002C26FC /* StatusBarMenuWindowController.swift in Sources */,
 				F4AFF342268B6ACF002C26FC /* StatusUI.swift in Sources */,
+				F448920D268E057100DBC803 /* DetailGroup+StatusCore.swift in Sources */,
 				F4AFF344268B6B29002C26FC /* EventMonitor.swift in Sources */,
 				F4AFF328268B681C002C26FC /* DetailViewModel.swift in Sources */,
 				F4AFF32B268B681C002C26FC /* DashboardItem.swift in Sources */,

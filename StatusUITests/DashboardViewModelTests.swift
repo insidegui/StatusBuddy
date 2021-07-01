@@ -2,7 +2,7 @@ import XCTest
 @testable import StatusCore
 @testable import StatusUI
 
-final class StatusUITests: XCTestCase {
+final class DashboardViewModelTests: XCTestCase {
 
     func testGeneratingDashboardWithNoIssues() throws {
         let customerResponse = try StatusResponse.customerNoIssues()
