@@ -20,10 +20,14 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>70</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSAccentColorName</key>
+	<string>AccentColor</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2020 Guilherme Rambo. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
@@ -38,7 +42,5 @@
 	<string>dj8ljUPnwoLj/dLs6HyJg5Ayw+t8zWtgjQUfQsH56ww=</string>
 	<key>SUScheduledCheckInterval</key>
 	<integer>86400</integer>
-	<key>NSAccentColorName</key>
-	<string>AccentColor</string>
 </dict>
 </plist>
