@@ -61,8 +61,8 @@
 		F4AFF342268B6ACF002C26FC /* StatusUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF341268B6ACF002C26FC /* StatusUI.swift */; };
 		F4AFF344268B6B29002C26FC /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF343268B6B29002C26FC /* EventMonitor.swift */; };
 		F4AFF348268B6C29002C26FC /* StatusBarFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF347268B6C29002C26FC /* StatusBarFlowController.swift */; };
-		F4AFF34A268B72FA002C26FC /* MenuContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF349268B72FA002C26FC /* MenuContainerView.swift */; };
-		F4AFF34C268B730E002C26FC /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF34B268B730E002C26FC /* MenuViewModel.swift */; };
+		F4AFF34A268B72FA002C26FC /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF349268B72FA002C26FC /* RootView.swift */; };
+		F4AFF34C268B730E002C26FC /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF34B268B730E002C26FC /* RootViewModel.swift */; };
 		F4AFF34E268B88E3002C26FC /* WindowChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF34D268B88E3002C26FC /* WindowChrome.swift */; };
 		F4D61CF0268CF1B50087B158 /* developer-no-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CEE268CF1B50087B158 /* developer-no-issues.json */; };
 		F4D61CF1268CF1B50087B158 /* developer-no-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CEE268CF1B50087B158 /* developer-no-issues.json */; };
@@ -186,8 +186,8 @@
 		F4AFF341268B6ACF002C26FC /* StatusUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusUI.swift; sourceTree = "<group>"; };
 		F4AFF343268B6B29002C26FC /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		F4AFF347268B6C29002C26FC /* StatusBarFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarFlowController.swift; sourceTree = "<group>"; };
-		F4AFF349268B72FA002C26FC /* MenuContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContainerView.swift; sourceTree = "<group>"; };
-		F4AFF34B268B730E002C26FC /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		F4AFF349268B72FA002C26FC /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		F4AFF34B268B730E002C26FC /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
 		F4AFF34D268B88E3002C26FC /* WindowChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowChrome.swift; sourceTree = "<group>"; };
 		F4D61CEE268CF1B50087B158 /* developer-no-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "developer-no-issues.json"; sourceTree = "<group>"; };
 		F4D61CEF268CF1B50087B158 /* customer-no-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-no-issues.json"; sourceTree = "<group>"; };
@@ -419,7 +419,7 @@
 		F4AFF318268B681C002C26FC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				F4AFF34B268B730E002C26FC /* MenuViewModel.swift */,
+				F4AFF34B268B730E002C26FC /* RootViewModel.swift */,
 				F4AFF319268B681C002C26FC /* DetailViewModel.swift */,
 				F4AFF31A268B681C002C26FC /* DashboardViewModel.swift */,
 			);
@@ -452,7 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				F4AFF324268B681C002C26FC /* Modifiers */,
-				F4AFF349268B72FA002C26FC /* MenuContainerView.swift */,
+				F4AFF349268B72FA002C26FC /* RootView.swift */,
 				F4AFF322268B681C002C26FC /* DashboardView.swift */,
 				F4AFF323268B681C002C26FC /* DetailView.swift */,
 				F4AFF326268B681C002C26FC /* DetailGroupView.swift */,
@@ -762,7 +762,7 @@
 				F4AFF32F268B681C002C26FC /* DetailView.swift in Sources */,
 				F4AFF330268B681C002C26FC /* StatusItemBackgroundModifier.swift in Sources */,
 				F4D61CF5268CF20C0087B158 /* DashboardItem+StatusCore.swift in Sources */,
-				F4AFF34C268B730E002C26FC /* MenuViewModel.swift in Sources */,
+				F4AFF34C268B730E002C26FC /* RootViewModel.swift in Sources */,
 				F4AFF332268B681C002C26FC /* DashboardItemView.swift in Sources */,
 				F4AFF340268B6AB9002C26FC /* StatusBarMenuWindowController.swift in Sources */,
 				F4AFF342268B6ACF002C26FC /* StatusUI.swift in Sources */,
@@ -777,7 +777,7 @@
 				F4AFF329268B681C002C26FC /* DashboardViewModel.swift in Sources */,
 				F4AFF348268B6C29002C26FC /* StatusBarFlowController.swift in Sources */,
 				F4AFF331268B681C002C26FC /* DetailGroupView.swift in Sources */,
-				F4AFF34A268B72FA002C26FC /* MenuContainerView.swift in Sources */,
+				F4AFF34A268B72FA002C26FC /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,11 +9,8 @@
 import Foundation
 import Combine
 
-public typealias StatusCheckCompletionHandler = (Result<StatusResponse, Error>) -> Void
+public typealias StatusResponsePublisher = AnyPublisher<StatusResponse, Error>
 
 public protocol StatusChecker {
-    var currentStatus: StatusResponse? { get }
-    
-    @discardableResult func check(with completion: StatusCheckCompletionHandler?) -> Cancellable
-    func clear()
+    func check() -> StatusResponsePublisher
 }

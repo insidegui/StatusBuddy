@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct DetailView: View {
-    @StateObject var viewModel = DetailViewModel(with: [
-        .activeIssuesPreview,
-        .recentIssuesPreview
-    ], in: .developer)
+    @ObservedObject var viewModel: RootViewModel
+    
+    let scope: ServiceScope
+    let groups: [DetailGroup]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(viewModel.scope.title)
+            Text(scope.title)
                 .font(.system(size: 15, weight: .semibold, design: .rounded))
                 .padding([.top, .leading])
                 .padding(.leading, 6)
@@ -23,7 +23,7 @@ struct DetailView: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    ForEach(viewModel.groups) { group in
+                    ForEach(groups) { group in
                         DetailGroupView(group)
                     }
                 }
@@ -36,7 +36,10 @@ struct DetailView: View {
 #if DEBUG
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView()
+        DetailView(viewModel: RootViewModel(), scope: .developer, groups: [
+            .activeIssuesPreview,
+            .recentIssuesPreview
+        ])
     }
 }
 #endif

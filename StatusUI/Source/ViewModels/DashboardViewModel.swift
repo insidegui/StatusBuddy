@@ -8,10 +8,10 @@
 import SwiftUI
 import StatusCore
 
-final class DashboardViewModel: ObservableObject {
-    @Published private(set) var items: [DashboardItem]
+public struct DashboardViewModel {
+    public let items: [DashboardItem]
     
-    init(with items: [DashboardItem] = [
+    public init(with items: [DashboardItem] = [
         DashboardItem(with: .customer),
         DashboardItem(with: .developer)
     ]) {
@@ -20,7 +20,7 @@ final class DashboardViewModel: ObservableObject {
 }
 
 extension DashboardViewModel {
-    convenience init(with responses: [ServiceScope: StatusResponse]) {
+    init(with responses: [ServiceScope: StatusResponse]) {
         let items: [DashboardItem] = responses
             .sorted(by: { $0.key.order < $1.key.order })
             .map { DashboardItem(with: $1, in: $0) }

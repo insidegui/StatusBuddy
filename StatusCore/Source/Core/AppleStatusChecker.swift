@@ -33,10 +33,6 @@ public final class AppleStatusChecker: StatusChecker {
 
         return components.url ?? endpoint
     }
-    
-    private lazy var cancellables = Set<AnyCancellable>()
-
-    public private(set) var currentStatus: StatusResponse?
 
     private lazy var session: URLSession = {
         let config = URLSessionConfiguration.default
@@ -51,39 +47,13 @@ public final class AppleStatusChecker: StatusChecker {
         return decoder
     }()
 
-    public func clear() {
-        currentStatus = nil
-    }
-
-    @discardableResult public func check(with completionHandler: StatusCheckCompletionHandler? = nil) -> Cancellable {
-        os_log("%{public}@", log: log, type: .debug, #function)
-
-        let url = currentURL
-        
-        let cancellable = session.dataTaskPublisher(for: url)
+    public func check() -> StatusResponsePublisher {
+        session.dataTaskPublisher(for: currentURL)
             .map({ $0.data.demanglingAppleDeveloperStatusResponseIfNeeded })
             .decode(type: StatusResponse.self, decoder: decoder)
             .retry(3)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                guard let self = self else { return }
-
-                switch completion {
-                case .finished:
-                    os_log("Finished loading %{public}@", log: self.log, type: .debug, url.absoluteString)
-                case .failure(let error):
-                    os_log("Error loading %{public}@: %{public}@", log: self.log, type: .error, url.absoluteString, String(describing: error))
-                    
-                    completionHandler?(.failure(error))
-                }
-            }, receiveValue: { [weak self] value in
-                self?.currentStatus = value
-                completionHandler?(.success(value))
-            })
-        
-        cancellable.store(in: &cancellables)
-
-        return cancellable
+            .eraseToAnyPublisher()
     }
 
 }

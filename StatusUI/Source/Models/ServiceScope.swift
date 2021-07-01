@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct ServiceScope: Hashable, Identifiable {
+public struct ServiceScope: Hashable, Identifiable {
     let order: Int
-    let id: String
+    public let id: String
     let iconName: String
     let title: String
 }
 
-extension ServiceScope {
+public extension ServiceScope {
     static let developer = ServiceScope(
         order: 1,
         id: "DEVELOPER",

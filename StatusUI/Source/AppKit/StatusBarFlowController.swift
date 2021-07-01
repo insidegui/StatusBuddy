@@ -8,15 +8,21 @@
 
 import Cocoa
 import SwiftUI
+import StatusCore
 
 public final class StatusBarFlowController: NSViewController {
     
-    public static var topMargin: CGFloat { MenuContainerView.topPaddingToAccomodateShadow }
+    public static var topMargin: CGFloat { RootView.topPaddingToAccomodateShadow }
     
-    public private(set) lazy var viewModel = MenuViewModel()
+    public private(set) lazy var viewModel: RootViewModel = {
+        RootViewModel(with: [
+            .developer: AppleStatusChecker(endpoint: .developerFeedURL),
+            .customer: AppleStatusChecker(endpoint: .consumerFeedURL)
+        ])
+    }()
     
     private lazy var rootView: NSView = {
-        NSHostingView(rootView: MenuContainerView().environmentObject(self.viewModel))
+        NSHostingView(rootView: RootView().environmentObject(self.viewModel))
     }()
     
     public convenience init() {
@@ -41,4 +47,24 @@ public final class StatusBarFlowController: NSViewController {
         preferredContentSize = view.fittingSize
     }
     
+}
+
+private extension URL {
+    static var developerFeedURL: URL {
+        if let overrideStr = UserDefaults.standard.string(forKey: "SBDeveloperFeedURL"),
+           let overrideURL = URL(string: overrideStr) {
+            return overrideURL
+        } else {
+            return URL(string: "https://www.apple.com/support/systemstatus/data/developer/system_status_en_US.js?callback=jsonCallback")!
+        }
+    }
+    
+    static var consumerFeedURL: URL {
+        if let overrideStr = UserDefaults.standard.string(forKey: "SBConsumerFeedURL"),
+           let overrideURL = URL(string: overrideStr) {
+            return overrideURL
+        } else {
+            return URL(string: "https://www.apple.com/support/systemstatus/data/system_status_en_US.js")!
+        }
+    }
 }

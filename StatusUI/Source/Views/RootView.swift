@@ -1,5 +1,5 @@
 //
-//  MenuContainerView.swift
+//  RootView.swift
 //  StatusUI
 //
 //  Created by Guilherme Rambo on 29/06/21.
@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-struct MenuContainerView: View {
-    @EnvironmentObject var viewModel: MenuViewModel
+struct RootView: View {
+    @EnvironmentObject var viewModel: RootViewModel
     
     static let shadowRadius: CGFloat = 10
     static let topPaddingToAccomodateShadow: CGFloat = 26
@@ -18,25 +18,31 @@ struct MenuContainerView: View {
     var body: some View {
         Group {
             if let selectedItem = viewModel.selectedDashboardItem {
-                #warning("TODO: respect selectedItem")
-                DetailView()
+                DetailView(
+                    viewModel: viewModel,
+                    scope: selectedItem.scope,
+                    groups: viewModel.details[selectedItem.scope]?.groups ?? []
+                )
                     .frame(minWidth: Self.minWidth, maxWidth: .infinity, minHeight: 323, maxHeight: .infinity, alignment: .topLeading)
                     .windowChrome(shadowRadius: Self.shadowRadius, padding: Self.topPaddingToAccomodateShadow)
             } else {
                 DashboardView(
-                    viewModel: viewModel.dashboard,
+                    viewModel: viewModel,
                     selectedItem: $viewModel.selectedDashboardItem
                 )
                     .frame(minWidth: Self.minWidth, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .windowChrome(shadowRadius: Self.shadowRadius, padding: Self.topPaddingToAccomodateShadow)
             }
         }
+        .onAppear {
+            viewModel.refresh()
+        }
     }
 }
 
-struct MenuContainerView_Previews: PreviewProvider {
+struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuContainerView()
-            .environmentObject(MenuViewModel())
+        RootView()
+            .environmentObject(RootViewModel(with: [:]))
     }
 }

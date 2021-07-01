@@ -8,10 +8,10 @@
 import SwiftUI
 import StatusCore
 
-final class DetailViewModel: ObservableObject {
+struct DetailViewModel {
     let scope: ServiceScope
     
-    @Published private(set) var groups: [DetailGroup]
+    let groups: [DetailGroup]
     
     init(with groups: [DetailGroup], in scope: ServiceScope) {
         self.scope = scope
@@ -20,7 +20,7 @@ final class DetailViewModel: ObservableObject {
 }
 
 extension DetailViewModel {
-    convenience init(with response: StatusResponse, in scope: ServiceScope) {
+    init(with response: StatusResponse, in scope: ServiceScope) {
         self.init(with: DetailGroup.generateGroups(with: response, in: scope), in: scope)
     }
 }

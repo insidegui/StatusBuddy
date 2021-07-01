@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @StateObject var viewModel = DashboardViewModel()
+    @ObservedObject var viewModel = RootViewModel()
     @Binding var selectedItem: DashboardItem?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            ForEach(viewModel.items) { item in
+            ForEach(viewModel.dashboard.items) { item in
                 DashboardItemView(item)
                     .onTapGesture { selectedItem = item }
             }
@@ -29,10 +29,10 @@ struct DashboardView_Previews: PreviewProvider {
             DashboardView(selectedItem: .constant(nil))
             DashboardView(selectedItem: .constant(nil))
                 .preferredColorScheme(.dark)
-            DashboardView(viewModel: DashboardViewModel(with: [
+            DashboardView(viewModel: RootViewModel(dashboard: DashboardViewModel(with: [
                 DashboardItem(with: .customer, subtitle: "Outage: Maps Routing & Navigation", iconColor: .error, subtitleColor: .error),
                 DashboardItem(with: .developer, subtitle: "3 Recent Issues", iconColor: .warning, subtitleColor: .warningText)
-            ]), selectedItem: .constant(nil))
+            ])), selectedItem: .constant(nil))
         }
     }
 }

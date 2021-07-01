@@ -48,7 +48,8 @@ struct DetailGroupView: View {
                         assert(configureNotifications != nil)
                         configureNotifications?()
                     } label: {
-                        Image(systemName: "gearshape.fill")
+                        #warning("TODO: Change foreground color depending on whether notifications are currently enabled or not")
+                        Image(systemName: "rectangle.fill.badge.checkmark")
                             .foregroundColor(Color.primaryText)
                     }
                     .buttonStyle(PlainButtonStyle())

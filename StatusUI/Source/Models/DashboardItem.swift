@@ -17,7 +17,7 @@ public struct DashboardItem: Hashable, Identifiable {
     let iconColor: Color
     let subtitleColor: Color
     
-    init(with scope: ServiceScope,
+    public init(with scope: ServiceScope,
          subtitle: String? = nil,
          iconColor: Color? = nil,
          subtitleColor: Color? = nil)
