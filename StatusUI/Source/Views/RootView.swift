@@ -35,7 +35,7 @@ struct RootView: View {
             }
         }
         .onAppear {
-            viewModel.refresh()
+            viewModel.startPeriodicUpdates()
         }
     }
 }

@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var flowController: StatusBarFlowController = {
         StatusBarFlowController()
     }()
-    
+     
     private lazy var windowController: StatusBarMenuWindowController = {
         StatusBarMenuWindowController(
             statusItem: statusItem,
