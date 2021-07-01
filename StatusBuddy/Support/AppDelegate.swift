@@ -12,8 +12,16 @@ import StatusCore
 import Combine
 import StatusUI
 
+#if ENABLE_SPARKLE
+import Sparkle
+#endif
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    #if ENABLE_SPARKLE
+    @IBOutlet weak var updaterController: SPUStandardUpdaterController?
+    #endif
 
     var window: NSWindow!
 

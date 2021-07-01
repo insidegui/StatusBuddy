@@ -9,15 +9,14 @@
 import SwiftUI
 import Combine
 import StatusCore
-
-#if ENABLE_SPARKLE
-import Sparkle
-#endif
+import StatusUI
 
 struct PreferencesMenuView: View {
     let refresh: PassthroughSubject<Void, Never>
     
+    @EnvironmentObject var viewModel: RootViewModel
     @EnvironmentObject var preferences: Preferences
+    @EnvironmentObject var updateController: UpdateController
 
     var body: some View {
         MenuButton(label: Image("gear").resizable().frame(width: 16, height: 16)) {
@@ -50,9 +49,7 @@ struct PreferencesMenuView: View {
     }
 
     private func checkForUpdates() {
-        #if ENABLE_SPARKLE
-        SUUpdater.shared()?.checkForUpdates(nil)
-        #endif
+        updateController.checkForUpdates()
     }
 
     private func openWebsite() {
