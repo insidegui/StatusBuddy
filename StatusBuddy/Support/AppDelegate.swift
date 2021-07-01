@@ -41,6 +41,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         windowController.handleEscape = { [weak self] _ in
             self?.hideUI(sender: nil)
         }
+        
+        flowController.viewModel.$hasActiveIssues
+            .assign(to: \.issueBadgeVisible, on: self)
+            .store(in: &cancellables)
     }
 
     private var imageForCurrentStatus: NSImage? {
