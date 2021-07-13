@@ -41,6 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         windowController.handleEscape = { [weak self] _ in
             self?.hideUI(sender: nil)
         }
+        
+        flowController.viewModel.startPeriodicUpdates()
     }
 
     private var imageForCurrentStatus: NSImage? {
@@ -94,6 +96,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func showUI(sender: Any?) {
+        flowController.viewModel.refresh(nil)
+        
         windowController.showWindow(sender)
     }
 
