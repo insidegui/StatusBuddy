@@ -12,8 +12,16 @@ import StatusCore
 import Combine
 import StatusUI
 
+#if ENABLE_SPARKLE
+import Sparkle
+#endif
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    #if ENABLE_SPARKLE
+    @IBOutlet weak var updaterController: SPUStandardUpdaterController?
+    #endif
 
     var window: NSWindow!
 
@@ -26,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var flowController: StatusBarFlowController = {
         StatusBarFlowController()
     }()
-    
+     
     private lazy var windowController: StatusBarMenuWindowController = {
         StatusBarMenuWindowController(
             statusItem: statusItem,
@@ -41,8 +49,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         windowController.handleEscape = { [weak self] _ in
             self?.hideUI(sender: nil)
         }
-        
+
         flowController.viewModel.startPeriodicUpdates()
+
+        flowController.viewModel.$hasActiveIssues
+            .assign(to: \.issueBadgeVisible, on: self)
+            .store(in: &cancellables)
     }
 
     private var imageForCurrentStatus: NSImage? {

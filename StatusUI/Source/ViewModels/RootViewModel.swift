@@ -17,11 +17,14 @@ public final class RootViewModel: ObservableObject {
     @Published private(set) var latestResponses: [ServiceScope: StatusResponse] = [:]
     @Published private(set) var dashboard = DashboardViewModel(with: [DashboardItem]())
     @Published private(set) var details: [ServiceScope: DetailViewModel] = [:]
+    @Published public private(set) var hasActiveIssues = false
     
     private let log = OSLog(subsystem: StatusUI.subsystemName, category: String(describing: RootViewModel.self))
     
     let checkers: [ServiceScope: StatusChecker]
     let updateInterval: TimeInterval
+    
+    private lazy var cancellables = Set<AnyCancellable>()
     
     public init(with checkers: [ServiceScope: StatusChecker] = [:],
                 updateInterval: TimeInterval = 10 * 60,
@@ -29,6 +32,8 @@ public final class RootViewModel: ObservableObject {
     {
         self.checkers = checkers
         self.updateInterval = updateInterval
+        
+        $latestResponses.map({ $0.values.contains(where: { $0.hasActiveEvents }) }).assign(to: &$hasActiveIssues)
     }
 
     private var updateTimer: Timer?
