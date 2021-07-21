@@ -20,9 +20,15 @@ public protocol NotificationPresenter: AnyObject {
     func requestNotificationPermissionIfNeeded()
 }
 
-public final class DefaultNotificationPresenter: NSObject, NotificationPresenter {
+public final class DefaultNotificationPresenter: NSObject, NotificationPresenter, UNUserNotificationCenterDelegate {
     
     private let log = OSLog(subsystem: StatusUI.subsystemName, category: String(describing: DefaultNotificationPresenter.self))
+    
+    public override init() {
+        super.init()
+        
+        UNUserNotificationCenter.current().delegate = self
+    }
     
     public func present(_ notification: ServiceRestoredNotification) {
         let content = UNMutableNotificationContent()
@@ -58,6 +64,10 @@ public final class DefaultNotificationPresenter: NSObject, NotificationPresenter
                 os_log("Notification authorization status = %{public}@", log: self.log, type: .debug, String(describing: result))
             }
         }
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.banner)
     }
     
 }

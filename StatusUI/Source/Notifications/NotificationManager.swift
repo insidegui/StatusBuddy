@@ -68,12 +68,7 @@ public final class NotificationManager: ObservableObject {
     
     private func processUpdatedResponses(_ responses: [ServiceScope: StatusResponse], oldValue: [ServiceScope: StatusResponse]) {
         os_log("%{public}@", log: log, type: .debug, #function)
-        
-        guard responses != oldValue else {
-            os_log("Ignoring update because there's been no change", log: self.log, type: .debug)
-            return
-        }
-        
+
         let oldStates = servicesPendingNotification(in: oldValue)
         let newStates = servicesPendingNotification(in: responses)
         

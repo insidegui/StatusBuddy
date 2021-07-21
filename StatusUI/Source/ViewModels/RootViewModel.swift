@@ -25,13 +25,20 @@ public final class RootViewModel: ObservableObject {
     let updateInterval: TimeInterval
     
     private lazy var cancellables = Set<AnyCancellable>()
+
+    private static var deafultRefreshInterval: TimeInterval {
+        if let refreshStr = UserDefaults.standard.string(forKey: "SBRefreshInterval"), let refreshInt = Int(refreshStr) {
+            return TimeInterval(refreshInt)
+        } else {
+            return 10 * 60
+        }
+    }
     
     public init(with checkers: [ServiceScope: StatusChecker] = [:],
-                updateInterval: TimeInterval = 10 * 60,
                 dashboard: DashboardViewModel = DashboardViewModel())
     {
         self.checkers = checkers
-        self.updateInterval = updateInterval
+        self.updateInterval = Self.deafultRefreshInterval
         
         $latestResponses.map({ $0.values.contains(where: { $0.hasActiveEvents }) }).assign(to: &$hasActiveIssues)
     }
