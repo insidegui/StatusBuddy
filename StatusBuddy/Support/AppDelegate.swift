@@ -31,8 +31,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private let preferences = Preferences()
     
+    private(set) lazy var rootViewModel: RootViewModel = {
+        RootViewModel(with: [
+            .developer: AppleStatusChecker(endpoint: .developerFeedURL),
+            .customer: AppleStatusChecker(endpoint: .consumerFeedURL)
+        ])
+    }()
+    
     private lazy var flowController: StatusBarFlowController = {
-        StatusBarFlowController()
+        StatusBarFlowController(
+            viewModel: rootViewModel,
+            notificationManager: notificationManager
+        )
     }()
      
     private lazy var windowController: StatusBarMenuWindowController = {
@@ -42,6 +52,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             topMargin: StatusBarFlowController.topMargin
         )
     }()
+    
+    private lazy var notificationManager = NotificationManager()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         updateButton()
@@ -50,10 +62,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self?.hideUI(sender: nil)
         }
 
-        flowController.viewModel.startPeriodicUpdates()
+        rootViewModel.startPeriodicUpdates()
 
-        flowController.viewModel.$hasActiveIssues
+        rootViewModel.$hasActiveIssues
             .assign(to: \.issueBadgeVisible, on: self)
+            .store(in: &cancellables)
+        
+        rootViewModel.$latestResponses
+            .assign(to: \.latestResponses, on: notificationManager)
             .store(in: &cancellables)
     }
 
@@ -115,15 +131,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func showUI(sender: Any?) {
-        flowController.viewModel.refresh(nil)
+        rootViewModel.refresh(nil)
         
         windowController.showWindow(sender)
     }
 
     func hideUI(sender: Any?) {
         // Go back if showing detail.
-        guard flowController.viewModel.selectedDashboardItem == nil else {
-            flowController.viewModel.selectedDashboardItem = nil
+        guard rootViewModel.selectedDashboardItem == nil else {
+            rootViewModel.selectedDashboardItem = nil
             return
         }
         

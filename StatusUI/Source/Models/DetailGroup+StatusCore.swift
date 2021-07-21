@@ -25,6 +25,7 @@ extension DetailGroup {
         if !ongoingIssueItems.isEmpty {
             let group = DetailGroup(
                 id: "ONGOING",
+                scope: scope,
                 iconName: "x.circle.fill",
                 title: "ACTIVE ISSUES",
                 accentColor: .error,
@@ -37,6 +38,7 @@ extension DetailGroup {
         if !recentIssueItems.isEmpty {
             let group = DetailGroup(
                 id: "RECENT",
+                scope: scope,
                 iconName: "exclamationmark.triangle.fill",
                 title: "RECENT ISSUES",
                 accentColor: .warningText,
@@ -49,6 +51,7 @@ extension DetailGroup {
         if !operationalItems.isEmpty {
             let group = DetailGroup(
                 id: "OPERATIONAL",
+                scope: scope,
                 iconName: "checkmark.circle.fill",
                 title: "OPERATIONAL",
                 accentColor: .success,

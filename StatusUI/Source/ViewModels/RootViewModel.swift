@@ -14,7 +14,7 @@ import StatusCore
 public final class RootViewModel: ObservableObject {
     
     @Published public var selectedDashboardItem: DashboardItem?
-    @Published private(set) var latestResponses: [ServiceScope: StatusResponse] = [:]
+    @Published public private(set) var latestResponses: [ServiceScope: StatusResponse] = [:]
     @Published private(set) var dashboard = DashboardViewModel(with: [DashboardItem]())
     @Published private(set) var details: [ServiceScope: DetailViewModel] = [:]
     @Published public private(set) var hasActiveIssues = false

@@ -15,6 +15,7 @@ struct DetailGroupItem: Hashable, Identifiable {
 
 struct DetailGroup: Hashable, Identifiable {
     let id: String
+    let scope: ServiceScope
     let iconName: String
     let title: String
     let accentColor: Color

@@ -8,15 +8,27 @@
 import SwiftUI
 
 struct DetailGroupItemView: View {
-    let item: DetailGroupItem
+    @EnvironmentObject var notificationManager: NotificationManager
     
-    init(_ item: DetailGroupItem) { self.item = item }
+    let item: DetailGroupItem
+    let group: DetailGroup
+    
+    init(for item: DetailGroupItem, in group: DetailGroup) {
+        self.item = item
+        self.group = group
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(item.title)
-                .font(.system(size: 12, weight: .medium))
-                .foregroundColor(.primaryText)
+            HStack {
+                Text(item.title)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.primaryText)
+                
+                Spacer()
+                
+                if group.supportsNotifications { notificationView }
+            }
             if let subtitle = item.subtitle {
                 Text(subtitle)
                     .font(.system(size: 11))
@@ -25,15 +37,24 @@ struct DetailGroupItemView: View {
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
     }
+    
+    private var notificationView: some View {
+        Button {
+            notificationManager.toggleNotificationsEnabled(for: item.id, in: group.scope)
+        } label: {
+            Image(systemName: "rectangle.fill.badge.checkmark")
+                .foregroundColor(notificationManager.hasNotificationsEnabled(for: item.id, in: group.scope) ? Color.accent : Color.primaryText)
+        }
+        .buttonStyle(PlainButtonStyle())
+        .accessibility(label: Text("Configure Notifications"))
+    }
 }
 
 struct DetailGroupView: View {
     let group: DetailGroup
-    let configureNotifications: (() -> Void)?
     
-    init(_ group: DetailGroup, configureNotifications: (() -> Void)? = nil) {
+    init(_ group: DetailGroup) {
         self.group = group
-        self.configureNotifications = configureNotifications
     }
     
     var body: some View {
@@ -42,19 +63,6 @@ struct DetailGroupView: View {
                 Image(systemName: group.iconName)
                 Text(group.title)
                 Spacer()
-                
-                if group.supportsNotifications {
-                    Button {
-                        assert(configureNotifications != nil)
-                        configureNotifications?()
-                    } label: {
-                        #warning("TODO: Change foreground color depending on whether notifications are currently enabled or not")
-                        Image(systemName: "rectangle.fill.badge.checkmark")
-                            .foregroundColor(Color.primaryText)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .accessibility(label: Text("Configure Notifications"))
-                }
             }
             .foregroundColor(group.accentColor)
             .font(.system(size: 11, weight: .medium))
@@ -62,7 +70,7 @@ struct DetailGroupView: View {
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(group.items) { item in
                     VStack {
-                        DetailGroupItemView(item)
+                        DetailGroupItemView(for: item, in: group)
                         if item.id != group.items.last?.id {
                             if #available(macOS 12.0, *) {
                                 Rectangle()
@@ -88,6 +96,7 @@ extension DetailGroup {
     static let recentIssuesPreview: DetailGroup = {
         DetailGroup(
             id: "RECENTS",
+            scope: .developer,
             iconName: "exclamationmark.triangle.fill",
             title: "RECENT ISSUES",
             accentColor: .warning,
@@ -110,6 +119,7 @@ extension DetailGroup {
     static let activeIssuesPreview: DetailGroup = {
         DetailGroup(
             id: "ACTIVE",
+            scope: .developer,
             iconName: "x.circle.fill",
             title: "ACTIVE ISSUES",
             accentColor: .error,

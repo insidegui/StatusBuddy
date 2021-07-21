@@ -14,19 +14,26 @@ public final class StatusBarFlowController: NSViewController {
     
     public static var topMargin: CGFloat { RootView.topPaddingToAccomodateShadow }
     
-    public private(set) lazy var viewModel: RootViewModel = {
-        RootViewModel(with: [
-            .developer: AppleStatusChecker(endpoint: .developerFeedURL),
-            .customer: AppleStatusChecker(endpoint: .consumerFeedURL)
-        ])
-    }()
-    
     private lazy var rootView: NSView = {
-        NSHostingView(rootView: RootView().environmentObject(self.viewModel))
+        let v = RootView()
+            .environmentObject(viewModel)
+            .environmentObject(notificationManager)
+        
+        return NSHostingView(rootView: v)
     }()
     
-    public convenience init() {
-        self.init(nibName: nil, bundle: nil)
+    let viewModel: RootViewModel
+    let notificationManager: NotificationManager
+    
+    public init(viewModel: RootViewModel, notificationManager: NotificationManager) {
+        self.viewModel = viewModel
+        self.notificationManager = notificationManager
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    public required init?(coder: NSCoder) {
+        fatalError()
     }
 
     public override func loadView() {
@@ -49,7 +56,7 @@ public final class StatusBarFlowController: NSViewController {
     
 }
 
-private extension URL {
+public extension URL {
     static var developerFeedURL: URL {
         if let overrideStr = UserDefaults.standard.string(forKey: "SBDeveloperFeedURL"),
            let overrideURL = URL(string: overrideStr) {

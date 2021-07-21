@@ -73,6 +73,9 @@
 		F4D61CF5268CF20C0087B158 /* DashboardItem+StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D61CF4268CF20C0087B158 /* DashboardItem+StatusCore.swift */; };
 		F4D61CF7268D02D50087B158 /* customer-three-ongoing-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */; };
 		F4D61CF8268D02D50087B158 /* customer-three-ongoing-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */; };
+		F4F212C326A879A400BE7A0D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F212C226A879A400BE7A0D /* NotificationManager.swift */; };
+		F4F212C526A87FCA00BE7A0D /* NotificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F212C426A87FCA00BE7A0D /* NotificationPresenter.swift */; };
+		F4F212C726A88ABF00BE7A0D /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F212C626A88ABF00BE7A0D /* NotificationManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +199,9 @@
 		F4D61CEF268CF1B50087B158 /* customer-no-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-no-issues.json"; sourceTree = "<group>"; };
 		F4D61CF4268CF20C0087B158 /* DashboardItem+StatusCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardItem+StatusCore.swift"; sourceTree = "<group>"; };
 		F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-three-ongoing-issues.json"; sourceTree = "<group>"; };
+		F4F212C226A879A400BE7A0D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		F4F212C426A87FCA00BE7A0D /* NotificationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPresenter.swift; sourceTree = "<group>"; };
+		F4F212C626A88ABF00BE7A0D /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -395,6 +401,7 @@
 			children = (
 				F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */,
 				F448920A268E04D400DBC803 /* DetailViewModelTests.swift */,
+				F4F212C626A88ABF00BE7A0D /* NotificationManagerTests.swift */,
 			);
 			path = StatusUITests;
 			sourceTree = "<group>";
@@ -417,6 +424,7 @@
 				F4AFF31B268B681C002C26FC /* Definitions */,
 				F4AFF318268B681C002C26FC /* ViewModels */,
 				F4AFF321268B681C002C26FC /* Views */,
+				F4F212C126A8799300BE7A0D /* Notifications */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -491,6 +499,15 @@
 				F4AFF347268B6C29002C26FC /* StatusBarFlowController.swift */,
 			);
 			path = AppKit;
+			sourceTree = "<group>";
+		};
+		F4F212C126A8799300BE7A0D /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				F4F212C226A879A400BE7A0D /* NotificationManager.swift */,
+				F4F212C426A87FCA00BE7A0D /* NotificationPresenter.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -755,6 +772,7 @@
 			files = (
 				F4A58BC9268CC7E100C11441 /* DashboardViewModelTests.swift in Sources */,
 				F4A58BD7268CC88900C11441 /* Bundle+TestData.swift in Sources */,
+				F4F212C726A88ABF00BE7A0D /* NotificationManagerTests.swift in Sources */,
 				F448920B268E04D400DBC803 /* DetailViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -764,9 +782,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4AFF32D268B681C002C26FC /* ServiceScope.swift in Sources */,
+				F4F212C526A87FCA00BE7A0D /* NotificationPresenter.swift in Sources */,
 				F4AFF34E268B88E3002C26FC /* WindowChrome.swift in Sources */,
 				F4AFF32F268B681C002C26FC /* DetailView.swift in Sources */,
 				F4AFF330268B681C002C26FC /* StatusItemBackgroundModifier.swift in Sources */,
+				F4F212C326A879A400BE7A0D /* NotificationManager.swift in Sources */,
 				F4D61CF5268CF20C0087B158 /* DashboardItem+StatusCore.swift in Sources */,
 				F4AFF34C268B730E002C26FC /* RootViewModel.swift in Sources */,
 				F4AFF332268B681C002C26FC /* DashboardItemView.swift in Sources */,
