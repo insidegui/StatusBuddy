@@ -52,6 +52,9 @@ final class NotificationManagerTests: XCTestCase {
         manager.latestResponses = [.customer: StatusResponse(services: [testServiceWithoutIssue])]
         
         XCTAssertEqual(presenter.presentedNotifications.count, 1)
+    
+        // Registration should be removed after delivering the notification.
+        XCTAssertEqual(manager.registrations.count, 0)
     }
     
 }

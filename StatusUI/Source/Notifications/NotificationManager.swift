@@ -89,7 +89,13 @@ public final class NotificationManager: ObservableObject {
         
         os_log("Produced %{public}d service restored notification(s)", log: self.log, type: .debug, notifications.count)
         
-        notifications.forEach(presenter.present)
+        notifications.forEach { notification in
+            presenter.present(notification)
+            
+            if let registrationIndex = registrations.firstIndex(where: { $0.serviceName == notification.serviceName }) {
+                registrations.remove(at: registrationIndex)
+            }
+        }
     }
     
 }
