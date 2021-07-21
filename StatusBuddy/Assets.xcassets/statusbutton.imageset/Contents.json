@@ -1,8 +1,18 @@
 {
   "images" : [
     {
-      "filename" : "StausBarImage.pdf",
-      "idiom" : "universal"
+      "filename" : "normal.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "retina.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

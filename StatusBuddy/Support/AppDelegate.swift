@@ -77,13 +77,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private lazy var badgeView: NSImageView = {
-        let image = NSImage(named: .init("issuebadge"))!
-        image.size = NSSize(width: 20, height: 20)
-
-        let v = NSImageView(image: image)
-
-        v.imageScaling = .scaleProportionallyDown
+    private lazy var badgeView: NSTextField = {
+        let v = NSTextField(labelWithString: "!")
+        
+        v.font = .systemFont(ofSize: 12, weight: .bold)
+        v.textColor = .labelColor
+        v.translatesAutoresizingMaskIntoConstraints = false
+        let s = NSShadow()
+        s.shadowColor = NSColor(named: "IssueBadgeColor")
+        s.shadowBlurRadius = 1
+        s.shadowOffset = .zero
+        v.shadow = s
 
         return v
     }()
@@ -92,8 +96,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let button = statusItem.button else { return }
 
         if badgeView.superview == nil {
-            badgeView.frame = button.bounds
             button.addSubview(badgeView)
+            NSLayoutConstraint.activate([
+                badgeView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: 0),
+                badgeView.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: 0),
+            ])
         }
 
         badgeView.isHidden = !issueBadgeVisible
