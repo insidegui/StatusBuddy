@@ -9,7 +9,7 @@
 import Cocoa
 
 public struct StatusUI {
-    static let subsystemName = "codes.rambo.StatusBuddy.StatusUI"
+    static let subsystemName = "com.nsbrltda.StatusBuddy.StatusUI"
     
     public static var transitionDuration: TimeInterval {
         if NSApp.currentEvent?.modifierFlags.contains(.shift) == true {

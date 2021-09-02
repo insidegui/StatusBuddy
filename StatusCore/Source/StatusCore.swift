@@ -9,5 +9,5 @@
 import Foundation
 
 struct StatusCore {
-    static let subsystemName = "codes.rambo.StatusBuddy.StatusCore"
+    static let subsystemName = "com.nsbrltda.StatusBuddy.StatusCore"
 }

@@ -11,7 +11,7 @@ import Combine
 
 final class Preferences: ObservableObject {
 
-    static let didChangeNotification = Notification.Name("codes.rambo.StatusBuddy.PrefsChanged")
+    static let didChangeNotification = Notification.Name("com.nsbrltda.StatusBuddy.PrefsChanged")
 
     private var appURL: URL { Bundle.main.bundleURL }
 
