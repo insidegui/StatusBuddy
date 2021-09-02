@@ -71,6 +71,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         rootViewModel.$latestResponses
             .assign(to: \.latestResponses, on: notificationManager)
             .store(in: &cancellables)
+        
+        statusItem.button?.menu = contextualMenu
     }
 
     private var imageForCurrentStatus: NSImage? {
@@ -150,6 +152,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         showUI(sender: nil)
         
         return true
+    }
+    
+    // MARK: - Menu
+    
+    private lazy var contextualMenu: NSMenu = {
+        let m = NSMenu(title: "StatusBuddy")
+        
+        let launchAtLoginItem = NSMenuItem(title: "Launch at Login", action: #selector(launchAtLoginMenuItemAction), keyEquivalent: "")
+        launchAtLoginItem.target = self
+        launchAtLoginItem.state = preferences.launchAtLoginEnabled ? .on : .off
+        
+        let quitItem = NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate), keyEquivalent: "")
+        quitItem.target = NSApp
+        
+        m.addItem(launchAtLoginItem)
+        m.addItem(.separator())
+        m.addItem(quitItem)
+        
+        return m
+    }()
+    
+    @objc private func launchAtLoginMenuItemAction(_ sender: NSMenuItem) {
+        sender.state = sender.state == .off ? .on : .off
+        preferences.launchAtLoginEnabled = sender.state == .on
     }
 
 }

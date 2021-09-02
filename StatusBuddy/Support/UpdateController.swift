@@ -10,8 +10,8 @@ import Foundation
 
 #if ENABLE_SPARKLE
 import Sparkle
-import AppKit
 #endif
+import AppKit
 
 final class UpdateController: ObservableObject {
     
