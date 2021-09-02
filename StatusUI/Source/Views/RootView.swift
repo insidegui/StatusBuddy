@@ -24,14 +24,14 @@ struct RootView: View {
                     groups: viewModel.details[selectedItem.scope]?.groups ?? []
                 )
                     .frame(minWidth: Self.minWidth, maxWidth: .infinity, minHeight: 323, maxHeight: .infinity, alignment: .topLeading)
-                    .windowChrome(shadowRadius: Self.shadowRadius, padding: Self.topPaddingToAccomodateShadow)
+                    .windowChrome(.default)
             } else {
                 DashboardView(
                     viewModel: viewModel,
                     selectedItem: $viewModel.selectedDashboardItem
                 )
                     .frame(minWidth: Self.minWidth, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    .windowChrome(shadowRadius: Self.shadowRadius, padding: Self.topPaddingToAccomodateShadow)
+                    .windowChrome(.default)
             }
         }
         .onAppear {
