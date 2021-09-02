@@ -27,7 +27,6 @@
 		F414B5B3268CAC4100C98255 /* customer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B2268CAC4000C98255 /* customer-one-ongoing-issue.json */; };
 		F414B5B5268CB27C00C98255 /* developer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */; };
 		F43A5CD7268E2DEA00A591D9 /* Sparkle.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F43A5CD6268E2DDD00A591D9 /* Sparkle.xcframework */; };
-		F43A5CD8268E2DEA00A591D9 /* Sparkle.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F43A5CD6268E2DDD00A591D9 /* Sparkle.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F448920B268E04D400DBC803 /* DetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920A268E04D400DBC803 /* DetailViewModelTests.swift */; };
 		F448920D268E057100DBC803 /* DetailGroup+StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920C268E057100DBC803 /* DetailGroup+StatusCore.swift */; };
 		F4A58BC9268CC7E100C11441 /* DashboardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */; };
@@ -131,7 +130,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				DD88E57323F34EE1009C4060 /* StatusCore.framework in Embed Frameworks */,
-				F43A5CD8268E2DEA00A591D9 /* Sparkle.xcframework in Embed Frameworks */,
 				F4AFF313268B6807002C26FC /* StatusUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
