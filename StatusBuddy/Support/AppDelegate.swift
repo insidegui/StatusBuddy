@@ -73,6 +73,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .store(in: &cancellables)
         
         statusItem.button?.menu = contextualMenu
+        
+        if !preferences.hasLaunchedBefore {
+            perform(#selector(showUI(sender:)), with: nil, afterDelay: 0.2)
+            
+            preferences.hasLaunchedBefore.toggle()
+        }
     }
 
     private var imageForCurrentStatus: NSImage? {
@@ -132,7 +138,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func showUI(sender: Any?) {
+    @objc func showUI(sender: Any?) {
         rootViewModel.refresh(nil)
         
         windowController.showWindow(sender)

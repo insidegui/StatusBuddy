@@ -16,9 +16,22 @@ final class Preferences: ObservableObject {
     private var appURL: URL { Bundle.main.bundleURL }
 
     @Published private var _launchAtLoginEnabled: Bool = false
+    
+    let defaults: UserDefaults
 
-    init() {
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        
         _launchAtLoginEnabled = launchAtLoginEnabled
+    }
+    
+    var hasLaunchedBefore: Bool {
+        get {
+            guard !UserDefaults.standard.bool(forKey: "SBSimulateFirstLaunch") else { return false }
+            
+            return defaults.bool(forKey: #function)
+        }
+        set { defaults.set(newValue, forKey: #function) }
     }
 
     var launchAtLoginEnabled: Bool {

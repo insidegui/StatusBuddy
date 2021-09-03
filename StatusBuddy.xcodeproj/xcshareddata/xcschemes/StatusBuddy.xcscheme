@@ -77,6 +77,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-SBSimulateFirstLaunch YES"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-SBDeveloperFeedURL &quot;https://statusbuddy.ngrok.io/developer.json&quot;"
             isEnabled = "NO">
          </CommandLineArgument>
