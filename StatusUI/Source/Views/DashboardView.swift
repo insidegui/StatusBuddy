@@ -12,13 +12,44 @@ struct DashboardView: View {
     @Binding var selectedItem: DashboardItem?
     
     var body: some View {
+        Group {
+            switch viewModel.dashboard.state {
+            case .loaded(let items):
+                itemList(with: items)
+            case .loading:
+                loadingView
+                    .frame(maxWidth: .infinity, minHeight: 90, maxHeight: .infinity)
+            case .failure(let message):
+                failureView(with: message)
+            }
+        }
+        .padding()
+    }
+    
+    @ViewBuilder
+    private func itemList(with items: [DashboardItem]) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            ForEach(viewModel.dashboard.items) { item in
+            ForEach(items) { item in
                 DashboardItemView(item)
                     .onTapGesture { selectedItem = item }
             }
         }
-        .padding()
+    }
+    
+    private var loadingView: some View {
+        ProgressView()
+            .progressViewStyle(.circular)
+            .controlSize(.small)
+    }
+    
+    @ViewBuilder
+    private func failureView(with message: String) -> some View {
+        Text("Sorry, I couldn't load the status right now.\n\(message)")
+            .font(.system(.caption))
+            .multilineTextAlignment(.center)
+            .lineLimit(nil)
+            .foregroundColor(.secondary)
+            .frame(maxHeight: .infinity)
     }
 }
 
@@ -29,10 +60,10 @@ struct DashboardView_Previews: PreviewProvider {
             DashboardView(selectedItem: .constant(nil))
             DashboardView(selectedItem: .constant(nil))
                 .preferredColorScheme(.dark)
-            DashboardView(viewModel: RootViewModel(dashboard: DashboardViewModel(with: [
+            DashboardView(viewModel: RootViewModel(dashboard: DashboardViewModel(with: .loaded([
                 DashboardItem(with: .customer, subtitle: "Outage: Maps Routing & Navigation", iconColor: .error, subtitleColor: .error),
                 DashboardItem(with: .developer, subtitle: "3 Recent Issues", iconColor: .warning, subtitleColor: .warningText)
-            ])), selectedItem: .constant(nil))
+            ]))), selectedItem: .constant(nil))
         }
     }
 }

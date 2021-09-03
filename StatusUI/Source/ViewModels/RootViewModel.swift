@@ -15,7 +15,7 @@ public final class RootViewModel: ObservableObject {
     
     @Published public var selectedDashboardItem: DashboardItem?
     @Published public private(set) var latestResponses: [ServiceScope: StatusResponse] = [:]
-    @Published private(set) var dashboard = DashboardViewModel(with: [DashboardItem]())
+    @Published private(set) var dashboard = DashboardViewModel()
     @Published private(set) var details: [ServiceScope: DetailViewModel] = [:]
     @Published public private(set) var hasActiveIssues = false
     
@@ -82,6 +82,8 @@ public final class RootViewModel: ObservableObject {
             
             if case .failure(let error) = result {
                 os_log("Status check failed with error: %{public}@", log: self.log, type: .error, String(describing: error))
+                
+                self.dashboard = DashboardViewModel(with: .failure(String(describing: error)))
             }
             
             completion?()

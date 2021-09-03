@@ -49,7 +49,13 @@ public final class AppleStatusChecker: StatusChecker {
 
     public func check() -> StatusResponsePublisher {
         session.dataTaskPublisher(for: currentURL)
-            .map({ $0.data.demanglingAppleDeveloperStatusResponseIfNeeded })
+            .tryMap({
+                if UserDefaults.standard.bool(forKey: "SBSimulateNetworkingError") {
+                    throw NSError(domain: "StatusBuddy", code: -1, userInfo: [NSLocalizedFailureReasonErrorKey: "Simulated networking error."])
+                } else {
+                    return $0.data.demanglingAppleDeveloperStatusResponseIfNeeded
+                }
+            })
             .decode(type: StatusResponse.self, decoder: decoder)
             .retry(3)
             .receive(on: DispatchQueue.main)

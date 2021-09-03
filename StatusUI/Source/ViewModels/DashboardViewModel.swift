@@ -9,13 +9,16 @@ import SwiftUI
 import StatusCore
 
 public struct DashboardViewModel {
-    public let items: [DashboardItem]
+    public enum State {
+        case loading
+        case loaded([DashboardItem])
+        case failure(String)
+    }
     
-    public init(with items: [DashboardItem] = [
-        DashboardItem(with: .customer),
-        DashboardItem(with: .developer)
-    ]) {
-        self.items = items
+    public let state: State
+    
+    public init(with state: State = .loading) {
+        self.state = state
     }
 }
 
@@ -25,6 +28,6 @@ extension DashboardViewModel {
             .sorted(by: { $0.key.order < $1.key.order })
             .map { DashboardItem(with: $1, in: $0) }
         
-        self.init(with: items)
+        self.init(with: .loaded(items))
     }
 }
