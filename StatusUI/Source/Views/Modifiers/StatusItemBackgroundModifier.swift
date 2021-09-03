@@ -23,19 +23,23 @@ fileprivate struct ItemBackgroundModifier: ViewModifier {
     }
 
     func body(content: Content) -> some View {
-        if #available(macOS 12.0, *) {
-            content
-                .padding(.all, padding)
-                .frame(maxWidth: maxWidth, alignment: .leading)
-                .background(Material.thin, in: shape)
-                .overlay(shape.stroke(Color.white.opacity(0.1), lineWidth: .onePixel))
-                .shadow(color: .menuBarItemShadow, radius: 7, x: -1.5, y: 1.5)
-                .shadow(color: .menuBarItemSecondaryShadow, radius: 1, x: 0, y: 0)
-        } else {
-            content
-                .background(Color.itemBackground)
-                .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        Group {
+            if #available(macOS 12.0, *) {
+                content
+                    .padding(.all, padding)
+                    .frame(maxWidth: maxWidth, alignment: .leading)
+                    .background(Material.thin, in: shape)
+            } else {
+                content
+                    .padding(.all, padding)
+                    .frame(maxWidth: maxWidth, alignment: .leading)
+                    .background(Color.itemBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+            }
         }
+        .overlay(shape.stroke(Color.white.opacity(0.1), lineWidth: .onePixel))
+        .shadow(color: .menuBarItemShadow, radius: 7, x: -1.5, y: 1.5)
+        .shadow(color: .menuBarItemSecondaryShadow, radius: 1, x: 0, y: 0)
     }
 }
 
