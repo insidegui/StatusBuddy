@@ -1,4 +1,4 @@
-<img src="./images/StatusBuddy-Icon-2021.png" width="220">
+<img src="./images/StatusBuddy-Icon-2021.png" width="128">
 
 # StatusBuddy
 
@@ -10,7 +10,7 @@ While a service is experiencing issues, you may also click the notification icon
 
 The app will show the same issues Apple reports in their official system status dashboards for developers and consumers, so it includes both developer services such as App Store Connect and TestFlight and consumer services such as Apple Music and TV+.
 
-<img src="./images/StatusBuddy-Screenshot-2021.png">
+<img src="./images/StatusBuddy-Screenshot-2021.png" width="130">
 
 # Download
 
