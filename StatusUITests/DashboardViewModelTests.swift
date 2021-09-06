@@ -2,6 +2,14 @@ import XCTest
 @testable import StatusCore
 @testable import StatusUI
 
+extension DashboardViewModel {
+    var items: [DashboardItem] {
+        guard case .loaded(let items) = state else { fatalError("Can't get items while not in loaded state.") }
+        
+        return items
+    }
+}
+
 final class DashboardViewModelTests: XCTestCase {
 
     func testGeneratingDashboardWithNoIssues() throws {
