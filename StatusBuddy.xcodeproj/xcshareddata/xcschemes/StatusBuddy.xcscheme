@@ -82,7 +82,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-SBSimulateFirstLaunch YES"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-SBDeveloperFeedURL &quot;https://statusbuddy.ngrok.io/developer.json&quot;"

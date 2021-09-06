@@ -79,6 +79,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             preferences.hasLaunchedBefore.toggle()
         }
+        
+        rootViewModel.showSettingsMenu = { [weak self] in
+            self?.showSettingsMenuFromUI()
+        }
     }
 
     private var imageForCurrentStatus: NSImage? {
@@ -182,6 +186,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func launchAtLoginMenuItemAction(_ sender: NSMenuItem) {
         sender.state = sender.state == .off ? .on : .off
         preferences.launchAtLoginEnabled = sender.state == .on
+    }
+    
+    @objc private func showSettingsMenuFromUI() {
+        contextualMenu.popUp(positioning: nil, at: NSEvent.mouseLocation, in: nil)
     }
 
 }

@@ -12,15 +12,32 @@ struct DashboardView: View {
     @Binding var selectedItem: DashboardItem?
     
     var body: some View {
-        Group {
-            switch viewModel.dashboard.state {
-            case .loaded(let items):
-                itemList(with: items)
-            case .loading:
-                loadingView
-                    .frame(maxWidth: .infinity, minHeight: 90, maxHeight: .infinity)
-            case .failure(let message):
-                failureView(with: message)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .bottom) {
+                Text("StatusBuddy")
+                    .foregroundColor(.accent)
+                
+                Spacer()
+                
+                Button {
+                    viewModel.showSettingsMenu()
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                }
+                .buttonStyle(.borderless)
+            }
+            .font(.system(size: 15, weight: .semibold, design: .rounded))
+            
+            Group {
+                switch viewModel.dashboard.state {
+                case .loaded(let items):
+                    itemList(with: items)
+                case .loading:
+                    loadingView
+                        .frame(maxWidth: .infinity, minHeight: 90, maxHeight: .infinity)
+                case .failure(let message):
+                    failureView(with: message)
+                }
             }
         }
         .padding()

@@ -19,6 +19,8 @@ public final class RootViewModel: ObservableObject {
     @Published private(set) var details: [ServiceScope: DetailViewModel] = [:]
     @Published public private(set) var hasActiveIssues = false
     
+    public var showSettingsMenu: () -> Void = { }
+    
     private let log = OSLog(subsystem: StatusUI.subsystemName, category: String(describing: RootViewModel.self))
     
     let checkers: [ServiceScope: StatusChecker]
