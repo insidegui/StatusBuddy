@@ -26,13 +26,13 @@ struct PreferencesView: View {
                 }.offset(x: -14, y: 0)
             })
 
-            VStack { Divider() }
+            Divider()
 
             Button(action: checkForUpdates, label: { Text("Check for Updates") })
             Button(action: openWebsite, label: { Text("Website") })
             Button(action: openGithub, label: { Text("GitHub") })
 
-            VStack { Divider() }
+            Divider()
 
             Button(action: quit, label: { Text("Quit") })
         }
@@ -68,5 +68,7 @@ struct PreferencesView: View {
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         PreferencesView()
+            .environmentObject(StatusProvider())
+            .environmentObject(Preferences())
     }
 }
