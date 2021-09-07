@@ -32,6 +32,7 @@ struct MainView: View {
                     TextField("Search", text: $searchTerm)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     PreferencesView()
+                        .fixedSize(horizontal: true, vertical: false)
                 }.padding(EdgeInsets(top: 10, leading: 14, bottom: 4, trailing: 14))
 
                 Rectangle().frame(height: 1)
