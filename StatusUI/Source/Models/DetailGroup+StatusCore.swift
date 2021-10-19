@@ -72,13 +72,34 @@ extension DetailGroupItem {
         self.init(
             id: service.serviceName,
             title: service.serviceName,
-            subtitle: Self.subtitle(for: type, in: service)
+            subtitle: Self.subtitle(for: type, in: service),
+            formattedResolutionTime: Self.formattedResolutionTime(for: type, in: service)
         )
     }
     
-    private static func subtitle(for type: EventFilter, in service: Service) -> String? {
-        service.events(filteredBy: type).sorted(by: { $0.nonOptionalStartDate > $1.nonOptionalStartDate }).first?.message
+    private static func relevantEvent(for type: EventFilter, in service: Service) -> Service.Event? {
+        service.events(filteredBy: type).sorted(by: { $0.nonOptionalStartDate > $1.nonOptionalStartDate }).first
     }
+    
+    private static func subtitle(for type: EventFilter, in service: Service) -> String? {
+        relevantEvent(for: type, in: service)?.message
+    }
+    
+    private static func formattedResolutionTime(for type: EventFilter, in service: Service) -> String? {
+        guard let event = relevantEvent(for: type, in: service), let endDate = event.epochEndDate else { return nil }
+        return Self.endDateFormatter.string(from: endDate)
+    }
+    
+    static let endDateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        
+        f.doesRelativeDateFormatting = true
+        f.timeStyle = .short
+        f.dateStyle = .short
+        f.formattingContext = .middleOfSentence
+        
+        return f
+    }()
     
 }
 

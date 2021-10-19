@@ -11,6 +11,7 @@ struct DetailGroupItem: Hashable, Identifiable {
     let id: String
     let title: String
     let subtitle: String?
+    let formattedResolutionTime: String?
 }
 
 struct DetailGroup: Hashable, Identifiable {

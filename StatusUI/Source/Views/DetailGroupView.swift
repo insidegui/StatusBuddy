@@ -22,18 +22,26 @@ struct DetailGroupItemView: View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
                 Text(item.title)
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.primaryText)
                 
                 Spacer()
                 
                 if group.supportsNotifications { notificationView }
             }
-            if let subtitle = item.subtitle {
-                Text(subtitle)
-                    .font(.system(size: 11))
-                    .foregroundColor(.secondaryText)
+            
+            Group {
+                if let resolutionTime = item.formattedResolutionTime {
+                    Text("Ended " + resolutionTime)
+                        .font(.system(size: 12, weight: .medium))
+                }
+
+                if let subtitle = item.subtitle {
+                    Text(subtitle)
+                        .font(.system(size: 11))
+                }
             }
+            .foregroundColor(.secondaryText)
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
     }
@@ -105,12 +113,14 @@ extension DetailGroup {
                 DetailGroupItem(
                     id: "Developer ID Notary Service",
                     title: "Developer ID Notary Service",
-                    subtitle: "Developer ID Notary Service was temporarily unavailable during system maintenance."
+                    subtitle: "Developer ID Notary Service was temporarily unavailable during system maintenance.",
+                    formattedResolutionTime: "2 hours ago"
                 ),
                 DetailGroupItem(
                     id: "App Store Connect",
                     title: "App Store Connect",
-                    subtitle: "Users may have experienced issues with the service."
+                    subtitle: "Users may have experienced issues with the service.",
+                    formattedResolutionTime: "5 hours ago"
                 )
             ]
         )
@@ -128,12 +138,14 @@ extension DetailGroup {
                 DetailGroupItem(
                     id: "Developer ID Notary Service",
                     title: "Developer ID Notary Service",
-                    subtitle: "Developer ID Notary Service is temporarily unavailable during system maintenance."
+                    subtitle: "Developer ID Notary Service is temporarily unavailable during system maintenance.",
+                    formattedResolutionTime: nil
                 ),
                 DetailGroupItem(
                     id: "App Store Connect",
                     title: "App Store Connect",
-                    subtitle: "Users may be experiencing issues with the service."
+                    subtitle: "Users may be experiencing issues with the service.",
+                    formattedResolutionTime: nil
                 )
             ]
         )
