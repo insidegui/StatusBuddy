@@ -16,6 +16,7 @@ public struct ServiceRestoredNotification: Identifiable, Hashable {
 }
 
 public protocol NotificationPresenter: AnyObject {
+    var enableTimeSensitiveNotifications: Bool { get set }
     func present(_ notification: ServiceRestoredNotification)
     func requestNotificationPermissionIfNeeded()
 }
@@ -23,6 +24,8 @@ public protocol NotificationPresenter: AnyObject {
 public final class DefaultNotificationPresenter: NSObject, NotificationPresenter, UNUserNotificationCenterDelegate {
     
     private let log = OSLog(subsystem: StatusUI.subsystemName, category: String(describing: DefaultNotificationPresenter.self))
+    
+    public var enableTimeSensitiveNotifications: Bool = false
     
     public override init() {
         super.init()
@@ -34,6 +37,10 @@ public final class DefaultNotificationPresenter: NSObject, NotificationPresenter
         let content = UNMutableNotificationContent()
         content.title = notification.serviceName
         content.body = "This service's issues are now resolved."
+
+        if #available(macOS 12.0, *), enableTimeSensitiveNotifications {
+            content.interruptionLevel = .timeSensitive
+        }
         
         let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: nil)
         

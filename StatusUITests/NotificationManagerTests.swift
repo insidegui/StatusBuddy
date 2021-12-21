@@ -61,6 +61,8 @@ final class NotificationManagerTests: XCTestCase {
 
 final class MockNotificationPresenter: NotificationPresenter {
     
+    var enableTimeSensitiveNotifications: Bool = false
+    
     private(set) var permissionRequested = false
     private(set) var presentedNotifications: [ServiceRestoredNotification] = []
     

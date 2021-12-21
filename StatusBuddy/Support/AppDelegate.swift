@@ -72,6 +72,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .assign(to: \.latestResponses, on: notificationManager)
             .store(in: &cancellables)
         
+        preferences.$enableTimeSensitiveNotifications
+            .assign(to: \.enableTimeSensitiveNotifications, on: notificationManager.presenter)
+            .store(in: &cancellables)
+        
         statusItem.button?.menu = contextualMenu
         
         if !preferences.hasLaunchedBefore {
@@ -169,32 +173,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var contextualMenu: NSMenu = {
         let m = NSMenu(title: "StatusBuddy")
         
-        let launchAtLoginItem = NSMenuItem(title: "Launch at Login", action: #selector(launchAtLoginMenuItemAction), keyEquivalent: "")
-        launchAtLoginItem.target = self
-        launchAtLoginItem.state = preferences.isLaunchAtLoginEnabled ? .on : .off
+        let prefsItem = NSMenuItem(title: "Preferences…", action: #selector(preferencesMenuItemAction), keyEquivalent: ",")
+        prefsItem.target = self
         
-        let quitItem = NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate), keyEquivalent: "")
+        let quitItem = NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate), keyEquivalent: "Q")
         quitItem.target = NSApp
         
-        m.addItem(launchAtLoginItem)
+        m.addItem(prefsItem)
         m.addItem(.separator())
         m.addItem(quitItem)
         
         return m
     }()
     
-    @objc private func launchAtLoginMenuItemAction(_ sender: NSMenuItem) {
-        sender.state = sender.state == .off ? .on : .off
+    private var preferencesWindowController: NSWindowController?
+    
+    @objc private func preferencesMenuItemAction(_ sender: NSMenuItem) {
+        let controller = HostingWindowController(
+            rootView: PreferencesView()
+                .padding()
+                .environmentObject(preferences)
+        )
         
-        if let error = preferences.setLaunchAtLoginEnabled(to: sender.state == .on) {
-            let alert = NSAlert(error: error)
-            
-            if let window = windowController.window {
-                alert.beginSheetModal(for: window, completionHandler: nil)
-            } else {
-                alert.runModal()
-            }
+        preferencesWindowController = controller
+        
+        controller.willClose = { [weak self] _ in
+            self?.preferencesWindowController = nil
         }
+        
+        preferencesWindowController?.showWindow(sender)
+        
+        hideUI(sender: sender)
+    }
+    
+    private func closePreferences() {
+        preferencesWindowController?.close()
+        preferencesWindowController = nil
     }
     
     @objc private func showSettingsMenuFromUI() {

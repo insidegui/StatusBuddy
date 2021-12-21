@@ -10,14 +10,35 @@ import Foundation
 import Combine
 
 final class Preferences: ObservableObject {
+    
+    static let forPreviews = Preferences(defaults: UserDefaults(), launchAtLogin: PreviewLaunchAtLoginProvider())
 
     private var appURL: URL { Bundle.main.bundleURL }
 
     let defaults: UserDefaults
+    private let launchAtLogin: LaunchAtLoginProvider
+    
+    private struct Keys {
+        static let enableTimeSensitiveNotifications = "enableTimeSensitiveNotifications"
+    }
 
-    init(defaults: UserDefaults = .standard) {
+    init(defaults: UserDefaults = .standard,
+         launchAtLogin: LaunchAtLoginProvider = LaunchAtLoginHelper())
+    {
         self.defaults = defaults
-
+        self.launchAtLogin = launchAtLogin
+        
+        self.defaults.register(defaults: [
+            Keys.enableTimeSensitiveNotifications: true
+        ])
+        
+        enableTimeSensitiveNotifications = defaults.bool(forKey: Keys.enableTimeSensitiveNotifications)
+    }
+    
+    @Published var enableTimeSensitiveNotifications: Bool = true {
+        didSet {
+            defaults.set(enableTimeSensitiveNotifications, forKey: Keys.enableTimeSensitiveNotifications)
+        }
     }
     
     var hasLaunchedBefore: Bool {
@@ -28,12 +49,10 @@ final class Preferences: ObservableObject {
         }
         set { defaults.set(newValue, forKey: #function) }
     }
-    
-    private let launchAtLogin = LaunchAtLoginHelper()
 
     var isLaunchAtLoginEnabled: Bool { launchAtLogin.checkEnabled() }
     
-    func setLaunchAtLoginEnabled(to enabled: Bool) -> LaunchAtLoginHelper.Failure? {
+    func setLaunchAtLoginEnabled(to enabled: Bool) -> LaunchAtLoginFailure? {
         if enabled {
             guard !isLaunchAtLoginEnabled else { return nil }
             
@@ -49,4 +68,18 @@ final class Preferences: ObservableObject {
         }
     }
 
+}
+
+fileprivate final class PreviewLaunchAtLoginProvider: LaunchAtLoginProvider {
+    
+    var isEnabled = false
+    
+    func checkEnabled() -> Bool { isEnabled }
+    
+    func setEnabled(_ enabled: Bool) -> LaunchAtLoginFailure? {
+        isEnabled = enabled
+    
+        return nil
+    }
+    
 }
