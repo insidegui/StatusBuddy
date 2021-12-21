@@ -171,7 +171,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let launchAtLoginItem = NSMenuItem(title: "Launch at Login", action: #selector(launchAtLoginMenuItemAction), keyEquivalent: "")
         launchAtLoginItem.target = self
-        launchAtLoginItem.state = preferences.launchAtLoginEnabled ? .on : .off
+        launchAtLoginItem.state = preferences.isLaunchAtLoginEnabled ? .on : .off
         
         let quitItem = NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate), keyEquivalent: "")
         quitItem.target = NSApp
@@ -185,7 +185,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc private func launchAtLoginMenuItemAction(_ sender: NSMenuItem) {
         sender.state = sender.state == .off ? .on : .off
-        preferences.launchAtLoginEnabled = sender.state == .on
+        
+        if let error = preferences.setLaunchAtLoginEnabled(to: sender.state == .on) {
+            let alert = NSAlert(error: error)
+            
+            if let window = windowController.window {
+                alert.beginSheetModal(for: window, completionHandler: nil)
+            } else {
+                alert.runModal()
+            }
+        }
     }
     
     @objc private func showSettingsMenuFromUI() {

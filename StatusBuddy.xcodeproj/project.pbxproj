@@ -17,9 +17,7 @@
 		DD88E57B23F34EF6009C4060 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E57A23F34EF6009C4060 /* Service.swift */; };
 		DD88E57D23F34FEA009C4060 /* StatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E57C23F34FEA009C4060 /* StatusResponse.swift */; };
 		DD88E58023F35011009C4060 /* AppleStatusChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E57F23F35011009C4060 /* AppleStatusChecker.swift */; };
-		DD88E59923F37583009C4060 /* SharedFileList.m in Sources */ = {isa = PBXBuildFile; fileRef = DD88E59723F37583009C4060 /* SharedFileList.m */; };
 		DD88E59B23F375AB009C4060 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E59A23F375AB009C4060 /* Preferences.swift */; };
-		DDCC3E7323F37824006BF12B /* PreferencesMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCC3E7223F37824006BF12B /* PreferencesMenuView.swift */; };
 		F414B5A6268CA70C00C98255 /* EventFilteringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414B5A5268CA70C00C98255 /* EventFilteringTests.swift */; };
 		F414B5A7268CA70C00C98255 /* StatusCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E56B23F34EE1009C4060 /* StatusCore.framework */; };
 		F414B5B0268CA7D400C98255 /* developer-one-resolved-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5AE268CA7D400C98255 /* developer-one-resolved-issue.json */; };
@@ -28,6 +26,12 @@
 		F414B5B5268CB27C00C98255 /* developer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */; };
 		F448920B268E04D400DBC803 /* DetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920A268E04D400DBC803 /* DetailViewModelTests.swift */; };
 		F448920D268E057100DBC803 /* DetailGroup+StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920C268E057100DBC803 /* DetailGroup+StatusCore.swift */; };
+		F4918BC827720ADB009CC98D /* HelperAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4918BC727720ADB009CC98D /* HelperAppDelegate.swift */; };
+		F4918BCC27720ADC009CC98D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4918BCB27720ADC009CC98D /* Assets.xcassets */; };
+		F4918BCF27720ADC009CC98D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4918BCD27720ADC009CC98D /* Main.storyboard */; };
+		F4918BDD27720C08009CC98D /* StatusBuddyHelper.app in Embed Login Item */ = {isa = PBXBuildFile; fileRef = F4918BC527720ADB009CC98D /* StatusBuddyHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F4918BE0277212FC009CC98D /* LaunchAtLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4918BDF277212FC009CC98D /* LaunchAtLoginHelper.swift */; };
+		F4918BE527722B31009CC98D /* Bundle+MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4918BE427722B31009CC98D /* Bundle+MainApp.swift */; };
 		F4A58BC9268CC7E100C11441 /* DashboardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */; };
 		F4A58BCA268CC7E100C11441 /* StatusUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AFF30C268B6807002C26FC /* StatusUI.framework */; };
 		F4A58BD2268CC81500C11441 /* Bundle+TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A58BD1268CC81500C11441 /* Bundle+TestData.swift */; };
@@ -91,6 +95,13 @@
 			remoteGlobalIDString = DD88E56A23F34EE1009C4060;
 			remoteInfo = StatusCore;
 		};
+		F4918BDA27720BF1009CC98D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F4918BC427720ADB009CC98D;
+			remoteInfo = StatusBuddyHelper;
+		};
 		F4A58BCB268CC7E100C11441 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
@@ -134,6 +145,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F4918BDC27720BF7009CC98D /* Embed Login Item */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				F4918BDD27720C08009CC98D /* StatusBuddyHelper.app in Embed Login Item */,
+			);
+			name = "Embed Login Item";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -150,11 +172,7 @@
 		DD88E57A23F34EF6009C4060 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		DD88E57C23F34FEA009C4060 /* StatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponse.swift; sourceTree = "<group>"; };
 		DD88E57F23F35011009C4060 /* AppleStatusChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleStatusChecker.swift; sourceTree = "<group>"; };
-		DD88E59623F37583009C4060 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
-		DD88E59723F37583009C4060 /* SharedFileList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharedFileList.m; sourceTree = "<group>"; };
-		DD88E59823F37583009C4060 /* SharedFileList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedFileList.h; sourceTree = "<group>"; };
 		DD88E59A23F375AB009C4060 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
-		DDCC3E7223F37824006BF12B /* PreferencesMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesMenuView.swift; sourceTree = "<group>"; };
 		F414B5A3268CA70C00C98255 /* StatusCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F414B5A5268CA70C00C98255 /* EventFilteringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilteringTests.swift; sourceTree = "<group>"; };
 		F414B5AE268CA7D400C98255 /* developer-one-resolved-issue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "developer-one-resolved-issue.json"; sourceTree = "<group>"; };
@@ -164,6 +182,15 @@
 		F43A5CD6268E2DDD00A591D9 /* Sparkle.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Sparkle.xcframework; sourceTree = "<group>"; };
 		F448920A268E04D400DBC803 /* DetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelTests.swift; sourceTree = "<group>"; };
 		F448920C268E057100DBC803 /* DetailGroup+StatusCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailGroup+StatusCore.swift"; sourceTree = "<group>"; };
+		F4918BC527720ADB009CC98D /* StatusBuddyHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StatusBuddyHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4918BC727720ADB009CC98D /* HelperAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperAppDelegate.swift; sourceTree = "<group>"; };
+		F4918BCB27720ADC009CC98D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F4918BCE27720ADC009CC98D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F4918BD027720ADC009CC98D /* StatusBuddyHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StatusBuddyHelper.entitlements; sourceTree = "<group>"; };
+		F4918BD427720AF0009CC98D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F4918BD627720B2B009CC98D /* Versions.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Versions.xcconfig; sourceTree = "<group>"; };
+		F4918BDF277212FC009CC98D /* LaunchAtLoginHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginHelper.swift; sourceTree = "<group>"; };
+		F4918BE427722B31009CC98D /* Bundle+MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+MainApp.swift"; sourceTree = "<group>"; };
 		F4A58BC6268CC7E100C11441 /* StatusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4A58BC8268CC7E100C11441 /* DashboardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModelTests.swift; sourceTree = "<group>"; };
 		F4A58BD1268CC81500C11441 /* Bundle+TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+TestData.swift"; sourceTree = "<group>"; };
@@ -226,6 +253,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F4918BC227720ADB009CC98D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4A58BC3268CC7E100C11441 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,12 +283,14 @@
 		DD88E54723F34ECE009C4060 = {
 			isa = PBXGroup;
 			children = (
+				F4918BD527720B1F009CC98D /* Config */,
 				F43A5CD5268E2DDD00A591D9 /* Vendor */,
 				DD88E55223F34ECE009C4060 /* StatusBuddy */,
 				DD88E56C23F34EE1009C4060 /* StatusCore */,
 				F4AFF30D268B6807002C26FC /* StatusUI */,
 				F414B5A4268CA70C00C98255 /* StatusCoreTests */,
 				F4A58BC7268CC7E100C11441 /* StatusUITests */,
+				F4918BC627720ADB009CC98D /* StatusBuddyHelper */,
 				DD88E55123F34ECE009C4060 /* Products */,
 				DD88E59223F37452009C4060 /* Frameworks */,
 			);
@@ -268,6 +304,7 @@
 				F4AFF30C268B6807002C26FC /* StatusUI.framework */,
 				F414B5A3268CA70C00C98255 /* StatusCoreTests.xctest */,
 				F4A58BC6268CC7E100C11441 /* StatusUITests.xctest */,
+				F4918BC527720ADB009CC98D /* StatusBuddyHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -275,7 +312,6 @@
 		DD88E55223F34ECE009C4060 /* StatusBuddy */ = {
 			isa = PBXGroup;
 			children = (
-				DD88E58C23F3739B009C4060 /* Views */,
 				DD88E58B23F37395009C4060 /* Support */,
 				DD88E55723F34ECE009C4060 /* Assets.xcassets */,
 				DD88E55C23F34ECE009C4060 /* Main.storyboard */,
@@ -335,22 +371,12 @@
 		DD88E58B23F37395009C4060 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				DD88E59623F37583009C4060 /* BridgingHeader.h */,
-				DD88E59823F37583009C4060 /* SharedFileList.h */,
-				DD88E59723F37583009C4060 /* SharedFileList.m */,
 				DD88E55323F34ECE009C4060 /* AppDelegate.swift */,
 				DD88E59A23F375AB009C4060 /* Preferences.swift */,
 				F4D11ED3268E477100962EA3 /* UpdateController.swift */,
+				F4918BDF277212FC009CC98D /* LaunchAtLoginHelper.swift */,
 			);
 			path = Support;
-			sourceTree = "<group>";
-		};
-		DD88E58C23F3739B009C4060 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				DDCC3E7223F37824006BF12B /* PreferencesMenuView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		DD88E59223F37452009C4060 /* Frameworks */ = {
@@ -390,6 +416,27 @@
 				F43A5CD6268E2DDD00A591D9 /* Sparkle.xcframework */,
 			);
 			path = Vendor;
+			sourceTree = "<group>";
+		};
+		F4918BC627720ADB009CC98D /* StatusBuddyHelper */ = {
+			isa = PBXGroup;
+			children = (
+				F4918BD427720AF0009CC98D /* Info.plist */,
+				F4918BC727720ADB009CC98D /* HelperAppDelegate.swift */,
+				F4918BE427722B31009CC98D /* Bundle+MainApp.swift */,
+				F4918BCB27720ADC009CC98D /* Assets.xcassets */,
+				F4918BCD27720ADC009CC98D /* Main.storyboard */,
+				F4918BD027720ADC009CC98D /* StatusBuddyHelper.entitlements */,
+			);
+			path = StatusBuddyHelper;
+			sourceTree = "<group>";
+		};
+		F4918BD527720B1F009CC98D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				F4918BD627720B2B009CC98D /* Versions.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		F4A58BC7268CC7E100C11441 /* StatusUITests */ = {
@@ -536,12 +583,14 @@
 				DD88E54D23F34ECE009C4060 /* Frameworks */,
 				DD88E54E23F34ECE009C4060 /* Resources */,
 				DD88E57723F34EE1009C4060 /* Embed Frameworks */,
+				F4918BDC27720BF7009CC98D /* Embed Login Item */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				DD88E57123F34EE1009C4060 /* PBXTargetDependency */,
 				F4AFF311268B6807002C26FC /* PBXTargetDependency */,
+				F4918BDB27720BF1009CC98D /* PBXTargetDependency */,
 			);
 			name = StatusBuddy;
 			productName = StatusBuddy;
@@ -583,6 +632,23 @@
 			productName = StatusCoreTests;
 			productReference = F414B5A3268CA70C00C98255 /* StatusCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F4918BC427720ADB009CC98D /* StatusBuddyHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4918BD327720ADC009CC98D /* Build configuration list for PBXNativeTarget "StatusBuddyHelper" */;
+			buildPhases = (
+				F4918BC127720ADB009CC98D /* Sources */,
+				F4918BC227720ADB009CC98D /* Frameworks */,
+				F4918BC327720ADB009CC98D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StatusBuddyHelper;
+			productName = StatusBuddyHelper;
+			productReference = F4918BC527720ADB009CC98D /* StatusBuddyHelper.app */;
+			productType = "com.apple.product-type.application";
 		};
 		F4A58BC5268CC7E100C11441 /* StatusUITests */ = {
 			isa = PBXNativeTarget;
@@ -628,7 +694,7 @@
 		DD88E54823F34ECE009C4060 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1300;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "Guilherme Rambo";
 				TargetAttributes = {
@@ -641,6 +707,9 @@
 					};
 					F414B5A2268CA70C00C98255 = {
 						CreatedOnToolsVersion = 13.0;
+					};
+					F4918BC427720ADB009CC98D = {
+						CreatedOnToolsVersion = 13.2;
 					};
 					F4A58BC5268CC7E100C11441 = {
 						CreatedOnToolsVersion = 13.0;
@@ -668,6 +737,7 @@
 				F4AFF30B268B6807002C26FC /* StatusUI */,
 				F414B5A2268CA70C00C98255 /* StatusCoreTests */,
 				F4A58BC5268CC7E100C11441 /* StatusUITests */,
+				F4918BC427720ADB009CC98D /* StatusBuddyHelper */,
 			);
 		};
 /* End PBXProject section */
@@ -704,6 +774,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F4918BC327720ADB009CC98D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4918BCC27720ADC009CC98D /* Assets.xcassets in Resources */,
+				F4918BCF27720ADC009CC98D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4A58BC4268CC7E100C11441 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -733,11 +812,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD88E59923F37583009C4060 /* SharedFileList.m in Sources */,
 				F4D11ED4268E477100962EA3 /* UpdateController.swift in Sources */,
 				DD88E59B23F375AB009C4060 /* Preferences.swift in Sources */,
-				DDCC3E7323F37824006BF12B /* PreferencesMenuView.swift in Sources */,
 				DD88E55423F34ECE009C4060 /* AppDelegate.swift in Sources */,
+				F4918BE0277212FC009CC98D /* LaunchAtLoginHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +837,15 @@
 			files = (
 				F414B5A6268CA70C00C98255 /* EventFilteringTests.swift in Sources */,
 				F4A58BD2268CC81500C11441 /* Bundle+TestData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4918BC127720ADB009CC98D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4918BE527722B31009CC98D /* Bundle+MainApp.swift in Sources */,
+				F4918BC827720ADB009CC98D /* HelperAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,6 +903,11 @@
 			target = DD88E56A23F34EE1009C4060 /* StatusCore */;
 			targetProxy = F414B5A8268CA70C00C98255 /* PBXContainerItemProxy */;
 		};
+		F4918BDB27720BF1009CC98D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F4918BC427720ADB009CC98D /* StatusBuddyHelper */;
+			targetProxy = F4918BDA27720BF1009CC98D /* PBXContainerItemProxy */;
+		};
 		F4A58BCC268CC7E100C11441 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F4AFF30B268B6807002C26FC /* StatusUI */;
@@ -847,11 +939,20 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
+		F4918BCD27720ADC009CC98D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4918BCE27720ADC009CC98D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DD88E56123F34ECE009C4060 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Versions.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -885,6 +986,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -913,6 +1015,7 @@
 		};
 		DD88E56223F34ECE009C4060 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Versions.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -946,6 +1049,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -974,9 +1078,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_ASSET_PATHS = "\"StatusBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -989,10 +1091,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.StatusBuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = StatusBuddy/Support/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -1006,9 +1106,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
 				DEVELOPMENT_ASSET_PATHS = "\"StatusBuddy/Preview Content\"";
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1021,10 +1119,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.StatusBuddy;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = StatusBuddy/Support/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -1035,9 +1131,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1048,14 +1142,11 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.StatusCore;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
@@ -1065,9 +1156,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1078,13 +1167,10 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.StatusCore;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1093,16 +1179,13 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.StatusCoreTests;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1114,18 +1197,75 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.StatusCoreTests;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F4918BD127720ADC009CC98D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = StatusBuddyHelper/StatusBuddyHelper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StatusBuddyHelper/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "StatusBuddy Launch at Login";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Guilherme Rambo. All rights reserved.";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusBuddyHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F4918BD227720ADC009CC98D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = StatusBuddyHelper/StatusBuddyHelper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StatusBuddyHelper/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "StatusBuddy Launch at Login";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Guilherme Rambo. All rights reserved.";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusBuddyHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -1135,16 +1275,13 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.experiment.StatusUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1156,16 +1293,13 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.experiment.StatusUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1178,9 +1312,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1192,14 +1324,11 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.StatusUI;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
@@ -1209,9 +1338,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = V45SL99ZK4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1223,14 +1350,11 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsbrltda.StatusUI;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1269,6 +1393,15 @@
 			buildConfigurations = (
 				F414B5AA268CA70C00C98255 /* Debug */,
 				F414B5AB268CA70C00C98255 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4918BD327720ADC009CC98D /* Build configuration list for PBXNativeTarget "StatusBuddyHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4918BD127720ADC009CC98D /* Debug */,
+				F4918BD227720ADC009CC98D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

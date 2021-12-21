@@ -11,18 +11,13 @@ import Combine
 
 final class Preferences: ObservableObject {
 
-    static let didChangeNotification = Notification.Name("com.nsbrltda.StatusBuddy.PrefsChanged")
-
     private var appURL: URL { Bundle.main.bundleURL }
 
-    @Published private var _launchAtLoginEnabled: Bool = false
-    
     let defaults: UserDefaults
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
-        
-        _launchAtLoginEnabled = launchAtLoginEnabled
+
     }
     
     var hasLaunchedBefore: Bool {
@@ -33,26 +28,25 @@ final class Preferences: ObservableObject {
         }
         set { defaults.set(newValue, forKey: #function) }
     }
+    
+    private let launchAtLogin = LaunchAtLoginHelper()
 
-    var launchAtLoginEnabled: Bool {
-        get {
-            _launchAtLoginEnabled || SharedFileList.sessionLoginItems().containsItem(appURL)
+    var isLaunchAtLoginEnabled: Bool { launchAtLogin.checkEnabled() }
+    
+    func setLaunchAtLoginEnabled(to enabled: Bool) -> LaunchAtLoginHelper.Failure? {
+        if enabled {
+            guard !isLaunchAtLoginEnabled else { return nil }
+            
+            objectWillChange.send()
+            
+            return launchAtLogin.setEnabled(true)
+        } else {
+            guard isLaunchAtLoginEnabled else { return nil }
+            
+            objectWillChange.send()
+            
+            return launchAtLogin.setEnabled(false)
         }
-        set {
-            _launchAtLoginEnabled = newValue
-
-            if newValue {
-                SharedFileList.sessionLoginItems().addItem(appURL)
-            } else {
-                SharedFileList.sessionLoginItems().removeItem(appURL)
-            }
-
-            didChange()
-        }
-    }
-
-    private func didChange() {
-        NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
     }
 
 }

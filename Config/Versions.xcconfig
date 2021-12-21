@@ -1,0 +1,18 @@
+//
+//  Versions.xcconfig
+//  StatusBuddy
+//
+//  Created by Guilherme Rambo on 21/12/21.
+//  Copyright © 2021 Guilherme Rambo. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+VERSIONING_SYSTEM = apple-generic
+
+MARKETING_VERSION = 2.0 // Applies to all targets
+
+CURRENT_PROJECT_VERSION = 80 // Applies to all targets
+
+DYLIB_CURRENT_VERSION = $(CURRENT_PROJECT_VERSION)

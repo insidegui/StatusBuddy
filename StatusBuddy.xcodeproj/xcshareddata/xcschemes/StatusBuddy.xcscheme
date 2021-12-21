@@ -77,6 +77,10 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-SBSimulateLaunchAtLoginEnablementError YES"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-SBSimulateNetworkingError YES"
             isEnabled = "NO">
          </CommandLineArgument>
