@@ -195,14 +195,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 .environmentObject(preferences)
         )
         
+        controller.showWindow(sender)
+        
         preferencesWindowController = controller
         
         controller.willClose = { [weak self] _ in
             self?.preferencesWindowController = nil
         }
-        
-        preferencesWindowController?.showWindow(sender)
-        
+                
         hideUI(sender: sender)
     }
     
