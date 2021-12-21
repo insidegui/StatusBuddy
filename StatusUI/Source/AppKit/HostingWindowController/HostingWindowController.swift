@@ -16,7 +16,7 @@ public final class HostingWindowController<Content>: NSWindowController, NSWindo
 
     public init(rootView: Content) {
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 320, height: 400),
+            contentRect: NSRect(x: 0, y: 0, width: NSView.noIntrinsicMetric, height: NSView.noIntrinsicMetric),
             styleMask: [.titled, .closable],
             backing: .buffered,
             defer: false,
