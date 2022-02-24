@@ -13,6 +13,6 @@ VERSIONING_SYSTEM = apple-generic
 
 MARKETING_VERSION = 2.0 // Applies to all targets
 
-CURRENT_PROJECT_VERSION = 81 // Applies to all targets
+CURRENT_PROJECT_VERSION = 82 // Applies to all targets
 
 DYLIB_CURRENT_VERSION = $(CURRENT_PROJECT_VERSION)
