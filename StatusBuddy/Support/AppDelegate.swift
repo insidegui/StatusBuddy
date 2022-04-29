@@ -33,8 +33,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private(set) lazy var rootViewModel: RootViewModel = {
         RootViewModel(with: [
-            .developer: AppleStatusChecker(endpoint: .developerFeedURL),
-            .customer: AppleStatusChecker(endpoint: .consumerFeedURL)
+            .developer: AppleStatusChecker(endpoint: .developerFeedURL, format: .JSONCallback),
+            .customer: AppleStatusChecker(endpoint: .consumerFeedURL, format: .JSON)
         ])
     }()
     

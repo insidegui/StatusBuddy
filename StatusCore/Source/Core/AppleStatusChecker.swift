@@ -8,16 +8,37 @@
 
 import Foundation
 import Combine
+import JavaScriptCore
 import os.log
 
 public final class AppleStatusChecker: StatusChecker {
+    
+    public enum ResponseFormat: Hashable {
+        case JSON
+        case JSONCallback
+    }
+    
+    enum ResponseHandler {
+        case JSON
+        case JSONCallback(JSContext)
+    }
 
     private let log = OSLog(subsystem: StatusCore.subsystemName, category: String(describing: AppleStatusChecker.self))
 
     let endpoint: URL
+    let format: ResponseFormat
+    private let responseHandler: ResponseHandler
 
-    public init(endpoint: URL) {
+    public init(endpoint: URL, format: ResponseFormat) {
         self.endpoint = endpoint
+        self.format = format
+        
+        switch format {
+        case .JSON:
+            self.responseHandler = .JSON
+        case .JSONCallback:
+            self.responseHandler = .JSONCallback(JSContext())
+        }
     }
 
     private var currentURL: URL {
@@ -48,12 +69,14 @@ public final class AppleStatusChecker: StatusChecker {
     }()
 
     public func check() -> StatusResponsePublisher {
-        session.dataTaskPublisher(for: currentURL)
+        let handler = self.responseHandler
+        
+        return session.dataTaskPublisher(for: currentURL)
             .tryMap({
                 if UserDefaults.standard.bool(forKey: "SBSimulateNetworkingError") {
                     throw NSError(domain: "StatusBuddy", code: -1, userInfo: [NSLocalizedFailureReasonErrorKey: "Simulated networking error."])
                 } else {
-                    return $0.data.demanglingAppleDeveloperStatusResponseIfNeeded
+                    return try handler.apply(to: $0.data)
                 }
             })
             .decode(type: StatusResponse.self, decoder: decoder)
@@ -61,17 +84,36 @@ public final class AppleStatusChecker: StatusChecker {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+    
+    
 
 }
 
-extension Data {
-    /// Apple's response for the developer portal's status is a json callback, which
-    /// starts with `jsonCallback(` and ends with `);`.
-    /// This returns the data, removing the extra bits at the start and end,
-    /// turning it into valid JSON.
-    var demanglingAppleDeveloperStatusResponseIfNeeded: Data {
-        guard count >= 15 else { return self }
-        guard first != 123 else { return self }
-        return self[13..<(count-2)]
+private extension AppleStatusChecker.ResponseHandler {
+    
+    func apply(to data: Data) throws -> Data {
+        switch self {
+        case .JSON:
+            return data
+        case .JSONCallback(let context):
+            return try processJavascript(data, using: context)
+        }
     }
+    
+    private func processJavascript(_ input: Data, using context: JSContext) throws -> Data {
+        context.evaluateScript("""
+        function jsonCallback(json) {
+            return JSON.stringify(json);
+        }
+        """)
+        
+        guard let output = context.evaluateScript(String(decoding: input, as: UTF8.self)) else {
+            throw CocoaError(.coderValueNotFound)
+        }
+        
+        guard output.isString else { throw CocoaError(.coderValueNotFound) }
+        
+        return Data(output.toString().utf8)
+    }
+    
 }
