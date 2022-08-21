@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PreferencesView: View {
     @EnvironmentObject var preferences: Preferences
+    @EnvironmentObject var updateController: UpdateController
     
     @Environment(\.closeWindow) var closeWindow
     
@@ -37,6 +38,16 @@ struct PreferencesView: View {
                         .padding(.bottom, 6)
                         .frame(maxHeight: 50, alignment: .topLeading)
                 }
+
+                if updateController.isAvailable {
+                    VStack(alignment: .leading) {
+                        Toggle("Check for updates automatically", isOn: $updateController.automaticallyCheckForUpdates)
+
+                        Button("Check Now") {
+                            updateController.checkForUpdates()
+                        }
+                    }
+                }
             }
             
             HStack {
@@ -59,5 +70,6 @@ struct PreferencesView_Previews: PreviewProvider {
         PreferencesView()
             .padding()
             .environmentObject(Preferences.forPreviews)
+            .environmentObject(UpdateController())
     }
 }

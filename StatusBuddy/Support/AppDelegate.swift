@@ -12,16 +12,10 @@ import StatusCore
 import Combine
 import StatusUI
 
-#if ENABLE_SPARKLE
-import Sparkle
-#endif
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    #if ENABLE_SPARKLE
-    @IBOutlet weak var updaterController: SPUStandardUpdaterController?
-    #endif
+    private lazy var updateController = UpdateController()
 
     var window: NSWindow!
 
@@ -87,6 +81,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         rootViewModel.showSettingsMenu = { [weak self] in
             self?.showSettingsMenuFromUI()
         }
+
+        updateController.activate()
     }
 
     private var imageForCurrentStatus: NSImage? {
@@ -189,10 +185,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var preferencesWindowController: NSWindowController?
     
     @objc private func preferencesMenuItemAction(_ sender: NSMenuItem) {
+        defer { hideUI(sender: sender) }
+
+        if let preferencesWindowController {
+            preferencesWindowController.showWindow(sender)
+            return
+        }
+
         let controller = HostingWindowController(
             rootView: PreferencesView()
                 .padding()
                 .environmentObject(preferences)
+                .environmentObject(updateController)
         )
         
         controller.showWindow(sender)
@@ -202,8 +206,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         controller.willClose = { [weak self] _ in
             self?.preferencesWindowController = nil
         }
-                
-        hideUI(sender: sender)
     }
     
     private func closePreferences() {

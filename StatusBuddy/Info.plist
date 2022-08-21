@@ -41,7 +41,7 @@
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>https://su.statusbuddy.app/appcast.xml</string>
+	<string>https://sparkle.statusbuddy.app/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>dj8ljUPnwoLj/dLs6HyJg5Ayw+t8zWtgjQUfQsH56ww=</string>
 	<key>SUScheduledCheckInterval</key>
