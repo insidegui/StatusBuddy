@@ -10,36 +10,76 @@ import Foundation
 import Combine
 
 final class Preferences: ObservableObject {
-
-    static let didChangeNotification = Notification.Name("codes.rambo.StatusBuddy.PrefsChanged")
+    
+    static let forPreviews = Preferences(defaults: UserDefaults(), launchAtLogin: PreviewLaunchAtLoginProvider())
 
     private var appURL: URL { Bundle.main.bundleURL }
 
-    @Published private var _launchAtLoginEnabled: Bool = false
-
-    init() {
-        _launchAtLoginEnabled = launchAtLoginEnabled
+    let defaults: UserDefaults
+    private let launchAtLogin: LaunchAtLoginProvider
+    
+    private struct Keys {
+        static let enableTimeSensitiveNotifications = "enableTimeSensitiveNotifications"
     }
 
-    var launchAtLoginEnabled: Bool {
+    init(defaults: UserDefaults = .standard,
+         launchAtLogin: LaunchAtLoginProvider = LaunchAtLoginHelper())
+    {
+        self.defaults = defaults
+        self.launchAtLogin = launchAtLogin
+        
+        self.defaults.register(defaults: [
+            Keys.enableTimeSensitiveNotifications: true
+        ])
+        
+        enableTimeSensitiveNotifications = defaults.bool(forKey: Keys.enableTimeSensitiveNotifications)
+    }
+    
+    @Published var enableTimeSensitiveNotifications: Bool = true {
+        didSet {
+            defaults.set(enableTimeSensitiveNotifications, forKey: Keys.enableTimeSensitiveNotifications)
+        }
+    }
+    
+    var hasLaunchedBefore: Bool {
         get {
-            _launchAtLoginEnabled || SharedFileList.sessionLoginItems().containsItem(appURL)
+            guard !UserDefaults.standard.bool(forKey: "SBSimulateFirstLaunch") else { return false }
+            
+            return defaults.bool(forKey: #function)
         }
-        set {
-            _launchAtLoginEnabled = newValue
+        set { defaults.set(newValue, forKey: #function) }
+    }
 
-            if newValue {
-                SharedFileList.sessionLoginItems().addItem(appURL)
-            } else {
-                SharedFileList.sessionLoginItems().removeItem(appURL)
-            }
-
-            didChange()
+    var isLaunchAtLoginEnabled: Bool { launchAtLogin.checkEnabled() }
+    
+    func setLaunchAtLoginEnabled(to enabled: Bool) -> LaunchAtLoginFailure? {
+        if enabled {
+            guard !isLaunchAtLoginEnabled else { return nil }
+            
+            objectWillChange.send()
+            
+            return launchAtLogin.setEnabled(true)
+        } else {
+            guard isLaunchAtLoginEnabled else { return nil }
+            
+            objectWillChange.send()
+            
+            return launchAtLogin.setEnabled(false)
         }
     }
 
-    private func didChange() {
-        NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
-    }
+}
 
+fileprivate final class PreviewLaunchAtLoginProvider: LaunchAtLoginProvider {
+    
+    var isEnabled = false
+    
+    func checkEnabled() -> Bool { isEnabled }
+    
+    func setEnabled(_ enabled: Bool) -> LaunchAtLoginFailure? {
+        isEnabled = enabled
+    
+        return nil
+    }
+    
 }

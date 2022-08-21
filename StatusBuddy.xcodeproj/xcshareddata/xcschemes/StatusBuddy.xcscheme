@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1140"
+   LastUpgradeVersion = "1300"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F414B5A2268CA70C00C98255"
+               BuildableName = "StatusCoreTests.xctest"
+               BlueprintName = "StatusCoreTests"
+               ReferencedContainer = "container:StatusBuddy.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F4A58BC5268CC7E100C11441"
+               BuildableName = "StatusUITests.xctest"
+               BlueprintName = "StatusUITests"
+               ReferencedContainer = "container:StatusBuddy.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -53,11 +73,27 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-SBConsumerFeedURL &quot;https://statusbuddy.ngrok.io/consumer.js&quot;"
+            argument = "-SBConsumerFeedURL &quot;https://statusbuddy.ngrok.io/customer.json&quot;"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-SBDeveloperFeedURL &quot;https://statusbuddy.ngrok.io/developer.js&quot;"
+            argument = "-SBSimulateLaunchAtLoginEnablementError YES"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-SBSimulateNetworkingError YES"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-SBSimulateFirstLaunch YES"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-SBDeveloperFeedURL &quot;https://statusbuddy.ngrok.io/developer.json&quot;"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-SBRefreshInterval &quot;5&quot;"
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>

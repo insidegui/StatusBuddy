@@ -2,73 +2,62 @@
 //  PreferencesView.swift
 //  StatusBuddy
 //
-//  Created by Guilherme Rambo on 11/02/20.
-//  Copyright © 2020 Guilherme Rambo. All rights reserved.
+//  Created by Guilherme Rambo on 21/12/21.
+//  Copyright © 2021 Guilherme Rambo. All rights reserved.
 //
 
 import SwiftUI
-import Sparkle
-import StatusCore
 
 struct PreferencesView: View {
-    @EnvironmentObject var provider: StatusProvider
     @EnvironmentObject var preferences: Preferences
-
+    
+    @Environment(\.closeWindow) var closeWindow
+    
     var body: some View {
-        MenuButton(label: Image("gear").resizable().frame(width: 16, height: 16)) {
-            Button(action: refresh, label: { Text("Refresh") })
-            Button(action: toggleLaunchAtLogin, label: {
-                HStack(spacing: 4) {
-                    if preferences.launchAtLoginEnabled {
-                        Image("checkmark")
-                    }
-                    Text("Launch at Login")
-                }.offset(x: -14, y: 0)
-            })
-
-            Divider()
-
-            Button(action: checkForUpdates, label: { Text("Check for Updates") })
-            Button(action: openWebsite, label: { Text("Website") })
-            Button(action: openGithub, label: { Text("GitHub") })
-
-            Divider()
-
-            Button(action: quit, label: { Text("Quit") })
+        Form {
+            VStack(alignment: .leading, spacing: 12) {
+                Toggle("Launch StatusBuddy at login", isOn: .init(get: {
+                    preferences.isLaunchAtLoginEnabled
+                }, set: { isEnabled in
+                    preferences.setLaunchAtLoginEnabled(to: isEnabled)
+                }))
+                
+                VStack(alignment: .leading) {
+                    Toggle("Use time sensitive notifications", isOn: .init(get: {
+                        preferences.enableTimeSensitiveNotifications
+                    }, set: { isEnabled in
+                        preferences.enableTimeSensitiveNotifications = isEnabled
+                    }))
+                    
+                    Text("StatusBuddy will use time sensitive notifications to alert you when a system comes back online.")
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.bottom, 6)
+                        .frame(maxHeight: 50, alignment: .topLeading)
+                }
+            }
+            
+            HStack {
+                Spacer()
+                
+                Button("Done") {
+                    closeWindow()
+                }
+                .keyboardShortcut(.defaultAction)
+            }
+            .padding(.top)
         }
-        .menuButtonStyle(BorderlessButtonMenuButtonStyle())
-        .frame(width: 16, height: 16)
-    }
-
-    private func refresh() {
-        provider.check()
-    }
-
-    private func toggleLaunchAtLogin() {
-        preferences.launchAtLoginEnabled.toggle()
-    }
-
-    private func checkForUpdates() {
-        SUUpdater.shared()?.checkForUpdates(nil)
-    }
-
-    private func openWebsite() {
-        _ = NSWorkspace.shared.open(URL(string: "https://statusbuddy.app")!)
-    }
-
-    private func openGithub() {
-        _ = NSWorkspace.shared.open(URL(string: "https://github.com/insidegui/StatusBuddy")!)
-    }
-
-    private func quit() {
-        NSApp.terminate(nil)
+        .frame(maxWidth: 320)
+        .windowTitle("StatusBuddy Preferences")
     }
 }
 
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         PreferencesView()
-            .environmentObject(StatusProvider())
-            .environmentObject(Preferences())
+            .padding()
+            .environmentObject(Preferences.forPreviews)
     }
 }

@@ -1,0 +1,424 @@
+{
+  "drpost": false,
+  "drMessage": null,
+  "services": [
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/account/",
+      "events": [],
+      "serviceName": "Account"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/notifications/",
+      "events": [],
+      "serviceName": "APNS"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/notifications/",
+      "events": [],
+      "serviceName": "APNS Sandbox"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/documentation/devicecheck",
+      "events": [],
+      "serviceName": "App Attest"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/app-store/app-updates/",
+      "events": [],
+      "serviceName": "App Store Automatic App Updates"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://itunesconnect.apple.com/",
+      "events": [
+        {
+          "usersAffected": "Some users were affected",
+          "epochStartDate": 1603409280000,
+          "epochEndDate": 1603411800000,
+          "messageId": "2000000026",
+          "statusType": "Outage",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/22/2020 16:28 PDT",
+          "endDate": "10/22/2020 17:10 PDT",
+          "affectedServices": null,
+          "eventStatus": "resolved",
+          "message": "Users experienced a problem with this service."
+        }
+      ],
+      "serviceName": "App Store Connect"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/app-store-connect/api/",
+      "events": [],
+      "serviceName": "App Store Connect API"
+    },
+    {
+      "redirectUrl": null,
+      "events": [],
+      "serviceName": "App Store Connect App Processing"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/documentation/appstorereceipts/verifyreceipt",
+      "events": [],
+      "serviceName": "App Store Receipt Verification"
+    },
+    {
+      "redirectUrl": " https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox",
+      "events": [
+        {
+          "usersAffected": "Some users were affected",
+          "epochStartDate": 1602777600000,
+          "epochEndDate": 1603324800000,
+          "messageId": "1000000102",
+          "statusType": "Issue",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/15/2020 09:00 PDT",
+          "endDate": "10/21/2020 17:00 PDT",
+          "affectedServices": null,
+          "eventStatus": "resolved",
+          "message": "Users experienced a problem with this service."
+        }
+      ],
+      "serviceName": "App Store Sandbox"
+    },
+    {
+      "redirectUrl": " https://developer.apple.com/documentation/appstoreservernotifications",
+      "events": [],
+      "serviceName": "App Store Server Notifications"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://forums.developer.apple.com",
+      "events": [],
+      "serviceName": "Apple Developer Forums"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/maps/",
+      "events": [],
+      "serviceName": "Apple Maps API"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/musickit/",
+      "events": [],
+      "serviceName": "Apple Music API"
+    },
+    {
+      "redirectUrl": null,
+      "events": [],
+      "serviceName": "Apple News API"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/apple-pay/",
+      "events": [],
+      "serviceName": "Apple Pay - Developer"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/account/",
+      "events": [],
+      "serviceName": "Certificates, Identifiers & Profiles"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://icloud.developer.apple.com/dashboard",
+      "events": [],
+      "serviceName": "CloudKit Dashboard"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/account/?view=support",
+      "events": [],
+      "serviceName": "Code-level Support"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/contact/",
+      "events": [
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1603209600000,
+          "epochEndDate": 1603220400000,
+          "messageId": "2000000024",
+          "statusType": "Maintenance",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/20/2020 09:00 PDT",
+          "endDate": "10/20/2020 12:00 PDT",
+          "affectedServices": [
+            "Contact Us",
+            "Program Enrollment and Renewals",
+            "Software Downloads",
+            "Videos"
+          ],
+          "eventStatus": "completed",
+          "message": "Service was unavailable."
+        },
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1602259200000,
+          "epochEndDate": 1602266400000,
+          "messageId": "2000000002",
+          "statusType": "Maintenance",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/09/2020 09:00 PDT",
+          "endDate": "10/09/2020 11:00 PDT",
+          "affectedServices": [
+            "Contact Us",
+            "Program Enrollment and Renewals",
+            "Software Downloads",
+            "Videos"
+          ],
+          "eventStatus": "completed",
+          "message": "Service was unavailable."
+        }
+      ],
+      "serviceName": "Contact Us"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/reference",
+      "events": [],
+      "serviceName": "Developer Documentation"
+    },
+    {
+      "redirectUrl": null,
+      "events": [
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1604214060000,
+          "epochEndDate": 1604221200000,
+          "messageId": "2000000030",
+          "statusType": "Outage",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "11/01/2020 00:01 PDT",
+          "endDate": "11/01/2020 01:00 PST",
+          "affectedServices": null,
+          "eventStatus": "resolved",
+          "message": "Users experienced a problem with this service."
+        },
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1603479600000,
+          "epochEndDate": 1603482240000,
+          "messageId": "2000000027",
+          "statusType": "Outage",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/23/2020 12:00 PDT",
+          "endDate": "10/23/2020 12:44 PDT",
+          "affectedServices": null,
+          "eventStatus": "resolved",
+          "message": "Users experienced a problem with this service."
+        },
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1602690900000,
+          "epochEndDate": 1602695160000,
+          "messageId": "2000000022",
+          "statusType": "Outage",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/14/2020 08:55 PDT",
+          "endDate": "10/14/2020 10:06 PDT",
+          "affectedServices": null,
+          "eventStatus": "resolved",
+          "message": "Users experienced a problem with this service."
+        },
+        {
+          "usersAffected": "Some users were affected",
+          "epochStartDate": 1604315460000,
+          "epochEndDate": 1604320680000,
+          "messageId": "2000000031",
+          "statusType": "Issue",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "11/02/2020 03:11 PST",
+          "endDate": "11/02/2020 04:38 PST",
+          "affectedServices": null,
+          "eventStatus": "resolved",
+          "message": "Users may have experienced issues with the service."
+        }
+      ],
+      "serviceName": "Developer ID Notary Service"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/documentation/devicecheck",
+      "events": [],
+      "serviceName": "Device Check"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://support.apple.com/en-us/HT204460",
+      "events": [],
+      "serviceName": "Enterprise App Verification"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://bugreport.apple.com/",
+      "events": [],
+      "serviceName": "Feedback Assistant"
+    },
+    {
+      "redirectUrl": null,
+      "events": [],
+      "serviceName": "In-App Purchases"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://maps.developer.apple.com",
+      "events": [],
+      "serviceName": "MapKit JS Dashboard"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/news-publisher/",
+      "events": [],
+      "serviceName": "News Publisher"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/enroll/",
+      "events": [
+        {
+          "usersAffected": "Some users were affected",
+          "epochStartDate": 1603234020000,
+          "epochEndDate": 1603236540000,
+          "messageId": "2000000025",
+          "statusType": "Issue",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/20/2020 15:47 PDT",
+          "endDate": "10/20/2020 16:29 PDT",
+          "affectedServices": null,
+          "eventStatus": "resolved",
+          "message": "Users experienced a problem with this service."
+        },
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1603209600000,
+          "epochEndDate": 1603220400000,
+          "messageId": "2000000024",
+          "statusType": "Maintenance",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/20/2020 09:00 PDT",
+          "endDate": "10/20/2020 12:00 PDT",
+          "affectedServices": [
+            "Contact Us",
+            "Program Enrollment and Renewals",
+            "Software Downloads",
+            "Videos"
+          ],
+          "eventStatus": "completed",
+          "message": "Due to maintenance, some services were unavailable."
+        },
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1602259200000,
+          "epochEndDate": 1602266400000,
+          "messageId": "2000000002",
+          "statusType": "Maintenance",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/09/2020 09:00 PDT",
+          "endDate": "10/09/2020 11:00 PDT",
+          "affectedServices": [
+            "Contact Us",
+            "Program Enrollment and Renewals",
+            "Software Downloads",
+            "Videos"
+          ],
+          "eventStatus": "completed",
+          "message": "Due to maintenance, some services were unavailable."
+        }
+      ],
+      "serviceName": "Program Enrollment and Renewals"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/download/",
+      "events": [
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1603209600000,
+          "epochEndDate": 1603220400000,
+          "messageId": "2000000024",
+          "statusType": "Maintenance",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/20/2020 09:00 PDT",
+          "endDate": "10/20/2020 12:00 PDT",
+          "affectedServices": [
+            "Contact Us",
+            "Program Enrollment and Renewals",
+            "Software Downloads",
+            "Videos"
+          ],
+          "eventStatus": "completed",
+          "message": "Due to maintenance, some services were unavailable."
+        },
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1602259200000,
+          "epochEndDate": 1602266400000,
+          "messageId": "2000000002",
+          "statusType": "Maintenance",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/09/2020 09:00 PDT",
+          "endDate": "10/09/2020 11:00 PDT",
+          "affectedServices": [
+            "Contact Us",
+            "Program Enrollment and Renewals",
+            "Software Downloads",
+            "Videos"
+          ],
+          "eventStatus": "completed",
+          "message": "Due to maintenance, some services were unavailable."
+        }
+      ],
+      "serviceName": "Software Downloads"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/testflight/",
+      "events": [
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1603482060000,
+          "epochEndDate": 1603482300000,
+          "messageId": "2000000028",
+          "statusType": "Outage",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/23/2020 12:41 PDT",
+          "endDate": "10/23/2020 12:45 PDT",
+          "affectedServices": null,
+          "eventStatus": "resolved",
+          "message": "Users experienced a problem with this service."
+        }
+      ],
+      "serviceName": "TestFlight"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/videos/",
+      "events": [
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1603209600000,
+          "epochEndDate": null,
+          "messageId": "2000000024",
+          "statusType": "Maintenance",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/20/2020 09:00 PDT",
+          "endDate": null,
+          "affectedServices": [
+            "Videos"
+          ],
+          "eventStatus": "ongoing",
+          "message": "Due to maintenance, some services are unavailable."
+        },
+        {
+          "usersAffected": "All users were affected",
+          "epochStartDate": 1602259200000,
+          "epochEndDate": 1602266400000,
+          "messageId": "2000000002",
+          "statusType": "Maintenance",
+          "datePosted": "11/02/2020 10:12 PST",
+          "startDate": "10/09/2020 09:00 PDT",
+          "endDate": "10/09/2020 11:00 PDT",
+          "affectedServices": [
+            "Contact Us",
+            "Program Enrollment and Renewals",
+            "Software Downloads",
+            "Videos"
+          ],
+          "eventStatus": "completed",
+          "message": "Due to maintenance, some services were unavailable."
+        }
+      ],
+      "serviceName": "Videos"
+    },
+    {
+      "redirectUrl": "https://web.archive.org/web/20201104231054/https://developer.apple.com/xcode/",
+      "events": [],
+      "serviceName": "Xcode Automatic Configuration"
+    }
+  ]
+}
