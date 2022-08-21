@@ -20,4 +20,4 @@ StatusBuddy is available for free. If you prefer, you can pay any amount you'd l
 
 [You may also get the latest StatusBuddy beta on TestFlight](https://testflight.apple.com/join/MK6zSKdG) (requires macOS Monterey and the TestFlight app installed).
 
-**StatusBuddy requires macOS Catalina or later**
+**StatusBuddy requires macOS Big Sur or later**
