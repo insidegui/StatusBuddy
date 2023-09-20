@@ -13,6 +13,9 @@ VERSIONING_SYSTEM = apple-generic
 
 MARKETING_VERSION = 2.0 // Applies to all targets
 
-CURRENT_PROJECT_VERSION = 91 // Applies to all targets
+CURRENT_PROJECT_VERSION = 98 // Applies to all targets
 
 DYLIB_CURRENT_VERSION = $(CURRENT_PROJECT_VERSION)
+
+// Sparkle must be weak-linked so that it can be stripped out of App Store version
+OTHER_LDFLAGS=-weak_framework Sparkle

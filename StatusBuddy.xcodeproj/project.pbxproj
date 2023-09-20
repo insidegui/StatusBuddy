@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,8 +12,6 @@
 		DD88E55B23F34ECE009C4060 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD88E55A23F34ECE009C4060 /* Preview Assets.xcassets */; };
 		DD88E55E23F34ECE009C4060 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD88E55C23F34ECE009C4060 /* Main.storyboard */; };
 		DD88E56F23F34EE1009C4060 /* StatusCore.h in Headers */ = {isa = PBXBuildFile; fileRef = DD88E56D23F34EE1009C4060 /* StatusCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DD88E57223F34EE1009C4060 /* StatusCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E56B23F34EE1009C4060 /* StatusCore.framework */; };
-		DD88E57323F34EE1009C4060 /* StatusCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E56B23F34EE1009C4060 /* StatusCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD88E57B23F34EF6009C4060 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E57A23F34EF6009C4060 /* Service.swift */; };
 		DD88E57D23F34FEA009C4060 /* StatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E57C23F34FEA009C4060 /* StatusResponse.swift */; };
 		DD88E58023F35011009C4060 /* AppleStatusChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD88E57F23F35011009C4060 /* AppleStatusChecker.swift */; };
@@ -26,7 +24,6 @@
 		F414B5B5268CB27C00C98255 /* developer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */; };
 		F448920B268E04D400DBC803 /* DetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920A268E04D400DBC803 /* DetailViewModelTests.swift */; };
 		F448920D268E057100DBC803 /* DetailGroup+StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920C268E057100DBC803 /* DetailGroup+StatusCore.swift */; };
-		F480853B28B28ACC00984513 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F480853A28B28ACC00984513 /* Sparkle */; };
 		F4918BC827720ADB009CC98D /* HelperAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4918BC727720ADB009CC98D /* HelperAppDelegate.swift */; };
 		F4918BCC27720ADC009CC98D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4918BCB27720ADC009CC98D /* Assets.xcassets */; };
 		F4918BCF27720ADC009CC98D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4918BCD27720ADC009CC98D /* Main.storyboard */; };
@@ -46,8 +43,6 @@
 		F4AFF304268B628A002C26FC /* StatusChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF303268B628A002C26FC /* StatusChecker.swift */; };
 		F4AFF306268B62A1002C26FC /* StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF305268B62A1002C26FC /* StatusCore.swift */; };
 		F4AFF30F268B6807002C26FC /* StatusUI.h in Headers */ = {isa = PBXBuildFile; fileRef = F4AFF30E268B6807002C26FC /* StatusUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F4AFF312268B6807002C26FC /* StatusUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AFF30C268B6807002C26FC /* StatusUI.framework */; };
-		F4AFF313268B6807002C26FC /* StatusUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4AFF30C268B6807002C26FC /* StatusUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F4AFF328268B681C002C26FC /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF319268B681C002C26FC /* DetailViewModel.swift */; };
 		F4AFF329268B681C002C26FC /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF31A268B681C002C26FC /* DashboardViewModel.swift */; };
 		F4AFF32A268B681C002C26FC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AFF31C268B681C002C26FC /* Colors.swift */; };
@@ -79,19 +74,17 @@
 		F4D61CF5268CF20C0087B158 /* DashboardItem+StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D61CF4268CF20C0087B158 /* DashboardItem+StatusCore.swift */; };
 		F4D61CF7268D02D50087B158 /* customer-three-ongoing-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */; };
 		F4D61CF8268D02D50087B158 /* customer-three-ongoing-issues.json in Resources */ = {isa = PBXBuildFile; fileRef = F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */; };
+		F4E9DAD52ABB76FE004E64D1 /* StatusCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E56B23F34EE1009C4060 /* StatusCore.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F4E9DAD62ABB76FE004E64D1 /* StatusCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD88E56B23F34EE1009C4060 /* StatusCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F4E9DAD92ABB76FE004E64D1 /* StatusUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AFF30C268B6807002C26FC /* StatusUI.framework */; };
+		F4E9DADA2ABB76FE004E64D1 /* StatusUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4AFF30C268B6807002C26FC /* StatusUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F4E9DAE02ABB7A73004E64D1 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F4E9DADF2ABB7A73004E64D1 /* Sparkle */; settings = {ATTRIBUTES = (Required, ); }; };
 		F4F212C326A879A400BE7A0D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F212C226A879A400BE7A0D /* NotificationManager.swift */; };
 		F4F212C526A87FCA00BE7A0D /* NotificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F212C426A87FCA00BE7A0D /* NotificationPresenter.swift */; };
 		F4F212C726A88ABF00BE7A0D /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F212C626A88ABF00BE7A0D /* NotificationManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DD88E57023F34EE1009C4060 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DD88E56A23F34EE1009C4060;
-			remoteInfo = StatusCore;
-		};
 		F414B5A8268CA70C00C98255 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
@@ -120,19 +113,26 @@
 			remoteGlobalIDString = DD88E56A23F34EE1009C4060;
 			remoteInfo = StatusCore;
 		};
-		F4AFF310268B6807002C26FC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F4AFF30B268B6807002C26FC;
-			remoteInfo = StatusUI;
-		};
 		F4AFF336268B68D3002C26FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = DD88E56A23F34EE1009C4060;
 			remoteInfo = StatusCore;
+		};
+		F4E9DAD72ABB76FE004E64D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD88E56A23F34EE1009C4060;
+			remoteInfo = StatusCore;
+		};
+		F4E9DADB2ABB76FE004E64D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD88E54823F34ECE009C4060 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F4AFF30B268B6807002C26FC;
+			remoteInfo = StatusUI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -143,8 +143,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DD88E57323F34EE1009C4060 /* StatusCore.framework in Embed Frameworks */,
-				F4AFF313268B6807002C26FC /* StatusUI.framework in Embed Frameworks */,
+				F4E9DADA2ABB76FE004E64D1 /* StatusUI.framework in Embed Frameworks */,
+				F4E9DAD62ABB76FE004E64D1 /* StatusCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,7 +192,7 @@
 		F4918BCE27720ADC009CC98D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4918BD027720ADC009CC98D /* StatusBuddyHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StatusBuddyHelper.entitlements; sourceTree = "<group>"; };
 		F4918BD427720AF0009CC98D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		F4918BD627720B2B009CC98D /* Versions.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Versions.xcconfig; sourceTree = "<group>"; };
+		F4918BD627720B2B009CC98D /* Main.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.xcconfig; sourceTree = "<group>"; };
 		F4918BDF277212FC009CC98D /* LaunchAtLoginHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginHelper.swift; sourceTree = "<group>"; };
 		F4918BE427722B31009CC98D /* Bundle+MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+MainApp.swift"; sourceTree = "<group>"; };
 		F4918BE72772318A009CC98D /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
@@ -230,6 +230,7 @@
 		F4D61CEF268CF1B50087B158 /* customer-no-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-no-issues.json"; sourceTree = "<group>"; };
 		F4D61CF4268CF20C0087B158 /* DashboardItem+StatusCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardItem+StatusCore.swift"; sourceTree = "<group>"; };
 		F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "customer-three-ongoing-issues.json"; sourceTree = "<group>"; };
+		F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
 		F4F212C226A879A400BE7A0D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F4F212C426A87FCA00BE7A0D /* NotificationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPresenter.swift; sourceTree = "<group>"; };
 		F4F212C626A88ABF00BE7A0D /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
@@ -241,9 +242,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F480853B28B28ACC00984513 /* Sparkle in Frameworks */,
-				F4AFF312268B6807002C26FC /* StatusUI.framework in Frameworks */,
-				DD88E57223F34EE1009C4060 /* StatusCore.framework in Frameworks */,
+				F4E9DAE02ABB7A73004E64D1 /* Sparkle in Frameworks */,
+				F4E9DAD52ABB76FE004E64D1 /* StatusCore.framework in Frameworks */,
+				F4E9DAD92ABB76FE004E64D1 /* StatusUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,8 +437,9 @@
 		F4918BD527720B1F009CC98D /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				F4918BD627720B2B009CC98D /* Versions.xcconfig */,
+				F4918BD627720B2B009CC98D /* Main.xcconfig */,
 				F480854B28B28D4000984513 /* DeveloperID.xcconfig */,
+				F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -605,17 +607,18 @@
 				DD88E54E23F34ECE009C4060 /* Resources */,
 				DD88E57723F34EE1009C4060 /* Embed Frameworks */,
 				F4918BDC27720BF7009CC98D /* Embed Login Item */,
+				F4E9DADE2ABB796B004E64D1 /* Remove Sparkle From App Store Builds */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DD88E57123F34EE1009C4060 /* PBXTargetDependency */,
-				F4AFF311268B6807002C26FC /* PBXTargetDependency */,
 				F4918BDB27720BF1009CC98D /* PBXTargetDependency */,
+				F4E9DAD82ABB76FE004E64D1 /* PBXTargetDependency */,
+				F4E9DADC2ABB76FE004E64D1 /* PBXTargetDependency */,
 			);
 			name = StatusBuddy;
 			packageProductDependencies = (
-				F480853A28B28ACC00984513 /* Sparkle */,
+				F4E9DADF2ABB7A73004E64D1 /* Sparkle */,
 			);
 			productName = StatusBuddy;
 			productReference = DD88E55023F34ECE009C4060 /* StatusBuddy.app */;
@@ -718,8 +721,9 @@
 		DD88E54823F34ECE009C4060 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "Guilherme Rambo";
 				TargetAttributes = {
 					DD88E54F23F34ECE009C4060 = {
@@ -834,6 +838,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F4E9DADE2ABB796B004E64D1 /* Remove Sparkle From App Store Builds */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Remove Sparkle From App Store Builds";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\nif [ \"${CONFIGURATION}\" = \"Debug\" ] || [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    echo \"Stripping content that should not be included in App Store build\"\n\n    rm -Rf \"$CODESIGNING_FOLDER_PATH/Contents/Frameworks/Sparkle.framework\" 2>/dev/null\n    exit 0\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DD88E54C23F34ECE009C4060 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -923,11 +949,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		DD88E57123F34EE1009C4060 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DD88E56A23F34EE1009C4060 /* StatusCore */;
-			targetProxy = DD88E57023F34EE1009C4060 /* PBXContainerItemProxy */;
-		};
 		F414B5A9268CA70C00C98255 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DD88E56A23F34EE1009C4060 /* StatusCore */;
@@ -948,15 +969,20 @@
 			target = DD88E56A23F34EE1009C4060 /* StatusCore */;
 			targetProxy = F4A58BD8268CC89A00C11441 /* PBXContainerItemProxy */;
 		};
-		F4AFF311268B6807002C26FC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F4AFF30B268B6807002C26FC /* StatusUI */;
-			targetProxy = F4AFF310268B6807002C26FC /* PBXContainerItemProxy */;
-		};
 		F4AFF337268B68D3002C26FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DD88E56A23F34EE1009C4060 /* StatusCore */;
 			targetProxy = F4AFF336268B68D3002C26FC /* PBXContainerItemProxy */;
+		};
+		F4E9DAD82ABB76FE004E64D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD88E56A23F34EE1009C4060 /* StatusCore */;
+			targetProxy = F4E9DAD72ABB76FE004E64D1 /* PBXContainerItemProxy */;
+		};
+		F4E9DADC2ABB76FE004E64D1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F4AFF30B268B6807002C26FC /* StatusUI */;
+			targetProxy = F4E9DADB2ABB76FE004E64D1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -982,7 +1008,6 @@
 /* Begin XCBuildConfiguration section */
 		DD88E56123F34ECE009C4060 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4918BD627720B2B009CC98D /* Versions.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1020,6 +1045,7 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1046,7 +1072,6 @@
 		};
 		DD88E56223F34ECE009C4060 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4918BD627720B2B009CC98D /* Versions.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1084,6 +1109,7 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1103,6 +1129,7 @@
 		};
 		DD88E56423F34ECE009C4060 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Main.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1128,6 +1155,7 @@
 		};
 		DD88E56523F34ECE009C4060 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Main.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1153,8 +1181,10 @@
 		};
 		DD88E57523F34EE1009C4060 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -1162,6 +1192,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = StatusCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1169,6 +1200,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1179,8 +1212,10 @@
 		};
 		DD88E57623F34EE1009C4060 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -1188,6 +1223,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = StatusCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1195,6 +1231,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1204,6 +1242,7 @@
 		};
 		F414B5AA268CA70C00C98255 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Main.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1223,6 +1262,7 @@
 		};
 		F414B5AB268CA70C00C98255 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Main.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1242,7 +1282,6 @@
 		};
 		F480853D28B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1280,6 +1319,7 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1306,6 +1346,7 @@
 		};
 		F480853E28B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1330,8 +1371,10 @@
 		};
 		F480853F28B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -1339,6 +1382,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = StatusCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1346,6 +1390,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1356,6 +1402,7 @@
 		};
 		F480854028B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1366,6 +1413,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Guilherme Rambo. All rights reserved.";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1374,6 +1422,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1384,6 +1434,7 @@
 		};
 		F480854128B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1403,6 +1454,7 @@
 		};
 		F480854228B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1422,6 +1474,7 @@
 		};
 		F480854328B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1455,7 +1508,6 @@
 		};
 		F480854428B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1493,6 +1545,7 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1512,6 +1565,7 @@
 		};
 		F480854528B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1536,8 +1590,10 @@
 		};
 		F480854628B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -1545,6 +1601,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = StatusCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1552,6 +1609,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1561,6 +1620,7 @@
 		};
 		F480854728B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1571,6 +1631,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Guilherme Rambo. All rights reserved.";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1579,6 +1640,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1589,6 +1652,7 @@
 		};
 		F480854828B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1608,6 +1672,7 @@
 		};
 		F480854928B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1627,6 +1692,7 @@
 		};
 		F480854A28B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F480854B28B28D4000984513 /* DeveloperID.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1660,6 +1726,7 @@
 		};
 		F4918BD127720ADC009CC98D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Main.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1693,6 +1760,7 @@
 		};
 		F4918BD227720ADC009CC98D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Main.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1726,6 +1794,7 @@
 		};
 		F4A58BCD268CC7E100C11441 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Main.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1745,6 +1814,7 @@
 		};
 		F4A58BCE268CC7E100C11441 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4918BD627720B2B009CC98D /* Main.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1764,6 +1834,7 @@
 		};
 		F4AFF315268B6807002C26FC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1774,6 +1845,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Guilherme Rambo. All rights reserved.";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1782,6 +1854,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1792,6 +1866,7 @@
 		};
 		F4AFF316268B6807002C26FC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4E9DADD2ABB778F004E64D1 /* Framework.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1802,6 +1877,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 74;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Guilherme Rambo. All rights reserved.";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1810,6 +1886,8 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = tech.buddysoftware.StatusUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1912,7 +1990,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F480853A28B28ACC00984513 /* Sparkle */ = {
+		F4E9DADF2ABB7A73004E64D1 /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F480853928B28ACC00984513 /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
