@@ -177,6 +177,7 @@
 		DD88E57C23F34FEA009C4060 /* StatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusResponse.swift; sourceTree = "<group>"; };
 		DD88E57F23F35011009C4060 /* AppleStatusChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleStatusChecker.swift; sourceTree = "<group>"; };
 		DD88E59A23F375AB009C4060 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		F412A34D2B3B062B000F458A /* WhatToTest.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = WhatToTest.txt; sourceTree = "<group>"; };
 		F414B5A3268CA70C00C98255 /* StatusCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatusCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F414B5A5268CA70C00C98255 /* EventFilteringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilteringTests.swift; sourceTree = "<group>"; };
 		F414B5AE268CA7D400C98255 /* developer-one-resolved-issue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "developer-one-resolved-issue.json"; sourceTree = "<group>"; };
@@ -293,6 +294,7 @@
 		DD88E54723F34ECE009C4060 = {
 			isa = PBXGroup;
 			children = (
+				F412A34B2B3B062B000F458A /* TestFlight */,
 				F4918BD527720B1F009CC98D /* Config */,
 				DD88E55223F34ECE009C4060 /* StatusBuddy */,
 				DD88E56C23F34EE1009C4060 /* StatusCore */,
@@ -395,6 +397,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F412A34B2B3B062B000F458A /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				F412A34D2B3B062B000F458A /* WhatToTest.txt */,
+			);
+			path = TestFlight;
 			sourceTree = "<group>";
 		};
 		F414B5A4268CA70C00C98255 /* StatusCoreTests */ = {
@@ -602,6 +612,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD88E56323F34ECE009C4060 /* Build configuration list for PBXNativeTarget "StatusBuddy" */;
 			buildPhases = (
+				F412A34F2B3B067F000F458A /* Generate TestFlight WhatToTest Notes */,
 				DD88E54C23F34ECE009C4060 /* Sources */,
 				DD88E54D23F34ECE009C4060 /* Frameworks */,
 				DD88E54E23F34ECE009C4060 /* Resources */,
@@ -839,6 +850,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		F412A34F2B3B067F000F458A /* Generate TestFlight WhatToTest Notes */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/TestFlight/WhatToTest.txt",
+			);
+			name = "Generate TestFlight WhatToTest Notes";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/TestFlight/WhatToTest.en-US.txt",
+				"$(SRCROOT)/TestFlight/WhatToTest.en-GB.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/bash;
+			shellScript = "echo \"Copying generic TestFlight notes into en-US and en-GB locale files\"\n\ncat \"$SCRIPT_INPUT_FILE_0\" > \"$SCRIPT_OUTPUT_FILE_0\"\ncat \"$SCRIPT_INPUT_FILE_0\" > \"$SCRIPT_OUTPUT_FILE_1\"\n";
+		};
 		F4E9DADE2ABB796B004E64D1 /* Remove Sparkle From App Store Builds */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
