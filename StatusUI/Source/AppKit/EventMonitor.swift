@@ -6,7 +6,7 @@
 //  Copyright © 2020 Guilherme Rambo. All rights reserved.
 //
 
-import Cocoa
+import AppKit
 
 // Brought to you by: https://www.raywenderlich.com/450-menus-and-popovers-in-menu-bar-apps-for-macos
 

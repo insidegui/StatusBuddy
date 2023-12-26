@@ -52,6 +52,7 @@ final class Preferences: ObservableObject {
 
     var isLaunchAtLoginEnabled: Bool { launchAtLogin.checkEnabled() }
     
+    @discardableResult
     func setLaunchAtLoginEnabled(to enabled: Bool) -> LaunchAtLoginFailure? {
         if enabled {
             guard !isLaunchAtLoginEnabled else { return nil }

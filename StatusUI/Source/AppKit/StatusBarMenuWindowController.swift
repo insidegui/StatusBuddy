@@ -5,7 +5,7 @@
 //  Created by Gui Rambo on 04/12/20.
 //
 
-import Cocoa
+import AppKit
 import os.log
 
 public final class StatusBarMenuWindowController: NSWindowController {
