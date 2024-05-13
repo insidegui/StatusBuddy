@@ -1,1 +1,1 @@
-This update improves handling of scheduled maintenance events, which were incorrectly displayed as past events.
+Just making sure the build doesn't expire :)
