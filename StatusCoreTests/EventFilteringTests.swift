@@ -49,4 +49,10 @@ final class EventFilteringTests: XCTestCase {
 
         XCTAssertEqual(response.services.filter({ !$0.events(filteredBy: .recent).isEmpty }).count, 3)
     }
+
+    func testFilteringScheduledDeveloperEvents() throws {
+        let response = try StatusResponse.developerOneScheduledIssue()
+
+        XCTAssertEqual(response.services.filter({ $0.hasScheduledEvents }).count, 1)
+    }
 }

@@ -25,14 +25,21 @@ fileprivate extension DashboardItem {
         let servicesWithActiveIssues = response.services.filter({ $0.hasActiveEvents })
         
         if servicesWithActiveIssues.count == 0 {
-            let servicesWithRecentIssues = response.services.filter({ $0.hasRecentEvents })
-            
-            if servicesWithRecentIssues.count == 0 {
-                return "All Systems Operational"
-            } else if servicesWithRecentIssues.count == 1 {
-                return String(format: "Recent Issue: %@", servicesWithRecentIssues[0].serviceName)
+            let servicesWithScheduledIssues = response.services.filter({ $0.hasScheduledEvents })
+            if servicesWithScheduledIssues.count == 0 {
+                let servicesWithRecentIssues = response.services.filter({ $0.hasRecentEvents })
+
+                if servicesWithRecentIssues.count == 0 {
+                    return "All Systems Operational"
+                } else if servicesWithRecentIssues.count == 1 {
+                    return String(format: "Recent Issue: %@", servicesWithRecentIssues[0].serviceName)
+                } else {
+                    return String(format: "%d Recent Issues", servicesWithRecentIssues.count)
+                }
+            } else if servicesWithScheduledIssues.count == 1 {
+                return String(format: "Scheduled: %@", servicesWithScheduledIssues[0].serviceName)
             } else {
-                return String(format: "%d Recent Issues", servicesWithRecentIssues.count)
+                return String(format: "%d Services with Scheduled Maintenance", servicesWithScheduledIssues.count)
             }
         } else if servicesWithActiveIssues.count == 1 {
             return String(format: "Outage: %@", servicesWithActiveIssues[0].serviceName)
@@ -44,6 +51,8 @@ fileprivate extension DashboardItem {
     static func subtitleColor(for response: StatusResponse) -> Color {
         if response.hasActiveEvents {
             return .error
+        } else if response.hasScheduledEvents {
+            return .scheduledIssue
         } else if response.hasRecentEvents {
             return .warningText
         } else {
@@ -54,6 +63,8 @@ fileprivate extension DashboardItem {
     static func iconColor(for response: StatusResponse) -> Color {
         if response.hasActiveEvents {
             return .error
+        } else if response.hasScheduledEvents {
+            return .scheduledIssue
         } else if response.hasRecentEvents {
             return .warning
         } else {

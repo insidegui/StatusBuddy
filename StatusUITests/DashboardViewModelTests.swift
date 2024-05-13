@@ -77,5 +77,27 @@ final class DashboardViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.items[1].iconColor, .error)
         XCTAssertEqual(viewModel.items[1].subtitleColor, .error)
     }
-    
+
+    func testGeneratingDashboardWithScheduledIssues() throws {
+        let customerResponse = try StatusResponse.customerThreeOngoingIssues()
+        let developerResponse = try StatusResponse.developerOneScheduledIssue()
+
+        let viewModel = DashboardViewModel(with: [
+            .customer: customerResponse,
+            .developer: developerResponse
+        ])
+
+        XCTAssertEqual(viewModel.items.count, 2)
+
+        XCTAssertEqual(viewModel.items[0].title, "Customer Services")
+        XCTAssertEqual(viewModel.items[0].subtitle, "3 Ongoing Issues")
+        XCTAssertEqual(viewModel.items[0].iconColor, .error)
+        XCTAssertEqual(viewModel.items[0].subtitleColor, .error)
+
+        XCTAssertEqual(viewModel.items[1].title, "Developer Services")
+        XCTAssertEqual(viewModel.items[1].subtitle, "Scheduled: App Store Connect - TestFlight")
+        XCTAssertEqual(viewModel.items[1].iconColor, .scheduledIssue)
+        XCTAssertEqual(viewModel.items[1].subtitleColor, .scheduledIssue)
+    }
+
 }

@@ -32,8 +32,13 @@ struct DetailGroupItemView: View {
             
             Group {
                 if let resolutionTime = item.formattedResolutionTime {
-                    Text("Ended " + resolutionTime)
-                        .font(.system(size: 12, weight: .medium))
+                    if let startTime = item.formattedScheduledStartTime, let endTime = item.formattedScheduledEndTime {
+                        Text("\(startTime) — \(endTime)")
+                            .font(.system(size: 12, weight: .medium))
+                    } else {
+                        Text("Ended " + resolutionTime)
+                            .font(.system(size: 12, weight: .medium))
+                    }
                 }
 
                 if let subtitle = item.subtitle {

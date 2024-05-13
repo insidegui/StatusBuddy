@@ -1,0 +1,515 @@
+{
+    "drMessage": null,
+    "drpost": false,
+    "services": [
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/account/",
+            "serviceName": "Account"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/notifications/",
+            "serviceName": "APNS"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/notifications/",
+            "serviceName": "APNS Sandbox"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/documentation/devicecheck",
+            "serviceName": "App Attest"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": null,
+            "serviceName": "App Store - In-App Purchases"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/documentation/appstorereceipts/verifyreceipt",
+            "serviceName": "App Store - Receipt Verification"
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003600",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": [
+                        "App Store - Sandbox",
+                        "App Store Connect",
+                        "App Store Connect - Analytics",
+                        "App Store Connect - App Processing ",
+                        "App Store Connect - App Upload",
+                        "App Store Connect - TestFlight",
+                        "App Store Connect API",
+                        "Apple Music for Artists",
+                        "Apple Podcasts Connect"
+                    ],
+                    "eventStatus": "completed",
+                    "message": "Due to scheduled maintenance, some services were unavailable."
+                }
+            ],
+            "redirectUrl": " https://developer.apple.com/documentation/storekit/in-app_purchase/testing_in-app_purchases_with_sandbox",
+            "serviceName": "App Store - Sandbox"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/documentation/appstoreserverapi",
+            "serviceName": "App Store - Server APIs"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": " https://developer.apple.com/documentation/appstoreservernotifications",
+            "serviceName": "App Store - Server Notifications"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/app-store/app-updates/",
+            "serviceName": "App Store Automatic App Updates"
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003600",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": [
+                        "App Store - Sandbox",
+                        "App Store Connect",
+                        "App Store Connect - Analytics",
+                        "App Store Connect - App Processing ",
+                        "App Store Connect - App Upload",
+                        "App Store Connect - TestFlight",
+                        "App Store Connect API",
+                        "Apple Music for Artists",
+                        "Apple Podcasts Connect"
+                    ],
+                    "eventStatus": "completed",
+                    "message": "Due to scheduled maintenance, some services were unavailable."
+                }
+            ],
+            "redirectUrl": "https://appstoreconnect.apple.com ",
+            "serviceName": "App Store Connect"
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003600",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": [
+                        "App Store - Sandbox",
+                        "App Store Connect",
+                        "App Store Connect - Analytics",
+                        "App Store Connect - App Processing ",
+                        "App Store Connect - App Upload",
+                        "App Store Connect - TestFlight",
+                        "App Store Connect API",
+                        "Apple Music for Artists",
+                        "Apple Podcasts Connect"
+                    ],
+                    "eventStatus": "completed",
+                    "message": "Due to scheduled maintenance, some services were unavailable."
+                }
+            ],
+            "redirectUrl": "https://appstoreconnect.apple.com/analytics",
+            "serviceName": "App Store Connect - Analytics"
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003600",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": [
+                        "App Store - Sandbox",
+                        "App Store Connect",
+                        "App Store Connect - Analytics",
+                        "App Store Connect - App Processing ",
+                        "App Store Connect - App Upload",
+                        "App Store Connect - TestFlight",
+                        "App Store Connect API",
+                        "Apple Music for Artists",
+                        "Apple Podcasts Connect"
+                    ],
+                    "eventStatus": "completed",
+                    "message": "Due to scheduled maintenance, some services were unavailable."
+                }
+            ],
+            "redirectUrl": null,
+            "serviceName": "App Store Connect - App Processing "
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003600",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": [
+                        "App Store - Sandbox",
+                        "App Store Connect",
+                        "App Store Connect - Analytics",
+                        "App Store Connect - App Processing ",
+                        "App Store Connect - App Upload",
+                        "App Store Connect - TestFlight",
+                        "App Store Connect API",
+                        "Apple Music for Artists",
+                        "Apple Podcasts Connect"
+                    ],
+                    "eventStatus": "completed",
+                    "message": "Users may have experienced issues with the service."
+                }
+            ],
+            "redirectUrl": null,
+            "serviceName": "App Store Connect - App Upload"
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003601",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": null,
+                    "eventStatus": "completed",
+                    "message": "Sales and Trends was unavailable due to scheduled maintenance."
+                }
+            ],
+            "redirectUrl": "https://appstoreconnect.apple.com/trends",
+            "serviceName": "App Store Connect - Sales and Trends"
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users will be affected",
+                    "epochStartDate": 1715709600000,
+                    "epochEndDate": 1715713200000,
+                    "messageId": "2000003619",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/14/2024 11:00 PDT",
+                    "endDate": "05/14/2024 12:00 PDT",
+                    "affectedServices": null,
+                    "eventStatus": "upcoming",
+                    "message": "Due to scheduled maintenance, some services will be unavailable."
+                },
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003600",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": [
+                        "App Store - Sandbox",
+                        "App Store Connect",
+                        "App Store Connect - Analytics",
+                        "App Store Connect - App Processing ",
+                        "App Store Connect - App Upload",
+                        "App Store Connect - TestFlight",
+                        "App Store Connect API",
+                        "Apple Music for Artists",
+                        "Apple Podcasts Connect"
+                    ],
+                    "eventStatus": "completed",
+                    "message": "Due to scheduled maintenance, some services were unavailable."
+                }
+            ],
+            "redirectUrl": "https://developer.apple.com/testflight/",
+            "serviceName": "App Store Connect - TestFlight"
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003600",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": [
+                        "App Store - Sandbox",
+                        "App Store Connect",
+                        "App Store Connect - Analytics",
+                        "App Store Connect - App Processing ",
+                        "App Store Connect - App Upload",
+                        "App Store Connect - TestFlight",
+                        "App Store Connect API",
+                        "Apple Music for Artists",
+                        "Apple Podcasts Connect"
+                    ],
+                    "eventStatus": "completed",
+                    "message": "Due to scheduled maintenance, some services were unavailable."
+                }
+            ],
+            "redirectUrl": "https://developer.apple.com/app-store-connect/api/",
+            "serviceName": "App Store Connect API"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://forums.developer.apple.com",
+            "serviceName": "Apple Developer Forums"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/maps/",
+            "serviceName": "Apple Maps API"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/musickit/",
+            "serviceName": "Apple Music API"
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003600",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": [
+                        "App Store - Sandbox",
+                        "App Store Connect",
+                        "App Store Connect - Analytics",
+                        "App Store Connect - App Processing ",
+                        "App Store Connect - App Upload",
+                        "App Store Connect - TestFlight",
+                        "App Store Connect API",
+                        "Apple Music for Artists",
+                        "Apple Podcasts Connect"
+                    ],
+                    "eventStatus": "completed",
+                    "message": "Apple Music for Artists was unavailable due to scheduled maintenance"
+                }
+            ],
+            "redirectUrl": null,
+            "serviceName": "Apple Music for Artists"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": null,
+            "serviceName": "Apple News API"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": " https://applepaydemo.apple.com",
+            "serviceName": "Apple Pay Developer | Apple Pay Demo"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/apple-pay/",
+            "serviceName": "Apple Pay Production Instance"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/apple-pay/sandbox-testing/",
+            "serviceName": "Apple Pay Sandbox Instance"
+        },
+        {
+            "events": [
+                {
+                    "usersAffected": "Some users were affected",
+                    "epochStartDate": 1715432400000,
+                    "epochEndDate": 1715439600000,
+                    "messageId": "2000003600",
+                    "statusType": "Maintenance",
+                    "datePosted": "05/11/2024 08:00 PDT",
+                    "startDate": "05/11/2024 06:00 PDT",
+                    "endDate": "05/11/2024 08:00 PDT",
+                    "affectedServices": [
+                        "App Store - Sandbox",
+                        "App Store Connect",
+                        "App Store Connect - Analytics",
+                        "App Store Connect - App Processing ",
+                        "App Store Connect - App Upload",
+                        "App Store Connect - TestFlight",
+                        "App Store Connect API",
+                        "Apple Music for Artists",
+                        "Apple Podcasts Connect"
+                    ],
+                    "eventStatus": "completed",
+                    "message": "Users experienced a problem with this service."
+                }
+            ],
+            "redirectUrl": null,
+            "serviceName": "Apple Podcasts Connect"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/account/",
+            "serviceName": "Certificates, Identifiers & Profiles"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://icloud.developer.apple.com/dashboard",
+            "serviceName": "CloudKit Console"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/icloud/cloudkit/",
+            "serviceName": "CloudKit Database"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/account/?view=support",
+            "serviceName": "Code-level Support"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/contact/",
+            "serviceName": "Contact Us"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/reference",
+            "serviceName": "Developer Documentation"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": null,
+            "serviceName": "Developer ID Notary Service"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": null,
+            "serviceName": "Device Enrollment Program"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://bugreport.apple.com/",
+            "serviceName": "Feedback Assistant"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://maps.developer.apple.com",
+            "serviceName": "MapKit JS Dashboard"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": null,
+            "serviceName": "MFi Portal"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/news-publisher/",
+            "serviceName": "News Publisher"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/enroll/",
+            "serviceName": "Program Enrollment and Renewals"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": null,
+            "serviceName": "SKAdNetwork"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/download/",
+            "serviceName": "Software Downloads"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": null,
+            "serviceName": "Tap to Pay on iPhone"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/videos/",
+            "serviceName": "Videos"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/weatherkit/",
+            "serviceName": "WeatherKit"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/xcode/",
+            "serviceName": "Xcode Automatic Configuration"
+        },
+        {
+            "events": [
+            ],
+            "redirectUrl": "https://developer.apple.com/xcode-cloud/",
+            "serviceName": "Xcode Cloud"
+        }
+    ]
+}
