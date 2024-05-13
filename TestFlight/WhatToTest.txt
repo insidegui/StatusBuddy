@@ -1,1 +1,1 @@
-Just keeping the app up to date for the latest OSes.
+This update improves handling of scheduled maintenance events, which were incorrectly displayed as past events.

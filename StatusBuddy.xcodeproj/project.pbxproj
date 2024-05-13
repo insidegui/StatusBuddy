@@ -24,6 +24,8 @@
 		F414B5B5268CB27C00C98255 /* developer-one-ongoing-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */; };
 		F448920B268E04D400DBC803 /* DetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920A268E04D400DBC803 /* DetailViewModelTests.swift */; };
 		F448920D268E057100DBC803 /* DetailGroup+StatusCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448920C268E057100DBC803 /* DetailGroup+StatusCore.swift */; };
+		F482C4A32BF248B500B3A277 /* developer-one-scheduled-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F482C4A22BF248B500B3A277 /* developer-one-scheduled-issue.json */; };
+		F482C4A42BF24F7B00B3A277 /* developer-one-scheduled-issue.json in Resources */ = {isa = PBXBuildFile; fileRef = F482C4A22BF248B500B3A277 /* developer-one-scheduled-issue.json */; };
 		F4918BC827720ADB009CC98D /* HelperAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4918BC727720ADB009CC98D /* HelperAppDelegate.swift */; };
 		F4918BCC27720ADC009CC98D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4918BCB27720ADC009CC98D /* Assets.xcassets */; };
 		F4918BCF27720ADC009CC98D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4918BCD27720ADC009CC98D /* Main.storyboard */; };
@@ -187,6 +189,7 @@
 		F448920A268E04D400DBC803 /* DetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelTests.swift; sourceTree = "<group>"; };
 		F448920C268E057100DBC803 /* DetailGroup+StatusCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailGroup+StatusCore.swift"; sourceTree = "<group>"; };
 		F480854B28B28D4000984513 /* DeveloperID.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DeveloperID.xcconfig; sourceTree = "<group>"; };
+		F482C4A22BF248B500B3A277 /* developer-one-scheduled-issue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "developer-one-scheduled-issue.json"; sourceTree = "<group>"; };
 		F4918BC527720ADB009CC98D /* StatusBuddyHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StatusBuddyHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4918BC727720ADB009CC98D /* HelperAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperAppDelegate.swift; sourceTree = "<group>"; };
 		F4918BCB27720ADC009CC98D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -424,6 +427,7 @@
 				F4D61CF6268D02D50087B158 /* customer-three-ongoing-issues.json */,
 				F414B5AF268CA7D400C98255 /* customer-three-resolved-issues.json */,
 				F414B5AE268CA7D400C98255 /* developer-one-resolved-issue.json */,
+				F482C4A22BF248B500B3A277 /* developer-one-scheduled-issue.json */,
 				F414B5B2268CAC4000C98255 /* customer-one-ongoing-issue.json */,
 				F414B5B4268CB27C00C98255 /* developer-one-ongoing-issue.json */,
 				F4A58BD1268CC81500C11441 /* Bundle+TestData.swift */,
@@ -734,7 +738,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = "Guilherme Rambo";
 				TargetAttributes = {
 					DD88E54F23F34ECE009C4060 = {
@@ -813,6 +817,7 @@
 				F4D61CF0268CF1B50087B158 /* developer-no-issues.json in Resources */,
 				F414B5B5268CB27C00C98255 /* developer-one-ongoing-issue.json in Resources */,
 				F414B5B3268CAC4100C98255 /* customer-one-ongoing-issue.json in Resources */,
+				F482C4A32BF248B500B3A277 /* developer-one-scheduled-issue.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,6 +841,7 @@
 				F4D61CF1268CF1B50087B158 /* developer-no-issues.json in Resources */,
 				F4A58BD6268CC88500C11441 /* developer-one-ongoing-issue.json in Resources */,
 				F4A58BD5268CC88500C11441 /* developer-one-resolved-issue.json in Resources */,
+				F482C4A42BF24F7B00B3A277 /* developer-one-scheduled-issue.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

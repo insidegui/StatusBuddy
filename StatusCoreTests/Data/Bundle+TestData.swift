@@ -22,7 +22,11 @@ extension StatusResponse {
     static func developerOneResolvedIssue() throws -> StatusResponse {
         try Bundle.test.load(StatusResponse.self, from: "developer-one-resolved-issue")
     }
-    
+
+    static func developerOneScheduledIssue() throws -> StatusResponse {
+        try Bundle.test.load(StatusResponse.self, from: "developer-one-scheduled-issue")
+    }
+
     static func customerThreeResolvedIssues() throws -> StatusResponse {
         try Bundle.test.load(StatusResponse.self, from: "customer-three-resolved-issues")
     }

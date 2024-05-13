@@ -17,6 +17,7 @@ public struct Service: Hashable, Codable {
         public let eventStatus: String
         
         static let resolvedStatuses = ["resolved", "completed"]
+        static let scheduledStatuses = ["upcoming"]
     }
 
     public let serviceName: String
@@ -27,6 +28,7 @@ public struct Service: Hashable, Codable {
 public enum EventFilter: Int {
     case ongoing
     case recent
+    case scheduled
     case operational
 }
 
@@ -43,6 +45,8 @@ public extension Service {
             return activeEvents
         case .recent:
             return recentEvents
+        case .scheduled:
+            return scheduledEvents
         case .operational:
             return []
         }
@@ -50,14 +54,17 @@ public extension Service {
 }
 
 public extension Service {
-    var activeEvents: [Event] { events.filter { !Event.resolvedStatuses.contains($0.eventStatus) } }
+    var activeEvents: [Event] { events.filter { !(Event.resolvedStatuses + Event.scheduledStatuses).contains($0.eventStatus) } }
     var recentEvents: [Event] { events.filter { Event.resolvedStatuses.contains($0.eventStatus) } }
-    
+    var scheduledEvents: [Event] { events.filter { Event.scheduledStatuses.contains($0.eventStatus) } }
+
     var hasActiveEvents: Bool { !activeEvents.isEmpty }
     var hasRecentEvents: Bool { !recentEvents.isEmpty }
+    var hasScheduledEvents: Bool { !scheduledEvents.isEmpty }
 }
 
 public extension StatusResponse {
     var hasActiveEvents: Bool { !services.filter({ $0.hasActiveEvents }).isEmpty }
     var hasRecentEvents: Bool { !services.filter({ $0.hasRecentEvents }).isEmpty }
+    var hasScheduledEvents: Bool { !services.filter({ $0.hasScheduledEvents }).isEmpty }
 }
