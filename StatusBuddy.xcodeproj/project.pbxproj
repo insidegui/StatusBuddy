@@ -637,6 +637,8 @@
 /* Begin XCBuildConfiguration section */
 		DD88E56123F34ECE009C4060 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
+			baseConfigurationReferenceRelativePath = Versions.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -702,6 +704,8 @@
 		};
 		DD88E56223F34ECE009C4060 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
+			baseConfigurationReferenceRelativePath = Versions.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -761,7 +765,7 @@
 		DD88E56423F34ECE009C4060 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Main.xcconfig;
+			baseConfigurationReferenceRelativePath = "AppTarget-AppStore.xcconfig";
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StatusBuddy/StatusBuddy.entitlements;
@@ -787,7 +791,7 @@
 		DD88E56523F34ECE009C4060 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Main.xcconfig;
+			baseConfigurationReferenceRelativePath = "AppTarget-AppStore.xcconfig";
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StatusBuddy/StatusBuddy.entitlements;
@@ -812,8 +816,6 @@
 		};
 		DD88E57523F34EE1009C4060 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Framework.xcconfig;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -844,8 +846,6 @@
 		};
 		DD88E57623F34EE1009C4060 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Framework.xcconfig;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -875,8 +875,6 @@
 		};
 		F414B5AA268CA70C00C98255 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Main.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -896,8 +894,6 @@
 		};
 		F414B5AB268CA70C00C98255 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Main.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -917,6 +913,8 @@
 		};
 		F480853D28B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
+			baseConfigurationReferenceRelativePath = Versions.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -983,7 +981,7 @@
 		F480853E28B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = DeveloperID.xcconfig;
+			baseConfigurationReferenceRelativePath = "AppTarget-DeveloperID.xcconfig";
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1007,8 +1005,6 @@
 		};
 		F480853F28B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Framework.xcconfig;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1039,8 +1035,6 @@
 		};
 		F480854028B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Framework.xcconfig;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1072,8 +1066,6 @@
 		};
 		F480854128B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = DeveloperID.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1093,8 +1085,6 @@
 		};
 		F480854228B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = DeveloperID.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1114,8 +1104,6 @@
 		};
 		F480854328B28D2000984513 /* Debug-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = DeveloperID.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1148,6 +1136,8 @@
 		};
 		F480854428B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
+			baseConfigurationReferenceRelativePath = Versions.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1207,7 +1197,7 @@
 		F480854528B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = DeveloperID.xcconfig;
+			baseConfigurationReferenceRelativePath = "AppTarget-DeveloperID.xcconfig";
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1231,8 +1221,6 @@
 		};
 		F480854628B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Framework.xcconfig;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1262,8 +1250,6 @@
 		};
 		F480854728B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Framework.xcconfig;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1295,8 +1281,6 @@
 		};
 		F480854828B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = DeveloperID.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1316,8 +1300,6 @@
 		};
 		F480854928B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = DeveloperID.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1337,8 +1319,6 @@
 		};
 		F480854A28B28D2900984513 /* Release-DeveloperID */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = DeveloperID.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1371,8 +1351,6 @@
 		};
 		F4918BD127720ADC009CC98D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Main.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1405,8 +1383,6 @@
 		};
 		F4918BD227720ADC009CC98D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Main.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1439,8 +1415,6 @@
 		};
 		F4A58BCD268CC7E100C11441 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Main.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1460,8 +1434,6 @@
 		};
 		F4A58BCE268CC7E100C11441 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Main.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1481,8 +1453,6 @@
 		};
 		F4AFF315268B6807002C26FC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Framework.xcconfig;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1514,8 +1484,6 @@
 		};
 		F4AFF316268B6807002C26FC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = F4FC56883061523D0013AD58 /* Config */;
-			baseConfigurationReferenceRelativePath = Framework.xcconfig;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";

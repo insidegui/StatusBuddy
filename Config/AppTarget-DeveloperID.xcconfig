@@ -9,8 +9,11 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-#include "Main.xcconfig"
+#include "Versions.xcconfig"
 
 OTHER_SWIFT_FLAGS=-D ENABLE_SPARKLE
 
 CODE_SIGN_ENTITLEMENTS = StatusBuddy/StatusBuddy-DeveloperID.entitlements
+
+// Sparkle must be weak-linked so that it can be stripped out of App Store version
+OTHER_LDFLAGS=-weak_framework Sparkle

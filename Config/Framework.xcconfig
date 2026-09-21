@@ -1,3 +1,0 @@
-#include "Main.xcconfig"
-
-OTHER_SWIFT_FLAGS[config=*-DeveloperID]=-D ENABLE_SPARKLE
