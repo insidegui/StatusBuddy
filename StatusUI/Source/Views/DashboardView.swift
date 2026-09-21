@@ -84,33 +84,8 @@ private struct DashboardButtonStyle: ButtonStyle {
 
 #if DEBUG
 #Preview("Dashboard") {
-    @Previewable @State var selectedItem: DashboardItem?
-    DashboardView(viewModel: .default, selectedItem: $selectedItem)
-}
-#Preview("Clean") {
-    VStack(alignment: .leading, spacing: 12) {
-        DashboardHeader(showSettings: {})
-        DashboardContent(state: .loaded([
-            DashboardItem(with: .customer),
-            DashboardItem(with: .developer)
-        ]), selectedItem: .constant(nil))
-    }
-    .padding(16)
-    .frame(width: RootView.minWidth)
-    .windowChrome()
-}
-
-#Preview("Outages") {
-    VStack(alignment: .leading, spacing: 12) {
-        DashboardHeader(showSettings: {})
-        DashboardContent(state: .loaded([
-            DashboardItem(with: .customer, subtitle: "Outage: Maps Routing & Navigation", iconColor: .error, subtitleColor: .error),
-            DashboardItem(with: .developer, subtitle: "3 Recent Issues", iconColor: .warning, subtitleColor: .warningText)
-        ]), selectedItem: .constant(nil))
-    }
-    .padding(16)
-    .frame(width: RootView.minWidth)
-    .windowChrome()
-    .preferredColorScheme(.dark)
+    RootView()
+        .environmentObject(RootViewModel.preview)
+        .frame(width: 600, height: 700, alignment: .top)
 }
 #endif

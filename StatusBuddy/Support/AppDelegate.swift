@@ -29,8 +29,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private let preferences = Preferences()
     
-    private(set) lazy var rootViewModel = RootViewModel.default
-    
+    private(set) lazy var rootViewModel: RootViewModel = {
+        #if DEBUG
+        if UserDefaults.standard.bool(forKey: "SBUsePreviewData") {
+            RootViewModel.preview
+        } else {
+            RootViewModel.default
+        }
+        #else
+        RootViewModel.default
+        #endif
+    }()
+
     private lazy var flowController: StatusBarFlowController = {
         StatusBarFlowController(
             viewModel: rootViewModel,

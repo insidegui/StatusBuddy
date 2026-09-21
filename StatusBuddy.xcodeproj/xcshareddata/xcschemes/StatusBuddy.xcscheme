@@ -96,6 +96,10 @@
             argument = "-SBRefreshInterval &quot;5&quot;"
             isEnabled = "NO">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-SBUsePreviewData YES"
+            isEnabled = "YES">
+         </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
    <ProfileAction

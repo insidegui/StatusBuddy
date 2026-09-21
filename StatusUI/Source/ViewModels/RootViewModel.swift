@@ -108,4 +108,11 @@ public extension RootViewModel {
         .developer: AppleStatusChecker(endpoint: .developerFeedURL, format: .JSONCallback),
         .customer: AppleStatusChecker(endpoint: .consumerFeedURL, format: .JSON)
     ])
+
+    #if DEBUG
+    static let preview = try! RootViewModel(with: [
+        .developer: PreviewStatusChecker(responses: [.developerNoIssues(), .developerOneOngoingIssue(), .developerOneResolvedIssue(), .developerOneScheduledIssue()]),
+        .customer: PreviewStatusChecker(responses: [.customerNoIssues(), .customerOneOngoingIssue(), .customerThreeOngoingIssues(), .customerThreeResolvedIssues()])
+    ])
+    #endif
 }
