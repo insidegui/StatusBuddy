@@ -162,7 +162,17 @@ import OSLog
     public func showPanel() {
         logger.trace("Show panel")
 
-        requestShowPanel()
+        guard #available(macOS 27, *) else {
+            requestShowPanel()
+            return
+        }
+
+        if statusItem.sb_startExpandedInterfaceSession() {
+            logger.trace("\(#function, privacy: .public) start expanded interface session worked")
+        } else {
+            logger.trace("\(#function, privacy: .public) start expanded interface session failed, falling back to manual presentation")
+            requestShowPanel()
+        }
     }
 
     public func hidePanel(animated: Bool = true) {
