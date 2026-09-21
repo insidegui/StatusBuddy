@@ -105,7 +105,8 @@ import OSLog
             guard delegate.statusItemControllerShouldHidePanelInResponseToStatusItemClick(self) else {
                 logger.trace("Delegate decided click away should NOT hide panel")
 
-                return true
+                /// Stop click event propagation.
+                return false
             }
 
             logger.trace("Delegate decided click away should hide panel")

@@ -157,14 +157,57 @@ extension StatusBarMenuWindowController: NSWindowDelegate {
     }
     
     public func windowDidBecomeKey(_ notification: Notification) {
+        highlightStatusItem()
+    }
+
+    public func windowDidResignKey(_ notification: Notification) {
+        dimStatusItem()
+    }
+
+}
+
+// MARK: - Status Item Highlight
+
+public extension StatusBarMenuWindowController {
+    func highlightStatusItem() {
+        guard #unavailable(macOS 27) else { return }
+
+        cancelStatusItemHighlightStateChange()
+
+        perform(#selector(_highlightStatusItem), with: nil, afterDelay: 0)
+    }
+
+    func dimStatusItem() {
+        guard #unavailable(macOS 27) else { return }
+
+        cancelStatusItemHighlightStateChange()
+
+        perform(#selector(_dimStatusItem), with: nil, afterDelay: 0)
+    }
+}
+
+private extension StatusBarMenuWindowController {
+    func cancelStatusItemHighlightStateChange() {
+        guard #unavailable(macOS 27) else { return }
+
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(_highlightStatusItem), object: nil)
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(_dimStatusItem), object: nil)
+    }
+
+    @objc func _highlightStatusItem() {
+        guard #unavailable(macOS 27) else { return }
+
         statusItem?.button?.highlight(true)
     }
-    
-    public func windowDidResignKey(_ notification: Notification) {
+
+    @objc func _dimStatusItem() {
+        guard #unavailable(macOS 27) else { return }
+
         statusItem?.button?.highlight(false)
     }
-    
 }
+
+// MARK: - Panel
 
 private final class StatusBarMenuPanel: NSPanel {
 

@@ -150,6 +150,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func hideUI(sender: Any?) {
         if #unavailable(macOS 27) {
             guard !navigateBackInResponseToStatusItemClick() else {
+                /// Button can have its highlight state reset because user clicked on it, bring it back to highlighted state.
+                windowController.highlightStatusItem()
                 return
             }
         }
