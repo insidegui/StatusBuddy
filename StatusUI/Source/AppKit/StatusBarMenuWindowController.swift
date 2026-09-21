@@ -35,20 +35,7 @@ public final class StatusBarMenuWindowController: NSWindowController {
         fatalError()
     }
     
-    private var clickOutsideEventMonitor: EventMonitor?
-    private var escapeKeyEventMonitor: Any?
-    
-    private func postBeginMenuTrackingNotification() {
-        DistributedNotificationCenter.default().post(name: .init("com.apple.HIToolbox.beginMenuTrackingNotification"), object: nil)
-    }
-    
-    private func postEndMenuTrackingNotification() {
-        DistributedNotificationCenter.default().post(name: .init("com.apple.HIToolbox.endMenuTrackingNotification"), object: nil)
-    }
-    
     public override func showWindow(_ sender: Any?) {
-        postBeginMenuTrackingNotification()
-        
         NSApp.activate(ignoringOtherApps: true)
 
         repositionWindow()
@@ -56,63 +43,26 @@ public final class StatusBarMenuWindowController: NSWindowController {
         window?.alphaValue = 1
         
         super.showWindow(sender)
-        
-        startMonitoringInterestingEvents()
     }
-    
-    public var handleEscape: ((StatusBarMenuWindowController) -> Void)?
-    
-    private func startMonitoringInterestingEvents() {
-        clickOutsideEventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown], handler: { [weak self] event in
-            guard let self = self else { return }
-            
-            #if DEBUG
-            guard !UserDefaults.standard.bool(forKey: "EnableStickyMenuBarWindow") else { return }
-            #endif
-            
-            self.close()
-        })
-        clickOutsideEventMonitor?.start()
-        
-        escapeKeyEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event -> NSEvent? in
-            guard let self = self else { return event }
 
-            if event.keyCode == 53 {
-                if let handleEscape = self.handleEscape {
-                    handleEscape(self)
-                } else {
-                    self.close()
-                }
-                return nil
-            } else {
-                return event
-            }
-        }
-    }
-    
-    private func stopMonitoringEvents() {
-        clickOutsideEventMonitor?.stop()
-        clickOutsideEventMonitor = nil
-        
-        if let escapeMonitor = escapeKeyEventMonitor {
-            NSEvent.removeMonitor(escapeMonitor)
-            escapeKeyEventMonitor = nil
-        }
-    }
-    
     public override func close() {
-        postEndMenuTrackingNotification()
+        assertionFailure("close() is not available, please use close(animated:)")
+    }
+
+    public func close(animated: Bool) {
+        guard animated else {
+            super.close()
+            return
+        }
         
         NSAnimationContext.beginGrouping()
         NSAnimationContext.current.completionHandler = {
             super.close()
-            
-            self.stopMonitoringEvents()
         }
         window?.animator().alphaValue = 0
         NSAnimationContext.endGrouping()
     }
-    
+
     // MARK: - Positioning relative to status item
     
     private struct Metrics {

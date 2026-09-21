@@ -12,9 +12,10 @@ import StatusCore
 import Combine
 import StatusUI
 
+@MainActor
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
-    
+final class AppDelegate: NSObject, NSApplicationDelegate {
+
     private lazy var updateController = UpdateController()
 
     var window: NSWindow!
@@ -49,12 +50,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private lazy var notificationManager = NotificationManager()
 
+    private lazy var statusItemController = StatusItemController(statusItem: statusItem, delegate: self)
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         updateButton()
-        
-        windowController.handleEscape = { [weak self] _ in
-            self?.hideUI(sender: nil)
-        }
+
+        statusItemController.configure()
 
         rootViewModel.startPeriodicUpdates()
 
@@ -143,19 +144,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func showUI(sender: Any?) {
-        rootViewModel.refresh(nil)
-        
-        windowController.showWindow(sender)
+        statusItemController.showPanel()
     }
 
     func hideUI(sender: Any?) {
-        // Go back if showing detail.
-        guard rootViewModel.selectedDashboardItem == nil else {
-            rootViewModel.selectedDashboardItem = nil
-            return
+        if #unavailable(macOS 27) {
+            // Go back if showing detail.
+            guard rootViewModel.selectedDashboardItem == nil else {
+                rootViewModel.selectedDashboardItem = nil
+                return
+            }
         }
         
-        windowController.close()
+        statusItemController.hidePanel()
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -219,3 +220,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 }
 
+
+extension AppDelegate: StatusItemControllerDelegate {
+    func statusItemControllerIsPanelVisible(_ controller: StatusItemController) -> Bool {
+        windowController.window?.isVisible == true
+    }
+
+    func statusItemControllerDidRequestShowPanel(_ controller: StatusItemController) {
+        windowController.showWindow(self)
+    }
+
+    func statusItemControllerDidRequestHidePanel(_ controller: StatusItemController, animated: Bool) {
+        windowController.close(animated: animated)
+    }
+
+    func statusItemControllerWillShowPanel(_ controller: StatusItemController) {
+        rootViewModel.refresh(nil)
+    }
+
+    func statusItemControllerWillHidePanel(_ controller: StatusItemController) {
+        
+    }
+}
