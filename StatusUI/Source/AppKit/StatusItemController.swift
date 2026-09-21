@@ -8,6 +8,8 @@ import OSLog
 
     func statusItemControllerWillShowPanel(_ controller: StatusItemController)
     func statusItemControllerWillHidePanel(_ controller: StatusItemController)
+
+    func statusItemControllerShouldHidePanelInResponseToStatusItemClick(_ controller: StatusItemController) -> Bool
 }
 
 @MainActor public final class StatusItemController: NSObject {
@@ -78,10 +80,68 @@ import OSLog
         clickAwayMonitor.activate()
 
         clickAwayMonitor.add { [weak self] (event) -> Bool in
-            self?.logger.debug("Clicked away with event type \(event.type.rawValue)")
-            self?.internalHidePanel()
+            guard let self else { return true }
+
+            logger.trace("Clicked away with event type \(event.type.rawValue)")
+
+            guard clickAwayShouldDelegatePanelHideDecision(with: event) else {
+                logger.trace("Click away determined event should hide panel")
+
+                internalHidePanel()
+
+                return true
+            }
+
+            guard let delegate else {
+                logger.trace("Click away determined event should delegate hide panel decision, but no delegate available, hiding")
+
+                internalHidePanel()
+
+                return true
+            }
+
+            logger.trace("Click away determined event should delegate hide panel decision")
+
+            guard delegate.statusItemControllerShouldHidePanelInResponseToStatusItemClick(self) else {
+                logger.trace("Delegate decided click away should NOT hide panel")
+
+                return true
+            }
+
+            logger.trace("Delegate decided click away should hide panel")
+
+            internalHidePanel()
+
             return true
         }
+    }
+
+    private func clickAwayShouldDelegatePanelHideDecision(with event: NSEvent) -> Bool {
+        logger.trace("\(#function, privacy: .public) locationInWindow = \(String(describing: event.locationInWindow))")
+
+        guard let view = statusItem.button ?? statusItem.view else {
+            logger.fault("NSStatusItem has no button nor view we can use as a reference for click-away handling!")
+            assertionFailure("NSStatusItem has no button nor view we can use as a reference for click-away handling!")
+            return true
+        }
+        guard let itemWindow = view.window, let contentView = itemWindow.contentView else {
+            logger.fault("NSStatusItem view has no window we can use as a reference for click-away handling!")
+            assertionFailure("NSStatusItem view has no window we can use as a reference for click-away handling!")
+            return true
+        }
+
+        let locationOnScreen: CGPoint = if let eventWindow = event.window {
+            eventWindow.convertPoint(toScreen: event.locationInWindow)
+        } else {
+            event.locationInWindow
+        }
+        let hitView = contentView.hitTest(contentView.convert(itemWindow.convertPoint(fromScreen: locationOnScreen), from: nil))
+
+        logger.trace("\(#function, privacy: .public) locationOnScreen = \(String(describing: locationOnScreen)); hitView = \(hitView?.description ?? "<nil>")")
+
+        /// Only hide panel automatically as a response to a "click outside" if the "click outside" is not actually a click within the status item itself,
+        /// in which case the decision as to whether to close will be delegated.
+        return hitView != nil
     }
 
     // MARK: - Panel Visibility

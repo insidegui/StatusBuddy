@@ -149,16 +149,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func hideUI(sender: Any?) {
         if #unavailable(macOS 27) {
-            // Go back if showing detail.
-            guard rootViewModel.selectedDashboardItem == nil else {
-                rootViewModel.selectedDashboardItem = nil
+            guard !navigateBackInResponseToStatusItemClick() else {
                 return
             }
         }
         
         statusItemController.hidePanel()
     }
-    
+
+    func navigateBackInResponseToStatusItemClick() -> Bool {
+        guard rootViewModel.selectedDashboardItem != nil else { return false }
+
+        rootViewModel.selectedDashboardItem = nil
+
+        return true
+    }
+
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         showUI(sender: nil)
         
@@ -240,5 +246,9 @@ extension AppDelegate: StatusItemControllerDelegate {
 
     func statusItemControllerWillHidePanel(_ controller: StatusItemController) {
         
+    }
+
+    func statusItemControllerShouldHidePanelInResponseToStatusItemClick(_ controller: StatusItemController) -> Bool {
+        !navigateBackInResponseToStatusItemClick()
     }
 }
