@@ -1,1 +1,1 @@
-Just making sure the build doesn't expire :)
+Updated with support for macOS 27.
