@@ -166,6 +166,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        /// Do not show UI in response to reopen if preferences window is currently visible.
+        guard preferencesWindowController?.window?.isVisible != true else {
+            return false
+        }
+
         showUI(sender: nil)
         
         return true
