@@ -1,0 +1,9 @@
+{
+  "id" : "89e429ce-a05b-4945-90a9-cd9ac2dd4065",
+  "targets" : [
+    {
+      "id" : "E83826A7-6DA3-4F49-9E23-9A9F6F59FF25",
+      "name" : "StatusBuddy"
+    }
+  ]
+}
