@@ -36,6 +36,9 @@ public final class StatusBarMenuWindowController: NSWindowController {
         fatalError()
     }
 
+    /// Keeps the menu bar visible while the panel is open, only used in macOS versions before macOS 27.
+    private var menuBarVisibilityAssertion: MenuBarVisibilityAssertion?
+
     /// Tracks show / hide requests to prevent race conditions caused by rapid repeated calls to `showWindow` and `close(animated:)`.
     private var visibilityToken: UUID?
 
@@ -146,6 +149,15 @@ public final class StatusBarMenuWindowController: NSWindowController {
         repositionWindow()
     }
 
+    /// Unlocks the menu bar visibility in case it is currently locked.
+    ///
+    /// The app may use this to defer termination until there's been enough time for the menu bar unlock
+    /// notification to be delivered to the system, preventing a situation where terminating the app in this
+    /// state may result in a permanent menu bar lock.
+    public func unlockMenuBar() {
+        menuBarVisibilityAssertion = nil
+    }
+
 }
 
 // MARK: - Window delegate
@@ -158,10 +170,18 @@ extension StatusBarMenuWindowController: NSWindowDelegate {
     
     public func windowDidBecomeKey(_ notification: Notification) {
         highlightStatusItem()
+
+        if #unavailable(macOS 27) {
+            menuBarVisibilityAssertion = NSApplication.shared.requestMenuBarVisible()
+        }
     }
 
     public func windowDidResignKey(_ notification: Notification) {
         dimStatusItem()
+
+        if #unavailable(macOS 27) {
+            menuBarVisibilityAssertion = nil
+        }
     }
 
 }

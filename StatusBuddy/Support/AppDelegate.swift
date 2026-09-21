@@ -11,10 +11,13 @@ import SwiftUI
 import StatusCore
 import Combine
 import StatusUI
+import OSLog
 
 @MainActor
 @NSApplicationMain
 final class AppDelegate: NSObject, NSApplicationDelegate {
+
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "StatusBuddy", category: String(describing: AppDelegate.self))
 
     private lazy var updateController = UpdateController()
 
@@ -53,6 +56,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var statusItemController = StatusItemController(statusItem: statusItem, delegate: self)
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        logger.debug(#function)
+
         updateButton()
 
         statusItemController.configure()
@@ -136,6 +141,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func toggleUI(_ sender: Any?) {
+        logger.notice(#function)
+
         if windowController.window?.isVisible == true {
             hideUI(sender: sender)
         } else {
@@ -144,10 +151,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func showUI(sender: Any?) {
+        logger.notice(#function)
+
         statusItemController.showPanel()
     }
 
     func hideUI(sender: Any?) {
+        logger.notice(#function)
+
         if #unavailable(macOS 27) {
             guard !navigateBackInResponseToStatusItemClick() else {
                 /// Button can have its highlight state reset because user clicked on it, bring it back to highlighted state.
@@ -162,12 +173,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func navigateBackInResponseToStatusItemClick() -> Bool {
         guard rootViewModel.selectedDashboardItem != nil else { return false }
 
+        logger.notice("Navigating back in response to status item click")
+
         rootViewModel.selectedDashboardItem = nil
 
         return true
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        logger.notice("Handle reopen")
+
         /// Do not show UI in response to reopen if preferences window is currently visible.
         guard preferencesWindowController?.window?.isVisible != true else {
             return false
@@ -177,7 +192,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         
         return true
     }
-    
+
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        logger.notice("Should terminate")
+
+        /// This is currently only used for menu bar unlock in macOS versions before macOS 27.
+        guard #unavailable(macOS 27) else { return .terminateNow }
+
+        windowController.unlockMenuBar()
+
+        /// Give the app enough time to deliver the menu bar unlocking notification to the system.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            self.logger.notice("Replying to should terminate")
+            sender.reply(toApplicationShouldTerminate: true)
+        }
+
+        return .terminateLater
+    }
+
     // MARK: - Menu
     
     private lazy var contextualMenu: NSMenu = {

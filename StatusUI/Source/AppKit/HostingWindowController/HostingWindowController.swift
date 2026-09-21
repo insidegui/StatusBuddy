@@ -48,7 +48,7 @@ public final class HostingWindowController<Content>: NSWindowController, NSWindo
         fatalError()
     }
 
-    private var activationPolicyAssertion: ActivationPolicyAssertion?
+    private var activationPolicyAssertion: AppActivationPolicyAssertion?
 
     public override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
