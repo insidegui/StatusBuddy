@@ -9,11 +9,19 @@
 import Cocoa
 import ServiceManagement
 
-struct LaunchAtLoginFailure: LocalizedError {
-    var errorDescription: String?
-    
-    static let enable = LaunchAtLoginFailure(errorDescription: "Sorry, enabling launch at login failed. Make sure that you don't have multiple copies of the app on your Mac.")
-    static let disable = LaunchAtLoginFailure(errorDescription: "Sorry, disabling launch at login failed. Make sure that you don't have multiple copies of the app on your Mac.")
+struct LaunchAtLoginFailure: LocalizedError, CustomStringConvertible {
+    let message: String
+
+    init(_ message: LocalizedStringResource) {
+        self.message = String(localized: message)
+    }
+
+    var errorDescription: String? { message }
+
+    var description: String { message }
+
+    static let enable = LaunchAtLoginFailure("StatusBuddy couldn’t enable launch at login. Make sure StatusBuddy is enabled in System Settings > General > Login Items & Extensions.")
+    static let disable = LaunchAtLoginFailure("Sorry, disabling launch at login failed. Make sure that you don't have multiple copies of the app on your Mac.")
 }
 
 protocol LaunchAtLoginProvider: AnyObject {
@@ -43,6 +51,7 @@ final class LaunchAtLoginHelper: LaunchAtLoginProvider {
         do {
             if enabled {
                 try service.register()
+                guard service.status == .enabled else { return .enable }
             } else {
                 try service.unregister()
             }
@@ -51,5 +60,9 @@ final class LaunchAtLoginHelper: LaunchAtLoginProvider {
             return enabled ? .enable : .disable
         }
     }
-    
+
+    static func openSystemSettings() {
+        SMAppService.openSystemSettingsLoginItems()
+    }
+
 }

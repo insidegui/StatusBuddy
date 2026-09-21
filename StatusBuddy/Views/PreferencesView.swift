@@ -13,14 +13,20 @@ struct PreferencesView: View {
     @EnvironmentObject var updateController: UpdateController
     
     @Environment(\.closeWindow) var closeWindow
-    
+
+    @State private var launchAtLoginFailure: LaunchAtLoginFailure?
+    @State private var isShowingLaunchAtLoginFailure = false
+
     var body: some View {
         Form {
             VStack(alignment: .leading, spacing: 12) {
                 Toggle("Launch StatusBuddy at login", isOn: .init(get: {
                     preferences.isLaunchAtLoginEnabled
                 }, set: { isEnabled in
-                    preferences.setLaunchAtLoginEnabled(to: isEnabled)
+                    if let failure = preferences.setLaunchAtLoginEnabled(to: isEnabled) {
+                        launchAtLoginFailure = failure
+                        isShowingLaunchAtLoginFailure = true
+                    }
                 }))
                 
                 VStack(alignment: .leading) {
@@ -62,6 +68,14 @@ struct PreferencesView: View {
         }
         .frame(maxWidth: 320)
         .windowTitle("StatusBuddy Preferences")
+        .alert("Launch at Login", isPresented: $isShowingLaunchAtLoginFailure, presenting: launchAtLoginFailure) { _ in
+            Button("System Settings") {
+                LaunchAtLoginHelper.openSystemSettings()
+            }
+            Button("Dismiss", role: .cancel) { }
+        } message: { failure in
+            Text(failure.localizedDescription)
+        }
     }
 }
 
