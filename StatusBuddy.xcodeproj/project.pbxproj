@@ -547,7 +547,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\nif [ \"${CONFIGURATION}\" = \"Debug\" ] || [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    echo \"Stripping content that should not be included in App Store build\"\n\n    rm -Rf \"$CODESIGNING_FOLDER_PATH/Contents/Frameworks/Sparkle.framework\" 2>/dev/null\n    exit 0\nfi\n";
+			shellScript = "#!/bin/bash\n\nif [ \"${CONFIGURATION}\" = \"Debug\" ] || [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    echo \"Stripping content that should not be included in App Store build\"\n\n    rm -Rf \"$CODESIGNING_FOLDER_PATH/Contents/Frameworks/Sparkle.framework\"\n    exit 0\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

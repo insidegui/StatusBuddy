@@ -24,22 +24,69 @@ import OSLog
     }
 
     public func configure() {
-        guard #available(macOS 27, *) else { return }
-
-        statusItem.expandedInterfaceDelegate = self
-    }
-
-    private var isPanelVisible: Bool { delegate?.statusItemControllerIsPanelVisible(self) == true }
-
-    private var _expandedInterfaceSession: Any?
-    @available(macOS 27, *)
-    private var expandedInterfaceSession: NSStatusItemExpandedInterfaceSession? {
-        get { _expandedInterfaceSession as? NSStatusItemExpandedInterfaceSession }
-        set {
-            _expandedInterfaceSession = newValue
-            logger.trace("expandedInterfaceSession = \(newValue?.description ?? "<nil>", privacy: .public)")
+        if #available(macOS 27, *) {
+            statusItem.expandedInterfaceDelegate = self
         }
     }
+
+    private lazy var escapeKeyMonitor = ManagedEventMonitor(mask: [.keyDown], scope: .local)
+    private lazy var clickAwayMonitor = ManagedEventMonitor(mask: [.leftMouseDown, .rightMouseDown, .otherMouseDown], scope: .global)
+
+    // MARK: - Events
+
+    private func activateEventMonitors() {
+        logger.trace(#function)
+
+        activateClickAwayEventMonitor()
+        activateEscapeEventMonitor()
+    }
+
+    private func invalidateEventMonitors() {
+        logger.trace(#function)
+
+        clickAwayMonitor.invalidate()
+
+        /// Escape monitor is only enabled in versions before macOS 27.
+        if #unavailable(macOS 27) {
+            escapeKeyMonitor.invalidate()
+        }
+    }
+
+    private func activateEscapeEventMonitor() {
+        /// Escape key to close is automatic in macOS 27+ when using expanded interface session.
+        guard #unavailable(macOS 27) else { return }
+
+        escapeKeyMonitor.activate()
+
+        escapeKeyMonitor.add { [weak self] (event) -> Bool in
+            switch event.type {
+            case .keyDown:
+                if event.keyCode == 53 {
+                    self?.logger.debug("Escape key pressed")
+                    self?.internalHidePanel()
+                    return false
+                } else {
+                    return true
+                }
+            default:
+                return true
+            }
+        }
+    }
+
+    private func activateClickAwayEventMonitor() {
+        clickAwayMonitor.activate()
+
+        clickAwayMonitor.add { [weak self] (event) -> Bool in
+            self?.logger.debug("Clicked away with event type \(event.type.rawValue)")
+            self?.internalHidePanel()
+            return true
+        }
+    }
+
+    // MARK: - Panel Visibility
+
+    private var isPanelVisible: Bool { delegate?.statusItemControllerIsPanelVisible(self) == true }
 
     public func togglePanel() {
         let isVisible = isPanelVisible
@@ -61,11 +108,13 @@ import OSLog
     public func hidePanel(animated: Bool = true) {
         logger.trace("Hide panel")
 
-        requestHidePanel(animated: animated)
+        internalHidePanel(animated: animated)
     }
 
     private func requestShowPanel() {
         logger.trace(#function)
+
+        activateEventMonitors()
 
         delegate?.statusItemControllerWillShowPanel(self)
 
@@ -78,6 +127,32 @@ import OSLog
         delegate?.statusItemControllerWillHidePanel(self)
 
         delegate?.statusItemControllerDidRequestHidePanel(self, animated: animated)
+
+        invalidateEventMonitors()
+    }
+
+    private func internalHidePanel(animated: Bool = true) {
+        if #available(macOS 27, *), let expandedInterfaceSession {
+            logger.trace("\(#function, privacy: .public) requesting cancellation of expanded interface session")
+
+            /// Cancelling the expanded interface session takes care of invoking `requestHidePanel` via the delegate callback.
+            expandedInterfaceSession.cancel()
+        } else {
+            logger.trace("\(#function, privacy: .public) using legacy route")
+            requestHidePanel(animated: animated)
+        }
+    }
+
+    // MARK: - Expanded Interface Session
+
+    private var _expandedInterfaceSession: Any?
+    @available(macOS 27, *)
+    private var expandedInterfaceSession: NSStatusItemExpandedInterfaceSession? {
+        get { _expandedInterfaceSession as? NSStatusItemExpandedInterfaceSession }
+        set {
+            _expandedInterfaceSession = newValue
+            logger.trace("expandedInterfaceSession = \(newValue?.description ?? "<nil>", privacy: .public)")
+        }
     }
 }
 
