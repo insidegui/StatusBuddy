@@ -24,14 +24,13 @@ protocol LaunchAtLoginProvider: AnyObject {
 final class LaunchAtLoginHelper: LaunchAtLoginProvider {
     
     static let helperAppIdentifier = "tech.buddysoftware.StatusBuddyHelper"
+
+    // Keep using the existing helper so login items enabled by earlier app versions
+    // retain their registration without requiring the user to enable them again.
+    private let service = SMAppService.loginItem(identifier: helperAppIdentifier)
     
     func checkEnabled() -> Bool {
-        // Not actually deprecated according to the headers.
-        guard let jobDictsPtr = SMCopyAllJobDictionaries(kSMDomainUserLaunchd) else { return false }
-        
-        guard let dicts = jobDictsPtr.takeUnretainedValue() as? [[String: Any]] else { return false }
-        
-        return dicts.contains(where: { $0["Label"] as? String == Self.helperAppIdentifier })
+        service.status == .enabled
     }
     
     func setEnabled(_ enabled: Bool) -> LaunchAtLoginFailure? {
@@ -41,10 +40,15 @@ final class LaunchAtLoginHelper: LaunchAtLoginProvider {
         }
         #endif
         
-        if enabled {
-            return SMLoginItemSetEnabled(Self.helperAppIdentifier as CFString, true) ? nil : .enable
-        } else {
-            return SMLoginItemSetEnabled(Self.helperAppIdentifier as CFString, false) ? nil : .disable
+        do {
+            if enabled {
+                try service.register()
+            } else {
+                try service.unregister()
+            }
+            return nil
+        } catch {
+            return enabled ? .enable : .disable
         }
     }
     
