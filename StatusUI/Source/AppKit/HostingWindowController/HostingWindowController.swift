@@ -14,7 +14,11 @@ public final class HostingWindowController<Content>: NSWindowController, NSWindo
     /// Invoked shortly before the hosting window controller's window is closed.
     public var willClose: ((HostingWindowController<Content>) -> Void)?
 
-    public init(rootView: Content) {
+    public let requiresRegularActivationPolicy: Bool
+
+    public init(rootView: Content, requiresRegularActivationPolicy: Bool = false) {
+        self.requiresRegularActivationPolicy = requiresRegularActivationPolicy
+
         let window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: NSView.noIntrinsicMetric, height: NSView.noIntrinsicMetric),
             styleMask: [.titled, .closable],
@@ -43,17 +47,27 @@ public final class HostingWindowController<Content>: NSWindowController, NSWindo
     public required init?(coder: NSCoder) {
         fatalError()
     }
-    
+
+    private var activationPolicyAssertion: ActivationPolicyAssertion?
+
     public override func showWindow(_ sender: Any?) {
         super.showWindow(sender)
         
         window?.center()
+
+        if requiresRegularActivationPolicy {
+            activationPolicyAssertion = NSApplication.shared.requestRegularActivationPolicy()
+        }
     }
 
     public func windowWillClose(_ notification: Notification) {
         contentViewController = nil
         
         willClose?(self)
+
+        activationPolicyAssertion = nil
     }
-    
+
+    deinit { activationPolicyAssertion = nil }
+
 }

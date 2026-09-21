@@ -203,7 +203,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             rootView: PreferencesView()
                 .padding()
                 .environmentObject(preferences)
-                .environmentObject(updateController)
+                .environmentObject(updateController),
+            requiresRegularActivationPolicy: true
         )
         
         controller.showWindow(sender)
