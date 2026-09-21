@@ -23,7 +23,7 @@ struct DetailGroupItemView: View {
             HStack {
                 Text(item.title)
                     .font(.system(size: 13, weight: .medium))
-                    .foregroundColor(.primaryText)
+                    .foregroundStyle(.primary)
                 
                 Spacer()
                 
@@ -46,7 +46,7 @@ struct DetailGroupItemView: View {
                         .font(.system(size: 11))
                 }
             }
-            .foregroundColor(.secondaryText)
+            .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
     }
@@ -56,10 +56,13 @@ struct DetailGroupItemView: View {
             notificationManager.toggleNotificationsEnabled(for: item.id, in: group.scope)
         } label: {
             Image(systemName: "rectangle.fill.badge.checkmark")
-                .foregroundColor(notificationManager.hasNotificationsEnabled(for: item.id, in: group.scope) ? Color.accent : Color.primaryText)
+                .foregroundStyle(notificationManager.hasNotificationsEnabled(for: item.id, in: group.scope) ? Color.accent : Color.primaryText)
         }
-        .buttonStyle(PlainButtonStyle())
-        .accessibility(label: Text("Configure Notifications"))
+        .buttonStyle(.bordered)
+        .buttonBorderShape(.circle)
+        .accessibilityLabel("Configure Notifications")
+        .accessibilityValue(notificationManager.hasNotificationsEnabled(for: item.id, in: group.scope) ? "On" : "Off")
+        .help("Notify when this service is restored")
     }
 }
 
@@ -77,7 +80,7 @@ struct DetailGroupView: View {
                 Text(group.title)
                 Spacer()
             }
-            .foregroundColor(group.accentColor)
+            .foregroundStyle(group.accentColor)
             .font(.system(size: 11, weight: .medium))
             
             VStack(alignment: .leading, spacing: 10) {
@@ -85,22 +88,14 @@ struct DetailGroupView: View {
                     VStack {
                         DetailGroupItemView(for: item, in: group)
                         if item.id != group.items.last?.id {
-                            if #available(macOS 12.0, *) {
-                                Rectangle()
-                                    .frame(height: 0.5)
-                                    .foregroundStyle(.tertiary)
-                                    .opacity(0.3)
-                                    .accessibility(hidden: true)
-                            } else {
-                                Divider()
-                                    .foregroundColor(.groupSeparator)
-                            }
+                            Divider()
+                                .accessibilityHidden(true)
                         }
                     }
                 }
             }
         }
-        .statusItemBackground(padding: 10)
+        .statusItemBackground(padding: 14)
     }
 }
 
@@ -170,6 +165,7 @@ struct DetailGroupView_Previews: PreviewProvider {
             DetailGroupView(.activeIssuesPreview)
                 .preferredColorScheme(.dark)
         }
+        .environmentObject(NotificationManager())
     }
 }
 #endif

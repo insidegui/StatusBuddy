@@ -18,18 +18,20 @@ struct PreferencesView: View {
     @State private var isShowingLaunchAtLoginFailure = false
 
     var body: some View {
-        Form {
-            VStack(alignment: .leading, spacing: 12) {
-                Toggle("Launch StatusBuddy at login", isOn: .init(get: {
-                    preferences.isLaunchAtLoginEnabled
-                }, set: { isEnabled in
-                    if let failure = preferences.setLaunchAtLoginEnabled(to: isEnabled) {
-                        launchAtLoginFailure = failure
-                        isShowingLaunchAtLoginFailure = true
-                    }
-                }))
-                
-                VStack(alignment: .leading) {
+        VStack(spacing: 0) {
+            Form {
+                Section {
+                    Toggle("Launch StatusBuddy at login", isOn: .init(get: {
+                        preferences.isLaunchAtLoginEnabled
+                    }, set: { isEnabled in
+                        if let failure = preferences.setLaunchAtLoginEnabled(to: isEnabled) {
+                            launchAtLoginFailure = failure
+                            isShowingLaunchAtLoginFailure = true
+                        }
+                    }))
+                }
+
+                Section {
                     Toggle("Use time sensitive notifications", isOn: .init(get: {
                         preferences.enableTimeSensitiveNotifications
                     }, set: { isEnabled in
@@ -38,15 +40,13 @@ struct PreferencesView: View {
                     
                     Text("StatusBuddy will use time sensitive notifications to alert you when a system comes back online.")
                         .font(.callout)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(.bottom, 6)
-                        .frame(maxHeight: 50, alignment: .topLeading)
                 }
 
                 if updateController.isAvailable {
-                    VStack(alignment: .leading) {
+                    Section {
                         Toggle("Check for updates automatically", isOn: $updateController.automaticallyCheckForUpdates)
 
                         Button("Check Now") {
@@ -55,7 +55,8 @@ struct PreferencesView: View {
                     }
                 }
             }
-            
+            .formStyle(.grouped)
+
             HStack {
                 Spacer()
                 
@@ -64,9 +65,9 @@ struct PreferencesView: View {
                 }
                 .keyboardShortcut(.defaultAction)
             }
-            .padding(.top)
+            .padding([.horizontal, .bottom])
         }
-        .frame(maxWidth: 320)
+        .frame(width: 420, height: updateController.isAvailable ? 380 : 290)
         .windowTitle("StatusBuddy Preferences")
         .alert("Launch at Login", isPresented: $isShowingLaunchAtLoginFailure, presenting: launchAtLoginFailure) { _ in
             Button("System Settings") {
@@ -82,7 +83,6 @@ struct PreferencesView: View {
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         PreferencesView()
-            .padding()
             .environmentObject(Preferences.forPreviews)
             .environmentObject(UpdateController())
     }

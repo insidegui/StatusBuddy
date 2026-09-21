@@ -15,24 +15,33 @@ struct DashboardItemView: View {
     }
     
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             Image(systemName: item.iconName)
                 .font(.system(size: 16, weight: .medium, design: .rounded))
                 .frame(width: 40, height: 40, alignment: .center)
-                .foregroundColor(.white)
-                .background(Circle().foregroundColor(item.iconColor))
-                .accessibility(hidden: true)
+                .foregroundStyle(.white)
+                .background(Circle().foregroundStyle(item.iconColor))
+                .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 3) {
                 Text(item.title)
-                    .foregroundColor(.primaryText)
+                    .foregroundStyle(.primary)
                     .font(.headline)
                 Text(item.subtitle)
-                    .foregroundColor(item.subtitleColor)
+                    .foregroundStyle(item.subtitleColor)
                     .font(.subheadline)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .accessibilityElement(children: .combine)
+
+            Spacer(minLength: 0)
+
+            Image(systemName: "chevron.forward")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.tertiary)
+                .accessibilityHidden(true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .statusItemBackground()
+        .padding(14)
+        .contentShape(.rect(cornerRadius: 16))
     }
 }

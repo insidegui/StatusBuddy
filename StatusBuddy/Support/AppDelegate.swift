@@ -240,7 +240,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         let controller = HostingWindowController(
             rootView: PreferencesView()
-                .padding()
                 .environmentObject(preferences)
                 .environmentObject(updateController),
             requiresRegularActivationPolicy: true
