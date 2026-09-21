@@ -29,12 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private let preferences = Preferences()
     
-    private(set) lazy var rootViewModel: RootViewModel = {
-        RootViewModel(with: [
-            .developer: AppleStatusChecker(endpoint: .developerFeedURL, format: .JSONCallback),
-            .customer: AppleStatusChecker(endpoint: .consumerFeedURL, format: .JSON)
-        ])
-    }()
+    private(set) lazy var rootViewModel = RootViewModel.default
     
     private lazy var flowController: StatusBarFlowController = {
         StatusBarFlowController(

@@ -53,8 +53,7 @@ private struct DashboardContent: View {
                     } label: {
                         DashboardItemView(item)
                     }
-                    .buttonStyle(.bordered)
-                    .buttonBorderShape(.roundedRectangle(radius: 16))
+                    .buttonStyle(DashboardButtonStyle())
                 }
             case .loading:
                 ProgressView()
@@ -71,8 +70,24 @@ private struct DashboardContent: View {
     }
 }
 
+private struct DashboardButtonStyle: ButtonStyle {
+    @Environment(\.colorScheme) private var colorScheme
+
+    private var pressColor: Color { colorScheme == .dark ? .white : .black }
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(4)
+            .glassEffect(.regular.interactive().tint(configuration.isPressed ? pressColor.opacity(0.07) : nil), in: .containerRelative)
+    }
+}
+
 #if DEBUG
 #Preview("Dashboard") {
+    @Previewable @State var selectedItem: DashboardItem?
+    DashboardView(viewModel: .default, selectedItem: $selectedItem)
+}
+#Preview("Clean") {
     VStack(alignment: .leading, spacing: 12) {
         DashboardHeader(showSettings: {})
         DashboardContent(state: .loaded([

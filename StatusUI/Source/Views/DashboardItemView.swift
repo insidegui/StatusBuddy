@@ -20,18 +20,22 @@ struct DashboardItemView: View {
                 .font(.system(size: 16, weight: .medium, design: .rounded))
                 .frame(width: 40, height: 40, alignment: .center)
                 .foregroundStyle(.white)
-                .background(Circle().foregroundStyle(item.iconColor))
+                .glassEffect(.clear.tint(item.iconColor), in: Circle())
                 .accessibilityHidden(true)
+
             VStack(alignment: .leading, spacing: 3) {
                 Text(item.title)
                     .foregroundStyle(.primary)
-                    .font(.headline)
+                    .font(.headline.weight(.medium))
+
                 Text(item.subtitle)
                     .foregroundStyle(item.subtitleColor)
-                    .font(.subheadline)
+                    .font(.headline.weight(.regular))
+                    .minimumScaleFactor(0.9)
                     .fixedSize(horizontal: false, vertical: true)
             }
             .accessibilityElement(children: .combine)
+            .foregroundStyle(.primary, item.subtitleColor)
 
             Spacer(minLength: 0)
 
@@ -41,7 +45,7 @@ struct DashboardItemView: View {
                 .accessibilityHidden(true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(14)
+        .padding(8)
         .contentShape(.rect(cornerRadius: 16))
     }
 }

@@ -102,3 +102,10 @@ public final class RootViewModel: ObservableObject {
     }
     
 }
+
+public extension RootViewModel {
+    static let `default` = RootViewModel(with: [
+        .developer: AppleStatusChecker(endpoint: .developerFeedURL, format: .JSONCallback),
+        .customer: AppleStatusChecker(endpoint: .consumerFeedURL, format: .JSON)
+    ])
+}

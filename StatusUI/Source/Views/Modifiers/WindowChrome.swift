@@ -11,9 +11,14 @@ import SwiftUI
 private struct WindowChromeModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .glassEffect(.regular, in: .rect(cornerRadius: 24))
+            .containerShape(shape)
+            .glassEffect(.regular, in: shape)
             // Leave room for the system-rendered glass shadow in the transparent panel.
             .padding(RootView.chromeShadowPadding)
+    }
+
+    private var shape: RoundedRectangle {
+        RoundedRectangle(cornerRadius: 32)
     }
 }
 
