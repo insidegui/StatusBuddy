@@ -72,17 +72,11 @@ struct DetailGroupView: View {
     init(_ group: DetailGroup) {
         self.group = group
     }
-    
+
+    @Namespace private var namespace
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack(spacing: 2) {
-                Image(systemName: group.iconName)
-                Text(group.title)
-                Spacer()
-            }
-            .foregroundStyle(group.accentColor)
-            .font(.system(size: 11, weight: .medium))
-            
+        Section {
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(group.items) { item in
                     VStack {
@@ -94,8 +88,19 @@ struct DetailGroupView: View {
                     }
                 }
             }
+            .padding(12)
+        } header: {
+            HStack(spacing: 2) {
+                Text(group.title)
+                Spacer()
+                Image(systemName: group.iconName)
+            }
+            .font(.headline.weight(.medium))
+//            .foregroundStyle(group.accentColor)
+            .padding(12)
+            .glassEffect(.clear.tint(group.accentColor), in: .containerRelative)
+            .glassEffectTransition(.materialize)
         }
-        .statusItemBackground(padding: 14)
     }
 }
 
@@ -152,20 +157,17 @@ extension DetailGroup {
     }()
 }
 
-struct DetailGroupView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            DetailGroupView(.recentIssuesPreview)
-                .preferredColorScheme(.light)
-            DetailGroupView(.recentIssuesPreview)
-                .preferredColorScheme(.dark)
-            
-            DetailGroupView(.activeIssuesPreview)
-                .preferredColorScheme(.light)
-            DetailGroupView(.activeIssuesPreview)
-                .preferredColorScheme(.dark)
-        }
+#Preview("Recent Issues") {
+    DetailView(viewModel: .preview, scope: .customer, groups: [.recentIssuesPreview])
         .environmentObject(NotificationManager())
-    }
+        .windowChrome()
+        .contentMargins(12, for: .scrollContent)
+}
+
+#Preview("Active Issues") {
+    DetailView(viewModel: .preview, scope: .customer, groups: [.activeIssuesPreview])
+        .environmentObject(NotificationManager())
+        .windowChrome()
+        .contentMargins(12, for: .scrollContent)
 }
 #endif

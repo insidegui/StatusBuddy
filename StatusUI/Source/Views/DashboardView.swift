@@ -12,29 +12,71 @@ struct DashboardView: View {
     @Binding var selectedItem: DashboardItem?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            DashboardHeader(showSettings: viewModel.showSettingsMenu)
-            DashboardContent(state: viewModel.dashboard.state, selectedItem: $selectedItem)
+        GlassEffectContainer {
+            VStack(alignment: .leading, spacing: 12) {
+                DashboardHeader()
+
+                if let selectedItem {
+                    DetailView(
+                        viewModel: viewModel,
+                        scope: selectedItem.scope,
+                        groups: viewModel.details[selectedItem.scope]?.groups ?? []
+                    )
+                    .frame(minHeight: 323, maxHeight: .infinity, alignment: .topLeading)
+                } else {
+                    DashboardContent(state: viewModel.dashboard.state, selectedItem: $selectedItem)
+                }
+            }
+            .padding(16)
         }
-        .padding(16)
+        .animation(.default, value: selectedItem?.id)
     }
 }
 
 private struct DashboardHeader: View {
-    let showSettings: () -> Void
+    @EnvironmentObject private var viewModel: RootViewModel
 
     var body: some View {
         HStack {
-            Text("StatusBuddy")
-                .font(.system(.headline, design: .rounded))
+            Group {
+                if let selectedItem = viewModel.selectedDashboardItem {
+                    BackButton {
+                        viewModel.selectedDashboardItem = nil
+                    }
+
+                    Text(selectedItem.scope.title)
+                        .font(.system(.headline, design: .rounded))
+                } else {
+                    Text("StatusBuddy")
+                        .font(.system(.headline, design: .rounded))
+                }
+            }
+            .transition(.blurReplace)
+
             Spacer()
-            Button(action: showSettings) {
+
+            Button(action: viewModel.showSettingsMenu) {
                 Label("Settings", systemImage: "gearshape")
                     .labelStyle(.iconOnly)
             }
             .buttonStyle(.bordered)
             .buttonBorderShape(.circle)
             .help("Settings")
+        }
+    }
+
+    struct BackButton: View {
+        let goBack: () -> ()
+        
+        var body: some View {
+            Button(action: goBack) {
+                Label("Back", systemImage: "chevron.backward")
+                    .labelStyle(.iconOnly)
+            }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.circle)
+            .keyboardShortcut("[", modifiers: .command)
+            .help("Back")
         }
     }
 }

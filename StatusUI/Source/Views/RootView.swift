@@ -15,32 +15,19 @@ struct RootView: View {
     static let minWidth: CGFloat = 346
     
     var body: some View {
-        Group {
-            if let selectedItem = viewModel.selectedDashboardItem {
-                DetailView(
-                    viewModel: viewModel,
-                    scope: selectedItem.scope,
-                    groups: viewModel.details[selectedItem.scope]?.groups ?? []
-                )
-                    .frame(minWidth: Self.minWidth, maxWidth: .infinity, minHeight: 323, maxHeight: .infinity, alignment: .topLeading)
-            } else {
-                DashboardView(
-                    viewModel: viewModel,
-                    selectedItem: $viewModel.selectedDashboardItem
-                )
-                    .frame(minWidth: Self.minWidth, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            }
-        }
+        DashboardView(
+            viewModel: viewModel,
+            selectedItem: $viewModel.selectedDashboardItem
+        )
+        .frame(minWidth: Self.minWidth, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .windowChrome()
-        .onAppear {
-            viewModel.startPeriodicUpdates()
-        }
+        .task { viewModel.startPeriodicUpdates() }
     }
 }
 
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView()
-            .environmentObject(RootViewModel(with: [:]))
-    }
+#if DEBUG
+#Preview {
+    RootView()
+        .environmentObject(RootViewModel.preview)
 }
+#endif

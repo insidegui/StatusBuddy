@@ -14,43 +14,13 @@ struct DetailView: View {
     let groups: [DetailGroup]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            DetailHeader(title: scope.title) {
-                viewModel.selectedDashboardItem = nil
-            }
-
-            ScrollView {
-                VStack(alignment: .leading, spacing: 12) {
-                    ForEach(groups) { group in
-                        DetailGroupView(group)
-                    }
+        ScrollView(.vertical) {
+            LazyVStack(alignment: .leading, spacing: 8, pinnedViews: .sectionHeaders) {
+                ForEach(groups) { group in
+                    DetailGroupView(group)
                 }
-                .padding()
             }
         }
-    }
-}
-
-private struct DetailHeader: View {
-    let title: String
-    let goBack: () -> Void
-
-    var body: some View {
-        HStack(spacing: 10) {
-            Button(action: goBack) {
-                Label("Back", systemImage: "chevron.backward")
-                    .labelStyle(.iconOnly)
-            }
-            .buttonStyle(.bordered)
-            .buttonBorderShape(.circle)
-            .keyboardShortcut("[", modifiers: .command)
-            .help("Back")
-
-            Text(title)
-                .font(.system(.headline, design: .rounded))
-            Spacer(minLength: 0)
-        }
-        .padding([.top, .horizontal], 16)
     }
 }
 
