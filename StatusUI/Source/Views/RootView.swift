@@ -11,7 +11,7 @@ import SwiftUI
 struct RootView: View {
     @EnvironmentObject var viewModel: RootViewModel
     
-    static let topPaddingToAccomodateShadow: CGFloat = 26
+    static let chromeShadowPadding: CGFloat = 64
     static let minWidth: CGFloat = 346
     
     var body: some View {

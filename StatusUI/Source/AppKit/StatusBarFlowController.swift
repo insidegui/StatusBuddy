@@ -12,7 +12,7 @@ import StatusCore
 
 public final class StatusBarFlowController: NSViewController {
     
-    public static var topMargin: CGFloat { RootView.topPaddingToAccomodateShadow }
+    public static var topMargin: CGFloat { RootView.chromeShadowPadding }
     
     private lazy var rootView: NSView = {
         let v = RootView()

@@ -13,7 +13,7 @@ private struct WindowChromeModifier: ViewModifier {
         content
             .glassEffect(.regular, in: .rect(cornerRadius: 24))
             // Leave room for the system-rendered glass shadow in the transparent panel.
-            .padding(RootView.topPaddingToAccomodateShadow)
+            .padding(RootView.chromeShadowPadding)
     }
 }
 
