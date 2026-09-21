@@ -226,7 +226,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 }
 
-
 extension AppDelegate: StatusItemControllerDelegate {
     func statusItemControllerIsPanelVisible(_ controller: StatusItemController) -> Bool {
         windowController.window?.isVisible == true

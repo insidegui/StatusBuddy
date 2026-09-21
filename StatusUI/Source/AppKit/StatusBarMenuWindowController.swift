@@ -8,6 +8,7 @@
 import AppKit
 import os.log
 
+@MainActor
 public final class StatusBarMenuWindowController: NSWindowController {
     
     private let log = OSLog(subsystem: StatusUI.subsystemName, category: String(describing: StatusBarMenuWindowController.self))
@@ -22,7 +23,7 @@ public final class StatusBarMenuWindowController: NSWindowController {
         self.statusItem = statusItem
         self.topMargin = topMargin
         
-        let window = StatusBarMenuWindow(statusItem: statusItem)
+        let window = StatusBarMenuPanel(statusItem: statusItem)
         window.contentViewController = contentViewController
 
         super.init(window: window)
@@ -34,9 +35,13 @@ public final class StatusBarMenuWindowController: NSWindowController {
     public required init?(coder: NSCoder) {
         fatalError()
     }
-    
+
+    /// Tracks show / hide requests to prevent race conditions caused by rapid repeated calls to `showWindow` and `close(animated:)`.
+    private var visibilityToken: UUID?
+
     public override func showWindow(_ sender: Any?) {
-        NSApp.activate(ignoringOtherApps: true)
+        /// Reset token so that a racing call to `close(animated:)` doesn't actually close the window.
+        visibilityToken = nil
 
         repositionWindow()
         
@@ -54,9 +59,20 @@ public final class StatusBarMenuWindowController: NSWindowController {
             super.close()
             return
         }
-        
+
+        let token = UUID()
+        visibilityToken = token
+
         NSAnimationContext.beginGrouping()
         NSAnimationContext.current.completionHandler = {
+            guard self.visibilityToken == token else {
+                os_log("Close cancelled by visibility token race", log: self.log, type: .debug)
+                self.window?.alphaValue = 1
+                return
+            }
+
+            self.visibilityToken = nil
+
             super.close()
         }
         window?.animator().alphaValue = 0
@@ -116,7 +132,9 @@ public final class StatusBarMenuWindowController: NSWindowController {
         guard let controller = contentViewController else { return }
         
         contentSizeObservation = controller.observe(\.preferredContentSize, options: [.initial, .new]) { [weak self] controller, _ in
-            self?.updateForNewContentSize(from: controller)
+            MainActor.assumeIsolated {
+                self?.updateForNewContentSize(from: controller)
+            }
         }
     }
     
@@ -148,12 +166,12 @@ extension StatusBarMenuWindowController: NSWindowDelegate {
     
 }
 
-private final class StatusBarMenuWindow: NSWindow {
-    
+private final class StatusBarMenuPanel: NSPanel {
+
     convenience init(statusItem: NSStatusItem?) {
         self.init(
             contentRect: NSRect(x: 0, y: 0, width: 0, height: 0),
-            styleMask: [.fullSizeContentView, .borderless],
+            styleMask: [.fullSizeContentView, .borderless, .nonactivatingPanel],
             backing: .buffered,
             defer: false,
             screen: statusItem?.button?.window?.screen
@@ -166,6 +184,7 @@ private final class StatusBarMenuWindow: NSWindow {
         isOpaque = false
         backgroundColor = .clear
         hasShadow = false
+        hidesOnDeactivate = false
     }
     
     override var acceptsFirstResponder: Bool { true }
