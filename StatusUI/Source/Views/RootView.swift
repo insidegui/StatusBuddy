@@ -29,5 +29,6 @@ struct RootView: View {
 #Preview {
     RootView()
         .environmentObject(RootViewModel.preview)
+        .frame(width: 600, height: 800, alignment: .top)
 }
 #endif
