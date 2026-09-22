@@ -39,21 +39,36 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         #endif
     }()
 
-    private lazy var flowController: StatusBarFlowController = {
-        StatusBarFlowController(
-            viewModel: rootViewModel,
-            notificationManager: notificationManager
-        )
-    }()
-     
-    private lazy var windowController: StatusBarMenuWindowController = {
+    private var windowController: StatusBarMenuWindowController?
+
+    private func _makeWindowController() -> StatusBarMenuWindowController {
         StatusBarMenuWindowController(
             statusItem: statusItem,
-            contentViewController: flowController,
+            contentViewController: StatusBarFlowController(
+                viewModel: rootViewModel,
+                notificationManager: notificationManager
+            ),
             topMargin: StatusBarFlowController.topMargin
         )
-    }()
-    
+    }
+
+    private func ensureWindowController() -> StatusBarMenuWindowController {
+        let controller: StatusBarMenuWindowController
+        if let windowController {
+            controller = windowController
+        } else {
+            controller = _makeWindowController()
+            windowController = controller
+            controller.windowWillClose = { [weak self] closingController in
+                guard let self else { return }
+                guard closingController === self.windowController else { return }
+                logger.trace("Window controller will close window: \(closingController)")
+                self.windowController = nil
+            }
+        }
+        return controller
+    }
+
     private lazy var notificationManager = NotificationManager()
 
     private lazy var statusItemController = StatusItemController(statusItem: statusItem, delegate: self)
@@ -148,7 +163,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func toggleUI(_ sender: Any?) {
         logger.notice(#function)
 
-        if windowController.window?.isVisible == true {
+        if windowController?.window?.isVisible == true {
             hideUI(sender: sender)
         } else {
             showUI(sender: sender)
@@ -167,7 +182,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if #unavailable(macOS 27) {
             guard !navigateBackInResponseToStatusItemClick() else {
                 /// Button can have its highlight state reset because user clicked on it, bring it back to highlighted state.
-                windowController.highlightStatusItem()
+                windowController?.highlightStatusItem()
                 return
             }
         }
@@ -204,7 +219,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         /// This is currently only used for menu bar unlock in macOS versions before macOS 27.
         guard #unavailable(macOS 27) else { return .terminateNow }
 
-        windowController.unlockMenuBar()
+        windowController?.unlockMenuBar()
 
         /// Give the app enough time to deliver the menu bar unlocking notification to the system.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
@@ -272,15 +287,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: StatusItemControllerDelegate {
     func statusItemControllerIsPanelVisible(_ controller: StatusItemController) -> Bool {
-        windowController.window?.isVisible == true
+        windowController?.window?.isVisible == true
     }
 
     func statusItemControllerDidRequestShowPanel(_ controller: StatusItemController) {
-        windowController.showWindow(self)
+        ensureWindowController().showWindow(self)
     }
 
     func statusItemControllerDidRequestHidePanel(_ controller: StatusItemController, animated: Bool) {
-        windowController.close(animated: animated)
+        windowController?.close(animated: animated)
     }
 
     func statusItemControllerWillShowPanel(_ controller: StatusItemController) {

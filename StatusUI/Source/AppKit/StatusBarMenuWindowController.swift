@@ -15,8 +15,8 @@ public final class StatusBarMenuWindowController: NSWindowController {
     
     public let statusItem: NSStatusItem?
     
-    public var windowWillClose: () -> Void = { }
-    
+    public var windowWillClose: (_ controller: StatusBarMenuWindowController) -> () = { _ in }
+
     let topMargin: CGFloat
 
     public init(statusItem: NSStatusItem?, contentViewController: NSViewController, topMargin: CGFloat = 0) {
@@ -29,6 +29,7 @@ public final class StatusBarMenuWindowController: NSWindowController {
         super.init(window: window)
         
         window.delegate = self
+        window.isReleasedWhenClosed = false
         setupContentSizeObservation()
     }
     
@@ -165,7 +166,10 @@ public final class StatusBarMenuWindowController: NSWindowController {
 extension StatusBarMenuWindowController: NSWindowDelegate {
     
     public func windowWillClose(_ notification: Notification) {
-        windowWillClose()
+        windowWillClose(self)
+
+        /// Prevents cycles or retention of SwiftUI content/environment.
+        window?.contentView = nil
     }
     
     public func windowDidBecomeKey(_ notification: Notification) {
