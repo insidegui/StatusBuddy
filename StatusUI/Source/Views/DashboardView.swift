@@ -1,45 +1,40 @@
 import SwiftUI
 
 struct DashboardView: View {
+    static var padding: Double { 16 }
+
     let viewModel: RootViewModel
-    var maximumHeight: CGFloat = 560
     @State private var category = ServiceCategory.all
-    @State private var controlsHeight: CGFloat = 72
-    @State private var footerHeight: CGFloat = 16
+
+    private static let enableCategoryPicker = UserDefaults.standard.bool(forKey: "SBEnableCategoryPicker")
 
     var body: some View {
-        VStack(spacing: 12) {
+        DashboardContent(
+            viewModel: viewModel,
+            category: category
+        )
+        .frame(maxWidth: .infinity)
+        .padding(Self.padding)
+        .safeAreaInset(edge: .top, spacing: -Self.padding) {
             VStack(spacing: 12) {
                 DashboardHeader(viewModel: viewModel)
 
-                Picker(selection: $category) {
-                    ForEach(ServiceCategory.allCases) { category in
-                        Text(category.title).tag(category)
+                if Self.enableCategoryPicker {
+                    Picker(selection: $category) {
+                        ForEach(ServiceCategory.allCases) { category in
+                            Text(category.title).tag(category)
+                        }
+                    } label: {
+                        Text("Service category", bundle: .statusUI)
                     }
-                } label: {
-                    Text("Service category", bundle: .statusUI)
+                    .pickerStyle(.segmented)
+                    .labelsHidden()
                 }
-                .pickerStyle(.segmented)
-                .labelsHidden()
             }
-            .onGeometryChange(for: CGFloat.self) { $0.size.height } action: {
-                controlsHeight = $0
-            }
-
-            // Reserve the measured chrome, two 12-point gaps, and 16-point outer insets.
-            DashboardContent(
-                viewModel: viewModel,
-                category: category,
-                maximumHeight: max(1, maximumHeight - controlsHeight - footerHeight - 56)
-            )
-                .frame(maxWidth: .infinity)
-
-            DashboardFooter(lastUpdated: viewModel.lastUpdated)
-                .onGeometryChange(for: CGFloat.self) { $0.size.height } action: {
-                    footerHeight = $0
-                }
+            .padding([.top, .leading, .trailing], Self.padding)
+            .padding(.bottom, Self.padding / 2)
+//            .background(Color.red, in: .rect)
         }
-        .padding(16)
     }
 }
 
@@ -83,8 +78,6 @@ private struct DashboardHeader: View {
 private struct DashboardContent: View {
     let viewModel: RootViewModel
     let category: ServiceCategory
-    let maximumHeight: CGFloat
-    @State private var contentHeight: CGFloat = 180
 
     var body: some View {
         ScrollView {
@@ -106,14 +99,7 @@ private struct DashboardContent: View {
                 }
             }
             .padding(.vertical, 12)
-            .onGeometryChange(for: CGFloat.self) { geometry in
-                geometry.size.height
-            } action: { height in
-                contentHeight = height
-            }
         }
-        .frame(height: min(maximumHeight, contentHeight))
-        .scrollBounceBehavior(.basedOnSize)
         .id(category)
     }
 }
@@ -413,7 +399,7 @@ private struct DashboardFooter: View {
 #if DEBUG
 import StatusCore
 
-#Preview("Category tabs") {
+#Preview("Root") {
     DashboardView(viewModel: try! .preview(with: [
         .customer: .customerNoIssues(), .developer: .developerNoIssues()
     ]))

@@ -12,6 +12,7 @@ private struct WindowChromeModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .containerShape(shape)
+            .clipShape(shape)
             .glassEffect(.regular, in: shape)
             // Leave room for the system-rendered glass shadow in the transparent panel.
             .padding(RootView.chromeShadowPadding)

@@ -23,7 +23,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
 
-    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    private lazy var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
     private let preferences = Preferences()
     
@@ -73,6 +73,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var statusItemController = StatusItemController(statusItem: statusItem, delegate: self)
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        #if DEBUG
+        /// Don't want status item or any other background activity to run in previews.
+        guard !ProcessInfo.isSwiftUIPreview else { return }
+        #endif
+
         logger.debug(#function)
 
         updateButton()

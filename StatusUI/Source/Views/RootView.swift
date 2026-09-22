@@ -18,13 +18,10 @@ public struct RootView: View {
     public init() { }
 
     public var body: some View {
-        DashboardView(
-            viewModel: viewModel,
-            maximumHeight: min(560, max(1, geometry.maximumContentHeight - Self.chromeShadowPadding * 2))
-        )
-        .frame(width: Self.minWidth)
-        .windowChrome()
-        .task { viewModel.startPeriodicUpdates() }
+        DashboardView(viewModel: viewModel)
+            .frame(minWidth: Self.minWidth, maxWidth: Self.minWidth, minHeight: nil, maxHeight: geometry.maximumContentHeight)
+            .windowChrome()
+            .task { viewModel.startPeriodicUpdates() }
     }
 }
 

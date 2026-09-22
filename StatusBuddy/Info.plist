@@ -26,8 +26,6 @@
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
-	<key>LSMultipleInstancesProhibited</key>
-	<true/>
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSAccentColorName</key>
