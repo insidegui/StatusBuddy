@@ -35,6 +35,7 @@ public struct RootView: View {
     RootView()
         .environment(RootViewModel.preview)
         .environment(WindowGeometry(layout: .default))
+        .environment(NotificationManager())
         .frame(width: 600, height: 800, alignment: .top)
 }
 #endif
