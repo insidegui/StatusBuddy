@@ -42,15 +42,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var windowController: StatusBarMenuWindowController?
 
     private func _makeWindowController() -> StatusBarMenuWindowController {
-        let hostingController = NSHostingController(rootView: RootView()
-            .environment(rootViewModel)
-            .environment(notificationManager))
-        hostingController.sceneBridgingOptions = .all
-        hostingController.sizingOptions = [.minSize, .maxSize, .preferredContentSize]
-
         return StatusBarMenuWindowController(
             statusItem: statusItem,
-            contentViewController: hostingController,
+            rootView: RootView()
+                .environment(rootViewModel)
+                .environment(notificationManager),
             topMargin: RootView.chromeShadowPadding
         )
     }

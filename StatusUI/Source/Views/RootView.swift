@@ -10,9 +10,10 @@ import SwiftUI
 
 public struct RootView: View {
     @Environment(RootViewModel.self) private var viewModel
-    
+    @Environment(WindowGeometry.self) private var geometry
+
     public static let chromeShadowPadding: CGFloat = 64
-    public static let minWidth: CGFloat = 346
+    public static let minWidth: CGFloat = 400
 
     public init() { }
 
@@ -23,7 +24,7 @@ public struct RootView: View {
             viewModel: viewModel,
             selectedItem: $viewModel.selectedDashboardItem
         )
-        .frame(minWidth: Self.minWidth, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .frame(minWidth: Self.minWidth, maxWidth: Self.minWidth, maxHeight: geometry.maximumContentHeight, alignment: .topLeading)
         .windowChrome()
         .task { viewModel.startPeriodicUpdates() }
     }
@@ -33,6 +34,7 @@ public struct RootView: View {
 #Preview {
     RootView()
         .environment(RootViewModel.preview)
+        .environment(WindowGeometry(layout: .default))
         .frame(width: 600, height: 800, alignment: .top)
 }
 #endif

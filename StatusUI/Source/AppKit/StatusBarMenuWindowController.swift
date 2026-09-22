@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import SwiftUI
 import OSLog
 
 @MainActor
@@ -18,22 +19,28 @@ public final class StatusBarMenuWindowController: NSWindowController {
     public var windowWillClose: (_ controller: StatusBarMenuWindowController) -> () = { _ in }
 
     let topMargin: CGFloat
+    let geometry: WindowGeometry
 
     private var panel: StatusBarMenuPanel? { window as? StatusBarMenuPanel }
 
-    public init(statusItem: NSStatusItem?, contentViewController: NSViewController, topMargin: CGFloat = 0) {
+    private var screenParametersObservation: Any?
+
+    public init<RootView>(statusItem: NSStatusItem?, rootView: RootView, topMargin: CGFloat = 0) where RootView: View {
         self.statusItem = statusItem
         self.topMargin = topMargin
-        
+        self.geometry = WindowGeometry(layout: .default)
+
+        let hostingController = NSHostingController(rootView: rootView.environment(geometry))
+        hostingController.sceneBridgingOptions = .all
+        hostingController.sizingOptions = [.minSize, .maxSize, .preferredContentSize]
+
         let panel = StatusBarMenuPanel(statusItem: statusItem)
-        panel.contentViewController = contentViewController
+        panel.contentViewController = hostingController
 
         super.init(window: panel)
         
         panel.delegate = self
         panel.isReleasedWhenClosed = false
-
-        trackContentSize()
     }
     
     public required init?(coder: NSCoder) {
@@ -46,7 +53,29 @@ public final class StatusBarMenuWindowController: NSWindowController {
     /// Tracks show / hide requests to prevent race conditions caused by rapid repeated calls to `showWindow` and `close(animated:)`.
     private var visibilityToken: UUID?
 
+    private func createObservationsIfNeeded() {
+        guard screenParametersObservation == nil else { return }
+
+        trackContentSize()
+
+        screenParametersObservation = NotificationCenter.default.addObserver(forName: NSApplication.didChangeScreenParametersNotification, object: nil, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated { [weak self] in
+                guard let self, let window else { return }
+                geometry.update(window: window)
+            }
+        }
+    }
+
+    private func teardownObservations() {
+        if let screenParametersObservation {
+            NotificationCenter.default.removeObserver(screenParametersObservation)
+            self.screenParametersObservation = nil
+        }
+    }
+
     public override func showWindow(_ sender: Any?) {
+        createObservationsIfNeeded()
+
         /// Reset token so that a racing call to `close(animated:)` doesn't actually close the window.
         visibilityToken = nil
 
@@ -62,6 +91,8 @@ public final class StatusBarMenuWindowController: NSWindowController {
     }
 
     public func close(animated: Bool) {
+        teardownObservations()
+
         guard animated else {
             super.close()
             return
