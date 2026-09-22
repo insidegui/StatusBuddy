@@ -8,10 +8,12 @@
 
 import Foundation
 import StatusCore
-import Combine
+import Observation
 import OSLog
 
-public final class NotificationManager: ObservableObject {
+@MainActor
+@Observable
+public final class NotificationManager {
     
     public struct Registration: Identifiable, Hashable {
         public var id: String { serviceName }
@@ -21,21 +23,16 @@ public final class NotificationManager: ObservableObject {
     
     private let logger = Logger(subsystem: StatusUI.subsystemName, category: String(describing: NotificationManager.self))
     
-    private lazy var cancellables = Set<AnyCancellable>()
-
-    @Published public var latestResponses: [ServiceScope: StatusResponse] = [:]
+    public var latestResponses: [ServiceScope: StatusResponse] = [:] {
+        didSet { processUpdatedResponses(latestResponses, oldValue: oldValue) }
+    }
     
-    @Published public private(set) var registrations: [Registration] = []
+    public private(set) var registrations: [Registration] = []
     
     public let presenter: NotificationPresenter
     
     public init(with presenter: NotificationPresenter = DefaultNotificationPresenter()) {
         self.presenter = presenter
-        
-        $latestResponses.sink { [weak self] newResponses in
-            guard let self = self else { return }
-            self.processUpdatedResponses(newResponses, oldValue: self.latestResponses)
-        }.store(in: &cancellables)
     }
     
     public func hasNotificationsEnabled(for serviceName: String, in scope: ServiceScope) -> Bool {

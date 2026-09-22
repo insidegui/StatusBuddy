@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DetailGroupItemView: View {
-    @EnvironmentObject var notificationManager: NotificationManager
+    @Environment(NotificationManager.self) private var notificationManager
     
     let item: DetailGroupItem
     let group: DetailGroup
@@ -159,14 +159,14 @@ extension DetailGroup {
 
 #Preview("Recent Issues") {
     DetailView(viewModel: .preview, scope: .customer, groups: [.recentIssuesPreview])
-        .environmentObject(NotificationManager())
+        .environment(NotificationManager())
         .windowChrome()
         .contentMargins(12, for: .scrollContent)
 }
 
 #Preview("Active Issues") {
     DetailView(viewModel: .preview, scope: .customer, groups: [.activeIssuesPreview])
-        .environmentObject(NotificationManager())
+        .environment(NotificationManager())
         .windowChrome()
         .contentMargins(12, for: .scrollContent)
 }

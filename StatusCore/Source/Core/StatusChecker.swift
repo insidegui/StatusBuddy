@@ -7,10 +7,6 @@
 //
 
 import Foundation
-import Combine
-
-public typealias StatusResponsePublisher = AnyPublisher<StatusResponse, Error>
-
-public protocol StatusChecker {
-    func check() -> StatusResponsePublisher
+public protocol StatusChecker: Sendable {
+    func check() async throws -> StatusResponse
 }

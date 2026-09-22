@@ -16,8 +16,8 @@ public final class StatusBarFlowController: NSViewController {
     
     private lazy var rootView: NSView = {
         let v = RootView()
-            .environmentObject(viewModel)
-            .environmentObject(notificationManager)
+            .environment(viewModel)
+            .environment(notificationManager)
         
         return NSHostingView(rootView: v)
     }()

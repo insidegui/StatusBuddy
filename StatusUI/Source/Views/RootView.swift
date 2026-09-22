@@ -9,12 +9,14 @@
 import SwiftUI
 
 struct RootView: View {
-    @EnvironmentObject var viewModel: RootViewModel
+    @Environment(RootViewModel.self) private var viewModel
     
     static let chromeShadowPadding: CGFloat = 64
     static let minWidth: CGFloat = 346
     
     var body: some View {
+        @Bindable var viewModel = viewModel
+
         DashboardView(
             viewModel: viewModel,
             selectedItem: $viewModel.selectedDashboardItem
@@ -28,7 +30,7 @@ struct RootView: View {
 #if DEBUG
 #Preview {
     RootView()
-        .environmentObject(RootViewModel.preview)
+        .environment(RootViewModel.preview)
         .frame(width: 600, height: 800, alignment: .top)
 }
 #endif

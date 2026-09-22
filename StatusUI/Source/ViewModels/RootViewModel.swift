@@ -7,27 +7,27 @@
 //
 
 import Foundation
-import Combine
+import Observation
 import OSLog
 import StatusCore
 
-public final class RootViewModel: ObservableObject {
+@MainActor
+@Observable
+public final class RootViewModel {
     
-    @Published public var selectedDashboardItem: DashboardItem?
-    @Published public private(set) var latestResponses: [ServiceScope: StatusResponse] = [:]
-    @Published private(set) var dashboard = DashboardViewModel()
-    @Published private(set) var details: [ServiceScope: DetailViewModel] = [:]
-    @Published public private(set) var hasActiveIssues = false
+    public var selectedDashboardItem: DashboardItem?
+    public private(set) var latestResponses: [ServiceScope: StatusResponse] = [:]
+    private(set) var dashboard = DashboardViewModel()
+    private(set) var details: [ServiceScope: DetailViewModel] = [:]
+    public private(set) var hasActiveIssues = false
     
-    public var showSettingsMenu: () -> Void = { }
+    @ObservationIgnored public var showSettingsMenu: () -> Void = { }
     
     private let logger = Logger(subsystem: StatusUI.subsystemName, category: String(describing: RootViewModel.self))
     
     let checkers: [ServiceScope: StatusChecker]
     let updateInterval: TimeInterval
     
-    private lazy var cancellables = Set<AnyCancellable>()
-
     private static var deafultRefreshInterval: TimeInterval {
         if let refreshStr = UserDefaults.standard.string(forKey: "SBRefreshInterval"), let refreshInt = Int(refreshStr) {
             return TimeInterval(refreshInt)
@@ -41,8 +41,6 @@ public final class RootViewModel: ObservableObject {
     {
         self.checkers = checkers
         self.updateInterval = Self.deafultRefreshInterval
-        
-        $latestResponses.map({ $0.values.contains(where: { $0.hasActiveEvents }) }).assign(to: &$hasActiveIssues)
     }
 
     private var updateTimer: Timer?
@@ -53,7 +51,9 @@ public final class RootViewModel: ObservableObject {
         logger.debug("\(#function, privacy: .public)")
 
         updateTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true, block: { [weak self] _ in
-            self?.refresh(nil)
+            Task { @MainActor in
+                self?.refresh(nil)
+            }
         })
         updateTimer?.tolerance = updateInterval / 3
         
@@ -67,37 +67,39 @@ public final class RootViewModel: ObservableObject {
         updateTimer = nil
     }
     
-    private var inFlightRefresh: Cancellable?
+    @ObservationIgnored private var inFlightRefresh: Task<Void, Never>?
     
     public func refresh(_ completion: (() -> Void)? = nil) {
         logger.debug("\(#function, privacy: .public)")
         
         inFlightRefresh?.cancel()
-        inFlightRefresh = nil
-        
-        let publishers = checkers.map { scope, checker in
-            checker.check().map { (scope, $0) }
-        }
-        
-        inFlightRefresh = Publishers.MergeMany(publishers).collect().sink { [weak self] result in
-            guard let self = self else { return }
-            
-            if case .failure(let error) = result {
+        inFlightRefresh = Task { [weak self, checkers] in
+            do {
+                let results = try await withThrowingTaskGroup(of: (ServiceScope, StatusResponse).self) { group in
+                    for (scope, checker) in checkers {
+                        group.addTask { (scope, try await checker.check()) }
+                    }
+                    return try await group.reduce(into: []) { $0.append($1) }
+                }
+
+                guard let self, !Task.isCancelled else { return }
+
+                for (scope, response) in results {
+                    latestResponses[scope] = response
+                    details[scope] = DetailViewModel(with: response, in: scope)
+                }
+
+                hasActiveIssues = latestResponses.values.contains(where: \.hasActiveEvents)
+                dashboard = DashboardViewModel(with: latestResponses)
+            } catch is CancellationError {
+                return
+            } catch {
+                guard let self else { return }
                 logger.error("Status check failed with error: \(String(describing: error), privacy: .public)")
-                
-                self.dashboard = DashboardViewModel(with: .failure(String(describing: error)))
-            }
-            
-            completion?()
-        } receiveValue: { [weak self] results in
-            guard let self = self else { return }
-            
-            results.forEach { scope, response in
-                self.latestResponses[scope] = response
-                self.details[scope] = DetailViewModel(with: response, in: scope)
+                dashboard = DashboardViewModel(with: .failure(String(describing: error)))
             }
 
-            self.dashboard = DashboardViewModel(with: self.latestResponses)
+            completion?()
         }
     }
     

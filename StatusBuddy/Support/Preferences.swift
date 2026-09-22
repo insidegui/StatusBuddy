@@ -7,9 +7,11 @@
 //
 
 import Foundation
-import Combine
+import Observation
 
-final class Preferences: ObservableObject {
+@Observable
+@MainActor
+final class Preferences {
     
     static let forPreviews = Preferences(defaults: UserDefaults(), launchAtLogin: PreviewLaunchAtLoginProvider())
 
@@ -27,6 +29,7 @@ final class Preferences: ObservableObject {
     {
         self.defaults = defaults
         self.launchAtLogin = launchAtLogin
+        self.isLaunchAtLoginEnabled = launchAtLogin.checkEnabled()
         
         self.defaults.register(defaults: [
             Keys.enableTimeSensitiveNotifications: true
@@ -35,7 +38,7 @@ final class Preferences: ObservableObject {
         enableTimeSensitiveNotifications = defaults.bool(forKey: Keys.enableTimeSensitiveNotifications)
     }
     
-    @Published var enableTimeSensitiveNotifications: Bool = true {
+    var enableTimeSensitiveNotifications: Bool = true {
         didSet {
             defaults.set(enableTimeSensitiveNotifications, forKey: Keys.enableTimeSensitiveNotifications)
         }
@@ -50,23 +53,19 @@ final class Preferences: ObservableObject {
         set { defaults.set(newValue, forKey: #function) }
     }
 
-    var isLaunchAtLoginEnabled: Bool { launchAtLogin.checkEnabled() }
+    private(set) var isLaunchAtLoginEnabled: Bool
+
+    func refreshLaunchAtLoginState() {
+        isLaunchAtLoginEnabled = launchAtLogin.checkEnabled()
+    }
     
     @discardableResult
     func setLaunchAtLoginEnabled(to enabled: Bool) -> LaunchAtLoginFailure? {
-        if enabled {
-            guard !isLaunchAtLoginEnabled else { return nil }
-            
-            objectWillChange.send()
-            
-            return launchAtLogin.setEnabled(true)
-        } else {
-            guard isLaunchAtLoginEnabled else { return nil }
-            
-            objectWillChange.send()
-            
-            return launchAtLogin.setEnabled(false)
-        }
+        guard enabled != isLaunchAtLoginEnabled else { return nil }
+
+        let failure = launchAtLogin.setEnabled(enabled)
+        refreshLaunchAtLoginState()
+        return failure
     }
 
 }

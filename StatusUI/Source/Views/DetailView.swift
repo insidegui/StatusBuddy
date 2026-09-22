@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DetailView: View {
-    @ObservedObject var viewModel: RootViewModel
+    let viewModel: RootViewModel
     
     let scope: ServiceScope
     let groups: [DetailGroup]
@@ -31,7 +31,7 @@ struct DetailView_Previews: PreviewProvider {
             .activeIssuesPreview,
             .recentIssuesPreview
         ])
-        .environmentObject(NotificationManager())
+        .environment(NotificationManager())
         .frame(width: RootView.minWidth, height: 400)
         .windowChrome()
     }

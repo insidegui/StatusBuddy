@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct PreferencesView: View {
-    @EnvironmentObject var preferences: Preferences
-    @EnvironmentObject var updateController: UpdateController
+    @Environment(Preferences.self) private var preferences
+    @Environment(UpdateController.self) private var updateController
     
     @Environment(\.closeWindow) var closeWindow
 
@@ -18,6 +18,8 @@ struct PreferencesView: View {
     @State private var isShowingLaunchAtLoginFailure = false
 
     var body: some View {
+        @Bindable var updateController = updateController
+
         VStack(spacing: 0) {
             Form {
                 Section {
@@ -69,6 +71,7 @@ struct PreferencesView: View {
         }
         .frame(width: 420, height: updateController.isAvailable ? 380 : 290)
         .windowTitle("StatusBuddy Preferences")
+        .onAppear { preferences.refreshLaunchAtLoginState() }
         .alert("Launch at Login", isPresented: $isShowingLaunchAtLoginFailure, presenting: launchAtLoginFailure) { _ in
             Button("System Settings") {
                 LaunchAtLoginHelper.openSystemSettings()
@@ -83,7 +86,7 @@ struct PreferencesView: View {
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         PreferencesView()
-            .environmentObject(Preferences.forPreviews)
-            .environmentObject(UpdateController())
+            .environment(Preferences.forPreviews)
+            .environment(UpdateController())
     }
 }

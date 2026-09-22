@@ -1,8 +1,7 @@
 #if DEBUG
 import Foundation
-import Combine
 
-public final class PreviewStatusChecker: StatusChecker {
+public actor PreviewStatusChecker: StatusChecker {
 
     let responses: [StatusResponse]
     private var currentIndex: Int = 0
@@ -11,18 +10,14 @@ public final class PreviewStatusChecker: StatusChecker {
         self.responses = responses
     }
 
-    public func check() -> StatusResponsePublisher {
+    public func check() async throws -> StatusResponse {
         let response = responses[currentIndex]
         currentIndex += 1
         if currentIndex > responses.count - 1 {
             currentIndex = 0
         }
 
-        let future = Future<StatusResponse, Error>.init { resolve in
-            resolve(.success(response))
-        }
-
-        return future.eraseToAnyPublisher()
+        return response
     }
 
 }

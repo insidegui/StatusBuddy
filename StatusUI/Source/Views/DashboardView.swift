@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @ObservedObject var viewModel: RootViewModel
+    let viewModel: RootViewModel
     @Binding var selectedItem: DashboardItem?
 
     var body: some View {
@@ -34,7 +34,7 @@ struct DashboardView: View {
 }
 
 private struct DashboardHeader: View {
-    @EnvironmentObject private var viewModel: RootViewModel
+    @Environment(RootViewModel.self) private var viewModel
 
     var body: some View {
         HStack {
@@ -127,7 +127,7 @@ private struct DashboardButtonStyle: ButtonStyle {
 #if DEBUG
 #Preview("Dashboard") {
     RootView()
-        .environmentObject(RootViewModel.preview)
+        .environment(RootViewModel.preview)
         .frame(width: 600, height: 700, alignment: .top)
 }
 #endif

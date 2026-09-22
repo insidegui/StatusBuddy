@@ -3,6 +3,7 @@ import XCTest
 @testable import StatusCore
 @testable import StatusUI
 
+@MainActor
 final class NotificationManagerTests: XCTestCase {
     
     private func makeManager() -> (NotificationManager, MockNotificationPresenter) {

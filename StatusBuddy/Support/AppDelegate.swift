@@ -9,9 +9,9 @@
 import Cocoa
 import SwiftUI
 import StatusCore
-import Combine
 import StatusUI
 import OSLog
+import Observation
 
 @MainActor
 @NSApplicationMain
@@ -24,8 +24,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
 
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-
-    private lazy var cancellables = Set<AnyCancellable>()
 
     private let preferences = Preferences()
     
@@ -69,17 +67,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         rootViewModel.startPeriodicUpdates()
 
-        rootViewModel.$hasActiveIssues
-            .assign(to: \.issueBadgeVisible, on: self)
-            .store(in: &cancellables)
-        
-        rootViewModel.$latestResponses
-            .assign(to: \.latestResponses, on: notificationManager)
-            .store(in: &cancellables)
-        
-        preferences.$enableTimeSensitiveNotifications
-            .assign(to: \.enableTimeSensitiveNotifications, on: notificationManager.presenter)
-            .store(in: &cancellables)
+        observeModelChanges()
         
         statusItem.button?.menu = contextualMenu
         
@@ -94,6 +82,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         updateController.activate()
+    }
+
+    private func observeModelChanges() {
+        withObservationTracking {
+            issueBadgeVisible = rootViewModel.hasActiveIssues
+            notificationManager.latestResponses = rootViewModel.latestResponses
+            notificationManager.presenter.enableTimeSensitiveNotifications = preferences.enableTimeSensitiveNotifications
+        } onChange: { [weak self] in
+            Task { @MainActor in
+                self?.observeModelChanges()
+            }
+        }
     }
 
     private var imageForCurrentStatus: NSImage? {
@@ -245,8 +245,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         let controller = HostingWindowController(
             rootView: PreferencesView()
-                .environmentObject(preferences)
-                .environmentObject(updateController),
+                .environment(preferences)
+                .environment(updateController),
             requiresRegularActivationPolicy: true
         )
         

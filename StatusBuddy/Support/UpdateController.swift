@@ -7,12 +7,14 @@
 //
 
 import Cocoa
+import Observation
 
 #if ENABLE_SPARKLE
 import Sparkle
 #endif
 
-final class UpdateController: NSObject, ObservableObject {
+@Observable
+final class UpdateController: NSObject {
 
     var isAvailable: Bool {
         #if ENABLE_SPARKLE
@@ -23,6 +25,7 @@ final class UpdateController: NSObject, ObservableObject {
     }
     
     #if ENABLE_SPARKLE
+    @ObservationIgnored
     private lazy var controller: SPUStandardUpdaterController = {
         SPUStandardUpdaterController(
             startingUpdater: false,
@@ -32,7 +35,7 @@ final class UpdateController: NSObject, ObservableObject {
     }()
     #endif
 
-    @Published var automaticallyCheckForUpdates = false {
+    var automaticallyCheckForUpdates = false {
         didSet {
             #if ENABLE_SPARKLE
             controller.updater.automaticallyChecksForUpdates = automaticallyCheckForUpdates

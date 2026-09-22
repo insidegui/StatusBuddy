@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import Combine
 import JavaScriptCore
 
-public final class AppleStatusChecker: StatusChecker {
+public actor AppleStatusChecker: StatusChecker {
     
     public enum ResponseFormat: Hashable {
         case JSON
@@ -65,21 +64,27 @@ public final class AppleStatusChecker: StatusChecker {
         return decoder
     }()
 
-    public func check() -> StatusResponsePublisher {
-        let handler = self.responseHandler
-        
-        return session.dataTaskPublisher(for: currentURL)
-            .tryMap({
+    public func check() async throws -> StatusResponse {
+        var lastError: Error?
+
+        for _ in 0..<4 {
+            do {
+                let (data, _) = try await session.data(from: currentURL)
+
                 if UserDefaults.standard.bool(forKey: "SBSimulateNetworkingError") {
                     throw NSError(domain: "StatusBuddy", code: -1, userInfo: [NSLocalizedFailureReasonErrorKey: "Simulated networking error."])
-                } else {
-                    return try handler.apply(to: $0.data)
                 }
-            })
-            .decode(type: StatusResponse.self, decoder: decoder)
-            .retry(3)
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
+
+                return try decoder.decode(StatusResponse.self, from: responseHandler.apply(to: data))
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch {
+                guard !Task.isCancelled else { throw CancellationError() }
+                lastError = error
+            }
+        }
+
+        throw lastError ?? CocoaError(.fileReadUnknown)
     }
     
     
