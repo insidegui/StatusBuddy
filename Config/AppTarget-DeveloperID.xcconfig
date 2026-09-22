@@ -1,19 +1,8 @@
-//
-//  DeveloperID.xcconfig
-//  StatusBuddy
-//
-//  Created by Guilherme Rambo on 21/08/22.
-//  Copyright © 2022 Guilherme Rambo. All rights reserved.
-//
-
-// Configuration settings file format documentation can be found at:
-// https://help.apple.com/xcode/#/dev745c5c974
-
 #include "Versions.xcconfig"
+
+// Can be used in scripts
+IS_APPSTORE_BUILD=0
 
 OTHER_SWIFT_FLAGS=-D ENABLE_SPARKLE
 
 CODE_SIGN_ENTITLEMENTS = StatusBuddy/StatusBuddy-DeveloperID.entitlements
-
-// Sparkle must be weak-linked so that it can be stripped out of App Store version
-OTHER_LDFLAGS=-weak_framework Sparkle
