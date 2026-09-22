@@ -105,7 +105,7 @@
          <EnvironmentVariable
             key = "DYLD_INSERT_LIBRARIES"
             value = "/Users/insidegui/Developer/bin/QuartzCapture.framework/Versions/A/QuartzCapture"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>

@@ -249,7 +249,6 @@ private struct IncidentRow: View {
     var body: some View {
         DisclosureGroup(isExpanded: $isExpanded) {
             IncidentDetails(row: row)
-                .padding(.leading, 24)
                 .padding(.bottom, 10)
         } label: {
             ServiceRowLabel(row: row, showScope: showScope)
@@ -290,7 +289,13 @@ private struct ServiceRowButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .background(.primary.opacity(configuration.isPressed ? 0.1 : isHovered ? 0.05 : 0), in: .rect(cornerRadius: 8))
+            .background {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.primary.opacity(configuration.isPressed ? 0.15 : isHovered ? 0.1 : 0))
+                    .padding(.horizontal, -DashboardView.padding + 6)
+                    .padding(.vertical, -4)
+            }
+//            .background(.primary.opacity(configuration.isPressed ? 0.1 : isHovered ? 0.05 : 0), in: .rect(cornerRadius: 8))
             .onHover { isHovered = $0 }
     }
 }
@@ -298,14 +303,17 @@ private struct ServiceRowButtonStyle: ButtonStyle {
 private struct ServiceRowLabel: View {
     let row: ServiceOverview.Row
     let showScope: Bool
+    var showGlyph: Bool = false
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
-            Image(systemName: row.kind.symbol)
-                .foregroundStyle(row.kind.color)
-                .frame(width: 16)
-                .padding(.top, 2)
-                .accessibilityHidden(true)
+            if showGlyph {
+                Image(systemName: row.kind.symbol)
+                    .foregroundStyle(row.kind.color)
+                    .frame(width: 16)
+                    .padding(.top, 2)
+                    .accessibilityHidden(true)
+            }
             VStack(alignment: .leading, spacing: 3) {
                 Text(row.item.title)
                     .font(.body)
@@ -346,7 +354,7 @@ private struct IncidentDetails: View {
             if let message = row.item.subtitle {
                 Text(message)
                     .font(.callout)
-                    .foregroundStyle(.secondary)
+//                    .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
                     .textSelection(.enabled)
             }
