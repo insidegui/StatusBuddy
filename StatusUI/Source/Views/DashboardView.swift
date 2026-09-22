@@ -3,16 +3,12 @@ import SwiftUI
 struct DashboardView: View {
     static var padding: Double { 16 }
 
-    let viewModel: RootViewModel
-    @State private var category = ServiceCategory.all
+    @State var viewModel: RootViewModel
 
     private static let enableCategoryPicker = UserDefaults.standard.bool(forKey: "SBEnableCategoryPicker")
 
     var body: some View {
-        DashboardContent(
-            viewModel: viewModel,
-            category: category
-        )
+        DashboardContent(viewModel: viewModel)
         .frame(maxWidth: .infinity)
         .contentMargins(Self.padding, for: .scrollContent)
         .safeAreaInset(edge: .top, spacing: -Self.padding) {
@@ -20,7 +16,7 @@ struct DashboardView: View {
                 DashboardHeader(viewModel: viewModel)
 
                 if Self.enableCategoryPicker {
-                    Picker(selection: $category) {
+                    Picker(selection: $viewModel.category) {
                         ForEach(ServiceCategory.allCases) { category in
                             Text(category.title).tag(category)
                         }
@@ -49,8 +45,9 @@ private struct DashboardHeader: View {
 
     var body: some View {
         HStack {
-            Text("StatusBuddy", bundle: .statusUI)
-                .font(.headline)
+            if let overview = viewModel.overviews[viewModel.category] {
+                ServiceStatusSummary(activeCount: overview.activeCount)
+            }
             Spacer()
             Button {
                 viewModel.refresh()
@@ -83,7 +80,6 @@ private struct DashboardHeader: View {
 
 private struct DashboardContent: View {
     let viewModel: RootViewModel
-    let category: ServiceCategory
 
     var body: some View {
         ScrollView {
@@ -94,8 +90,8 @@ private struct DashboardContent: View {
                     }
                 }
 
-                if let overview = viewModel.overviews[category] {
-                    ServiceOverviewContent(overview: overview, showScope: category == .all)
+                if let overview = viewModel.overviews[viewModel.category] {
+                    ServiceOverviewContent(overview: overview, showScope: viewModel.category == .all)
                 } else if case .loading = viewModel.dashboard.state {
                     ProgressView {
                         Text("Checking service status…", bundle: .statusUI)
@@ -106,7 +102,7 @@ private struct DashboardContent: View {
             }
             .padding(.vertical, 12)
         }
-        .id(category)
+        .id(viewModel.category)
     }
 }
 
@@ -156,11 +152,8 @@ private struct ServiceOverviewContent: View {
     @State private var expansion = IncidentExpansion()
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            ServiceStatusSummary(activeCount: overview.activeCount)
-            ForEach(overview.sections) { section in
-                ServiceOverviewSection(section: section, showScope: showScope, expansion: $expansion)
-            }
+        ForEach(overview.sections) { section in
+            ServiceOverviewSection(section: section, showScope: showScope, expansion: $expansion)
         }
     }
 }
@@ -169,27 +162,21 @@ private struct ServiceStatusSummary: View {
     let activeCount: Int
 
     var body: some View {
-        HStack(alignment: .top, spacing: 10) {
+        HStack {
             Image(systemName: activeCount == 0 ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
-                .font(.title2)
                 .foregroundStyle(activeCount == 0 ? Color.success : Color.error)
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 4) {
                 Group {
                     if activeCount == 0 {
                         Text("All systems operational", bundle: .statusUI)
-                    } else if activeCount == 1 {
-                        Text("1 service affected", bundle: .statusUI)
                     } else {
-                        Text("\(activeCount) services affected", bundle: .statusUI)
+                        Text("^[\(activeCount) active issue](inflect: true)", bundle: .statusUI)
                     }
                 }
-                .font(.title2.weight(.semibold))
-                Text("Reported by Apple", bundle: .statusUI)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
             }
         }
+        .font(.headline.weight(.medium))
         .accessibilityElement(children: .combine)
     }
 }

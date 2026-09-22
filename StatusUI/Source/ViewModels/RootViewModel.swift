@@ -22,7 +22,9 @@ public final class RootViewModel {
     private(set) var lastUpdated: Date?
     private(set) var isRefreshing = false
     public private(set) var hasActiveIssues = false
-    
+
+    var category = ServiceCategory.all
+
     @ObservationIgnored public var showSettingsMenu: () -> Void = { }
     
     private let logger = Logger(subsystem: StatusUI.subsystemName, category: String(describing: RootViewModel.self))
