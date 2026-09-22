@@ -118,3 +118,23 @@ public extension RootViewModel {
     ])
     #endif
 }
+
+extension URL {
+    static var developerFeedURL: URL {
+        if let overrideStr = UserDefaults.standard.string(forKey: "SBDeveloperFeedURL"),
+           let overrideURL = URL(string: overrideStr) {
+            return overrideURL
+        } else {
+            return URL(string: "https://www.apple.com/support/systemstatus/data/developer/system_status_en_US.js?callback=jsonCallback")!
+        }
+    }
+
+    static var consumerFeedURL: URL {
+        if let overrideStr = UserDefaults.standard.string(forKey: "SBConsumerFeedURL"),
+           let overrideURL = URL(string: overrideStr) {
+            return overrideURL
+        } else {
+            return URL(string: "https://www.apple.com/support/systemstatus/data/system_status_en_US.js")!
+        }
+    }
+}

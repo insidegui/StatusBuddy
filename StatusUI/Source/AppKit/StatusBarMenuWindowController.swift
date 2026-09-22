@@ -19,18 +19,21 @@ public final class StatusBarMenuWindowController: NSWindowController {
 
     let topMargin: CGFloat
 
+    private var panel: StatusBarMenuPanel? { window as? StatusBarMenuPanel }
+
     public init(statusItem: NSStatusItem?, contentViewController: NSViewController, topMargin: CGFloat = 0) {
         self.statusItem = statusItem
         self.topMargin = topMargin
         
-        let window = StatusBarMenuPanel(statusItem: statusItem)
-        window.contentViewController = contentViewController
+        let panel = StatusBarMenuPanel(statusItem: statusItem)
+        panel.contentViewController = contentViewController
 
-        super.init(window: window)
+        super.init(window: panel)
         
-        window.delegate = self
-        window.isReleasedWhenClosed = false
-        setupContentSizeObservation()
+        panel.delegate = self
+        panel.isReleasedWhenClosed = false
+
+        trackContentSize()
     }
     
     public required init?(coder: NSCoder) {
@@ -47,8 +50,8 @@ public final class StatusBarMenuWindowController: NSWindowController {
         /// Reset token so that a racing call to `close(animated:)` doesn't actually close the window.
         visibilityToken = nil
 
-        repositionWindow()
-        
+        repositionWindow(contentSize: panel?.contentSize)
+
         window?.alphaValue = 1
         
         super.showWindow(sender)
@@ -89,15 +92,16 @@ public final class StatusBarMenuWindowController: NSWindowController {
         static let margin: CGFloat = 5
     }
     
-    @objc private func repositionWindow() {
+    private func repositionWindow(contentSize: CGSize?) {
         guard let referenceWindow = statusItem?.button?.window, let window = window else {
             logger.debug("Couldn't find reference window for repositioning status bar menu window, centering instead")
             self.window?.center()
             return
         }
-        
-        let width = contentViewController?.preferredContentSize.width ?? window.frame.width
-        let height = contentViewController?.preferredContentSize.height ?? window.frame.height
+
+        let inputSize: CGSize = contentSize ?? contentViewController?.preferredContentSize ?? window.frame.size
+        let width = inputSize.width
+        let height = inputSize.height
         var x = referenceWindow.frame.origin.x + referenceWindow.frame.width / 2 - window.frame.width / 2
         
         if let screen = referenceWindow.screen {
@@ -116,38 +120,18 @@ public final class StatusBarMenuWindowController: NSWindowController {
         
         window.setFrame(rect, display: false, animate: false)
     }
-    
+
     // MARK: - Auto size/position based on content controller
-    
-    private var contentSizeObservation: NSKeyValueObservation?
-    
-    public override var contentViewController: NSViewController? {
-        didSet {
-            setupContentSizeObservation()
-        }
-    }
-    
-    private var previouslyObservedContentSize: NSSize?
-    
-    private func setupContentSizeObservation() {
-        contentSizeObservation?.invalidate()
-        contentSizeObservation = nil
-        
-        guard let controller = contentViewController else { return }
-        
-        contentSizeObservation = controller.observe(\.preferredContentSize, options: [.initial, .new]) { [weak self] controller, _ in
-            MainActor.assumeIsolated {
-                self?.updateForNewContentSize(from: controller)
+
+    private func trackContentSize() {
+        withObservationTracking { [weak self] in
+            self?.repositionWindow(contentSize: self?.panel?.contentSize)
+        } onChange: { [weak self] in
+            Task { @MainActor [weak self] in
+                self?.trackContentSize()
             }
         }
-    }
-    
-    private func updateForNewContentSize(from controller: NSViewController) {
-        defer { previouslyObservedContentSize = controller.preferredContentSize }
-        
-        guard controller.preferredContentSize != previouslyObservedContentSize else { return }
-        
-        repositionWindow()
+
     }
 
     /// Unlocks the menu bar visibility in case it is currently locked.
@@ -233,7 +217,10 @@ private extension StatusBarMenuWindowController {
 
 // MARK: - Panel
 
+@Observable
 private final class StatusBarMenuPanel: NSPanel {
+
+    private(set) var contentSize: CGSize? = nil
 
     convenience init(statusItem: NSStatusItem?) {
         self.init(
@@ -257,5 +244,21 @@ private final class StatusBarMenuPanel: NSPanel {
     override var acceptsFirstResponder: Bool { true }
     override var canBecomeKey: Bool { true }
     override var canBecomeMain: Bool { true }
-    
+
+    override func updateConstraintsIfNeeded() {
+        super.updateConstraintsIfNeeded()
+
+        guard let contentViewController else { return }
+
+        let newSize = contentViewController.view.bounds.size
+
+        if let contentSize {
+            guard abs(newSize.width - contentSize.width) >= 0.5,
+                  abs(newSize.height - contentSize.height) >= 0.5
+            else { return }
+        }
+
+        self.contentSize = newSize
+    }
+
 }

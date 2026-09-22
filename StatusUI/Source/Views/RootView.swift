@@ -8,13 +8,15 @@
 
 import SwiftUI
 
-struct RootView: View {
+public struct RootView: View {
     @Environment(RootViewModel.self) private var viewModel
     
-    static let chromeShadowPadding: CGFloat = 64
-    static let minWidth: CGFloat = 346
-    
-    var body: some View {
+    public static let chromeShadowPadding: CGFloat = 64
+    public static let minWidth: CGFloat = 346
+
+    public init() { }
+
+    public var body: some View {
         @Bindable var viewModel = viewModel
 
         DashboardView(
