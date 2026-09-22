@@ -9,34 +9,35 @@ struct DashboardView: View {
 
     var body: some View {
         DashboardContent(viewModel: viewModel)
-        .frame(maxWidth: .infinity)
-        .contentMargins(Self.padding, for: .scrollContent)
-        .safeAreaInset(edge: .top, spacing: -Self.padding) {
-            VStack(spacing: 12) {
-                DashboardHeader(viewModel: viewModel)
+            .frame(maxWidth: .infinity)
+            .contentMargins(Self.padding, for: .scrollContent)
+            .safeAreaInset(edge: .top, spacing: -Self.padding) {
+                VStack(spacing: 12) {
+                    DashboardHeader(viewModel: viewModel)
 
-                if Self.enableCategoryPicker {
-                    Picker(selection: $viewModel.category) {
-                        ForEach(ServiceCategory.allCases) { category in
-                            Text(category.title).tag(category)
+                    if Self.enableCategoryPicker {
+                        Picker(selection: $viewModel.category) {
+                            ForEach(ServiceCategory.allCases) { category in
+                                Text(category.title).tag(category)
+                            }
+                        } label: {
+                            Text("Service category", bundle: .statusUI)
                         }
-                    } label: {
-                        Text("Service category", bundle: .statusUI)
+                        .pickerStyle(.segmented)
+                        .labelsHidden()
                     }
-                    .pickerStyle(.segmented)
-                    .labelsHidden()
                 }
+                .padding([.top, .leading, .trailing], Self.padding)
+                .padding(.bottom, Self.padding / 2)
+                .variableBlurBackdrop(edge: .top)
             }
-            .padding([.top, .leading, .trailing], Self.padding)
-            .padding(.bottom, Self.padding / 2)
-            .variableBlurBackdrop(edge: .top)
-        }
-        .safeAreaInset(edge: .bottom, spacing: -Self.padding) {
-            DashboardFooter(lastUpdated: viewModel.lastUpdated)
-                .padding(Self.padding)
-                .variableBlurBackdrop(edge: .bottom)
-        }
-        .compositingGroup()
+            .safeAreaInset(edge: .bottom, spacing: -Self.padding) {
+                DashboardFooter()
+                    .padding(Self.padding)
+                    .variableBlurBackdrop(edge: .bottom)
+            }
+            .compositingGroup()
+            .environment(viewModel)
     }
 }
 
@@ -44,37 +45,46 @@ private struct DashboardHeader: View {
     let viewModel: RootViewModel
 
     var body: some View {
-        HStack {
-            if let overview = viewModel.overviews[viewModel.category] {
-                ServiceStatusSummary(activeCount: overview.activeCount)
-            }
-            Spacer()
-            Button {
-                viewModel.refresh()
-            } label: {
-                Label {
-                    Text("Refresh", bundle: .statusUI)
-                } icon: {
-                    Image(systemName: "arrow.clockwise")
-                }
-                .labelStyle(.iconOnly)
-            }
-            .disabled(viewModel.isRefreshing)
-            .help(Text("Refresh service status", bundle: .statusUI))
-            .keyboardShortcut("r", modifiers: .command)
-
-            Button(action: viewModel.showSettingsMenu) {
-                Label {
-                    Text("Settings", bundle: .statusUI)
-                } icon: {
-                    Image(systemName: "gearshape")
-                }
-                .labelStyle(.iconOnly)
-            }
-            .help(Text("Settings", bundle: .statusUI))
+        if let overview = viewModel.overviews[viewModel.category] {
+            ServiceStatusSummary(activeCount: overview.activeCount)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .buttonStyle(.glass)
-        .buttonBorderShape(.circle)
+    }
+}
+
+private struct SettingsButton: View {
+    @Environment(RootViewModel.self) private var viewModel
+
+    var body: some View {
+        Button(action: viewModel.showSettingsMenu) {
+            Label {
+                Text("Settings", bundle: .statusUI)
+            } icon: {
+                Image(systemName: "gearshape")
+            }
+            .labelStyle(.iconOnly)
+        }
+        .help(Text("Settings", bundle: .statusUI))
+    }
+}
+
+private struct RefreshButton: View {
+    @Environment(RootViewModel.self) private var viewModel
+
+    var body: some View {
+        Button {
+            viewModel.refresh()
+        } label: {
+            Label {
+                Text("Refresh", bundle: .statusUI)
+            } icon: {
+                Image(systemName: "arrow.clockwise")
+            }
+            .labelStyle(.iconOnly)
+        }
+        .disabled(viewModel.isRefreshing)
+        .help(Text("Refresh service status", bundle: .statusUI))
+        .keyboardShortcut("r", modifiers: .command)
     }
 }
 
@@ -372,20 +382,24 @@ private struct ServiceNotificationButton: View {
 }
 
 private struct DashboardFooter: View {
-    let lastUpdated: Date?
+    @Environment(RootViewModel.self) private var viewModel
 
     var body: some View {
         HStack {
-            if let lastUpdated {
-                Text("Checked \(lastUpdated, format: .dateTime.hour().minute())", bundle: .statusUI)
+            RefreshButton()
+
+            if let lastUpdated = viewModel.lastUpdated {
+                Text("Last checked \(lastUpdated, format: .dateTime.hour().minute())", bundle: .statusUI)
             }
-            Spacer(minLength: 4)
-            Link(destination: URL(string: "https://www.apple.com/support/systemstatus/")!) {
-                Text("Apple System Status", bundle: .statusUI)
-            }
+
+            Spacer()
+
+            SettingsButton()
         }
-        .font(.caption)
+        .font(.subheadline)
         .foregroundStyle(.secondary)
+        .buttonStyle(.glass)
+        .buttonBorderShape(.circle)
     }
 }
 
