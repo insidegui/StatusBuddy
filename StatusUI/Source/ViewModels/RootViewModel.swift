@@ -15,10 +15,12 @@ import StatusCore
 @Observable
 public final class RootViewModel {
     
-    public var selectedDashboardItem: DashboardItem?
     public private(set) var latestResponses: [ServiceScope: StatusResponse] = [:]
     private(set) var dashboard = DashboardViewModel()
     private(set) var details: [ServiceScope: DetailViewModel] = [:]
+    private(set) var overviews: [ServiceCategory: ServiceOverview] = [:]
+    private(set) var lastUpdated: Date?
+    private(set) var isRefreshing = false
     public private(set) var hasActiveIssues = false
     
     @ObservationIgnored public var showSettingsMenu: () -> Void = { }
@@ -40,6 +42,7 @@ public final class RootViewModel {
                 dashboard: DashboardViewModel = DashboardViewModel())
     {
         self.checkers = checkers
+        self.dashboard = dashboard
         self.updateInterval = Self.deafultRefreshInterval
     }
 
@@ -73,6 +76,7 @@ public final class RootViewModel {
         logger.debug("\(#function, privacy: .public)")
         
         inFlightRefresh?.cancel()
+        isRefreshing = true
         inFlightRefresh = Task { [weak self, checkers] in
             do {
                 let results = try await withThrowingTaskGroup(of: (ServiceScope, StatusResponse).self) { group in
@@ -84,23 +88,31 @@ public final class RootViewModel {
 
                 guard let self, !Task.isCancelled else { return }
 
-                for (scope, response) in results {
-                    latestResponses[scope] = response
-                    details[scope] = DetailViewModel(with: response, in: scope)
-                }
-
-                hasActiveIssues = latestResponses.values.contains(where: \.hasActiveEvents)
-                dashboard = DashboardViewModel(with: latestResponses)
+                update(with: Dictionary(uniqueKeysWithValues: results))
             } catch is CancellationError {
                 return
             } catch {
-                guard let self else { return }
+                guard let self, !Task.isCancelled else { return }
                 logger.error("Status check failed with error: \(String(describing: error), privacy: .public)")
                 dashboard = DashboardViewModel(with: .failure(String(describing: error)))
             }
 
+            self?.isRefreshing = false
             completion?()
         }
+    }
+
+    private func update(with responses: [ServiceScope: StatusResponse]) {
+        latestResponses = responses
+        details = responses.reduce(into: [:]) { result, entry in
+            result[entry.key] = DetailViewModel(with: entry.value, in: entry.key)
+        }
+        hasActiveIssues = responses.values.contains(where: \.hasActiveEvents)
+        dashboard = DashboardViewModel(with: responses)
+        overviews = Dictionary(uniqueKeysWithValues: ServiceCategory.allCases.map {
+            ($0, ServiceOverview(details: details, category: $0))
+        })
+        lastUpdated = Date()
     }
     
 }
@@ -112,6 +124,12 @@ public extension RootViewModel {
     ])
 
     #if DEBUG
+    internal static func preview(with responses: [ServiceScope: StatusResponse]) -> RootViewModel {
+        let model = RootViewModel()
+        model.update(with: responses)
+        return model
+    }
+
     static let preview = try! RootViewModel(with: [
         .developer: PreviewStatusChecker(responses: [.developerNoIssues(), .developerOneOngoingIssue(), .developerOneResolvedIssue(), .developerOneScheduledIssue()]),
         .customer: PreviewStatusChecker(responses: [.customerNoIssues(), .customerOneOngoingIssue(), .customerThreeOngoingIssues(), .customerThreeResolvedIssues()])

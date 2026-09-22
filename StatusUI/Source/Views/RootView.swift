@@ -18,13 +18,11 @@ public struct RootView: View {
     public init() { }
 
     public var body: some View {
-        @Bindable var viewModel = viewModel
-
         DashboardView(
             viewModel: viewModel,
-            selectedItem: $viewModel.selectedDashboardItem
+            maximumHeight: min(560, max(1, geometry.maximumContentHeight - Self.chromeShadowPadding * 2))
         )
-        .frame(minWidth: Self.minWidth, maxWidth: Self.minWidth, maxHeight: geometry.maximumContentHeight, alignment: .topLeading)
+        .frame(width: Self.minWidth)
         .windowChrome()
         .task { viewModel.startPeriodicUpdates() }
     }

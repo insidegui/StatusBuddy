@@ -178,25 +178,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func hideUI(sender: Any?) {
         logger.notice(#function)
 
-        if #unavailable(macOS 27) {
-            guard !navigateBackInResponseToStatusItemClick() else {
-                /// Button can have its highlight state reset because user clicked on it, bring it back to highlighted state.
-                windowController?.highlightStatusItem()
-                return
-            }
-        }
-        
         statusItemController.hidePanel()
-    }
-
-    func navigateBackInResponseToStatusItemClick() -> Bool {
-        guard rootViewModel.selectedDashboardItem != nil else { return false }
-
-        logger.notice("Navigating back in response to status item click")
-
-        rootViewModel.selectedDashboardItem = nil
-
-        return true
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
@@ -306,6 +288,6 @@ extension AppDelegate: StatusItemControllerDelegate {
     }
 
     func statusItemControllerShouldHidePanelInResponseToStatusItemClick(_ controller: StatusItemController) -> Bool {
-        !navigateBackInResponseToStatusItemClick()
+        true
     }
 }

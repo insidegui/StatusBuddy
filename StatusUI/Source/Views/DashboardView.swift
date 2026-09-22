@@ -1,133 +1,451 @@
-//
-//  DashboardView.swift
-//  StatusBuddyNewUIPrototype
-//
-//  Created by Guilherme Rambo on 28/06/21.
-//
-
 import SwiftUI
 
 struct DashboardView: View {
     let viewModel: RootViewModel
-    @Binding var selectedItem: DashboardItem?
+    var maximumHeight: CGFloat = 560
+    @State private var category = ServiceCategory.all
+    @State private var controlsHeight: CGFloat = 72
+    @State private var footerHeight: CGFloat = 16
 
     var body: some View {
-        GlassEffectContainer {
-            VStack(alignment: .leading, spacing: 12) {
-                DashboardHeader()
+        VStack(spacing: 12) {
+            VStack(spacing: 12) {
+                DashboardHeader(viewModel: viewModel)
 
-                if let selectedItem {
-                    DetailView(
-                        viewModel: viewModel,
-                        scope: selectedItem.scope,
-                        groups: viewModel.details[selectedItem.scope]?.groups ?? []
-                    )
-                    .frame(minHeight: 323, maxHeight: .infinity, alignment: .topLeading)
-                } else {
-                    DashboardContent(state: viewModel.dashboard.state, selectedItem: $selectedItem)
+                Picker(selection: $category) {
+                    ForEach(ServiceCategory.allCases) { category in
+                        Text(category.title).tag(category)
+                    }
+                } label: {
+                    Text("Service category", bundle: .statusUI)
                 }
+                .pickerStyle(.segmented)
+                .labelsHidden()
             }
-            .padding(16)
+            .onGeometryChange(for: CGFloat.self) { $0.size.height } action: {
+                controlsHeight = $0
+            }
+
+            // Reserve the measured chrome, two 12-point gaps, and 16-point outer insets.
+            DashboardContent(
+                viewModel: viewModel,
+                category: category,
+                maximumHeight: max(1, maximumHeight - controlsHeight - footerHeight - 56)
+            )
+                .frame(maxWidth: .infinity)
+
+            DashboardFooter(lastUpdated: viewModel.lastUpdated)
+                .onGeometryChange(for: CGFloat.self) { $0.size.height } action: {
+                    footerHeight = $0
+                }
         }
-        .animation(.default, value: selectedItem?.id)
+        .padding(16)
     }
 }
 
 private struct DashboardHeader: View {
-    @Environment(RootViewModel.self) private var viewModel
+    let viewModel: RootViewModel
 
     var body: some View {
         HStack {
-            Group {
-                if let selectedItem = viewModel.selectedDashboardItem {
-                    BackButton {
-                        viewModel.selectedDashboardItem = nil
-                    }
-
-                    Text(selectedItem.scope.title)
-                        .font(.system(.headline, design: .rounded))
-                } else {
-                    Text("StatusBuddy")
-                        .font(.system(.headline, design: .rounded))
-                }
-            }
-            .transition(.blurReplace)
-
+            Text("StatusBuddy", bundle: .statusUI)
+                .font(.headline)
             Spacer()
+            Button {
+                viewModel.refresh()
+            } label: {
+                Label {
+                    Text("Refresh", bundle: .statusUI)
+                } icon: {
+                    Image(systemName: "arrow.clockwise")
+                }
+                .labelStyle(.iconOnly)
+            }
+            .disabled(viewModel.isRefreshing)
+            .help(Text("Refresh service status", bundle: .statusUI))
+            .keyboardShortcut("r", modifiers: .command)
 
             Button(action: viewModel.showSettingsMenu) {
-                Label("Settings", systemImage: "gearshape")
-                    .labelStyle(.iconOnly)
+                Label {
+                    Text("Settings", bundle: .statusUI)
+                } icon: {
+                    Image(systemName: "gearshape")
+                }
+                .labelStyle(.iconOnly)
             }
-            .buttonStyle(.bordered)
-            .buttonBorderShape(.circle)
-            .help("Settings")
+            .help(Text("Settings", bundle: .statusUI))
         }
-    }
-
-    struct BackButton: View {
-        let goBack: () -> ()
-        
-        var body: some View {
-            Button(action: goBack) {
-                Label("Back", systemImage: "chevron.backward")
-                    .labelStyle(.iconOnly)
-            }
-            .buttonStyle(.bordered)
-            .buttonBorderShape(.circle)
-            .keyboardShortcut("[", modifiers: .command)
-            .help("Back")
-        }
+        .buttonStyle(.glass)
+        .buttonBorderShape(.circle)
     }
 }
 
 private struct DashboardContent: View {
-    let state: DashboardViewModel.State
-    @Binding var selectedItem: DashboardItem?
+    let viewModel: RootViewModel
+    let category: ServiceCategory
+    let maximumHeight: CGFloat
+    @State private var contentHeight: CGFloat = 180
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            switch state {
-            case .loaded(let items):
-                ForEach(items) { item in
-                    Button {
-                        selectedItem = item
-                    } label: {
-                        DashboardItemView(item)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                if case .failure = viewModel.dashboard.state {
+                    DashboardFailure(hasCachedStatus: viewModel.lastUpdated != nil) {
+                        viewModel.refresh()
                     }
-                    .buttonStyle(DashboardButtonStyle())
                 }
-            case .loading:
-                ProgressView()
-                    .controlSize(.small)
-                    .frame(maxWidth: .infinity, minHeight: 90)
-            case .failure(let message):
-                Text("Sorry, I couldn't load the status right now.\n\(message)")
-                    .font(.caption)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
-                    .frame(maxWidth: .infinity, minHeight: 90)
+
+                if let overview = viewModel.overviews[category] {
+                    ServiceOverviewContent(overview: overview, showScope: category == .all)
+                } else if case .loading = viewModel.dashboard.state {
+                    ProgressView {
+                        Text("Checking service status…", bundle: .statusUI)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 40)
+                }
+            }
+            .padding(.vertical, 12)
+            .onGeometryChange(for: CGFloat.self) { geometry in
+                geometry.size.height
+            } action: { height in
+                contentHeight = height
+            }
+        }
+        .frame(height: min(maximumHeight, contentHeight))
+        .scrollBounceBehavior(.basedOnSize)
+        .id(category)
+    }
+}
+
+private struct DashboardFailure: View {
+    let hasCachedStatus: Bool
+    let retry: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label {
+                Text("Unable to refresh", bundle: .statusUI)
+            } icon: {
+                Image(systemName: "wifi.exclamationmark")
+            }
+            .font(.headline)
+            Text(hasCachedStatus
+                 ? "Showing the last known status. Check your connection and try again."
+                 : "Check your connection and try again.", bundle: .statusUI)
+                .font(.callout)
+                .foregroundStyle(.secondary)
+            Button(action: retry) {
+                Text("Try Again", bundle: .statusUI)
+            }
+            .buttonStyle(.bordered)
+        }
+    }
+}
+
+private struct IncidentExpansion {
+    var selected: ServiceOverview.Row.ID?
+
+    subscript(row id: ServiceOverview.Row.ID) -> Bool {
+        get { selected == id }
+        set {
+            if newValue {
+                selected = id
+            } else if selected == id {
+                selected = nil
             }
         }
     }
 }
 
-private struct DashboardButtonStyle: ButtonStyle {
-    @Environment(\.colorScheme) private var colorScheme
+private struct ServiceOverviewContent: View {
+    let overview: ServiceOverview
+    let showScope: Bool
+    @State private var expansion = IncidentExpansion()
 
-    private var pressColor: Color { colorScheme == .dark ? .white : .black }
+    var body: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            ServiceStatusSummary(activeCount: overview.activeCount)
+            ForEach(overview.sections) { section in
+                ServiceOverviewSection(section: section, showScope: showScope, expansion: $expansion)
+            }
+        }
+    }
+}
+
+private struct ServiceStatusSummary: View {
+    let activeCount: Int
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: activeCount == 0 ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                .font(.title2)
+                .foregroundStyle(activeCount == 0 ? Color.success : Color.error)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 4) {
+                Group {
+                    if activeCount == 0 {
+                        Text("All systems operational", bundle: .statusUI)
+                    } else if activeCount == 1 {
+                        Text("1 service affected", bundle: .statusUI)
+                    } else {
+                        Text("\(activeCount) services affected", bundle: .statusUI)
+                    }
+                }
+                .font(.title2.weight(.semibold))
+                Text("Reported by Apple", bundle: .statusUI)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
+
+private struct ServiceOverviewSection: View {
+    let section: ServiceOverview.Section
+    let showScope: Bool
+    @Binding var expansion: IncidentExpansion
+    @State private var showsOperationalServices = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            if section.kind == .operational {
+                DisclosureGroup(isExpanded: $showsOperationalServices) {
+                    ForEach(section.rows) { row in
+                        ServiceRowLabel(row: row, showScope: showScope)
+                            .padding(.vertical, 6)
+                    }
+                } label: {
+                    ServiceSectionHeading(kind: section.kind, count: section.rows.count)
+                }
+                .disclosureGroupStyle(ServiceDisclosureStyle())
+            } else {
+                ServiceSectionHeading(kind: section.kind, count: section.rows.count)
+                    .padding(.bottom, 4)
+                ForEach(section.rows) { row in
+                    IncidentRow(row: row, showScope: showScope, isExpanded: $expansion[row: row.id])
+                }
+            }
+        }
+    }
+}
+
+private struct ServiceSectionHeading: View {
+    let kind: ServiceOverview.Kind
+    let count: Int
+
+    var body: some View {
+        HStack {
+            Text(kind.title)
+            Spacer()
+            Text(count, format: .number)
+                .monospacedDigit()
+                .font(.caption.weight(.medium))
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 7)
+                .padding(.vertical, 2)
+                .background(.primary.opacity(0.06), in: .capsule)
+        }
+        .font(.subheadline.weight(.semibold))
+        .foregroundStyle(.primary)
+    }
+}
+
+private struct IncidentRow: View {
+    let row: ServiceOverview.Row
+    let showScope: Bool
+    @Binding var isExpanded: Bool
+
+    var body: some View {
+        DisclosureGroup(isExpanded: $isExpanded) {
+            IncidentDetails(row: row)
+                .padding(.leading, 24)
+                .padding(.bottom, 10)
+        } label: {
+            ServiceRowLabel(row: row, showScope: showScope)
+        }
+        .disclosureGroupStyle(ServiceDisclosureStyle())
+    }
+}
+
+private struct ServiceDisclosureStyle: DisclosureGroupStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Button {
+                configuration.isExpanded.toggle()
+            } label: {
+                HStack(spacing: 8) {
+                    configuration.label
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Image(systemName: configuration.isExpanded ? "chevron.down" : "chevron.right")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                        .accessibilityHidden(true)
+                }
+                .padding(.vertical, 10)
+                .contentShape(.rect)
+            }
+            .buttonStyle(ServiceRowButtonStyle())
+            .accessibilityValue(Text(configuration.isExpanded ? "Expanded" : "Collapsed", bundle: .statusUI))
+
+            if configuration.isExpanded {
+                configuration.content
+            }
+        }
+    }
+}
+
+private struct ServiceRowButtonStyle: ButtonStyle {
+    @State private var isHovered = false
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(4)
-            .glassEffect(.regular.interactive().tint(configuration.isPressed ? pressColor.opacity(0.07) : nil), in: .containerRelative)
+            .background(.primary.opacity(configuration.isPressed ? 0.1 : isHovered ? 0.05 : 0), in: .rect(cornerRadius: 8))
+            .onHover { isHovered = $0 }
+    }
+}
+
+private struct ServiceRowLabel: View {
+    let row: ServiceOverview.Row
+    let showScope: Bool
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 8) {
+            Image(systemName: row.kind.symbol)
+                .foregroundStyle(row.kind.color)
+                .frame(width: 16)
+                .padding(.top, 2)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 3) {
+                Text(row.item.title)
+                    .font(.body)
+                    .foregroundStyle(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
+                HStack(spacing: 4) {
+                    if showScope {
+                        Text(row.scope == .developer ? "Developer" : "Customer", bundle: .statusUI)
+                        Text(verbatim: "·")
+                    }
+                    Text(row.kind.status)
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 0)
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
+
+private struct IncidentDetails: View {
+    let row: ServiceOverview.Row
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            if row.kind == .scheduled, let start = row.item.formattedScheduledStartTime {
+                if let end = row.item.formattedScheduledEndTime {
+                    Text("\(start) – \(end)", bundle: .statusUI)
+                        .font(.callout.weight(.medium))
+                } else {
+                    Text(start).font(.callout.weight(.medium))
+                }
+            } else if row.kind == .resolved, let end = row.item.formattedResolutionTime {
+                Text("Ended \(end)", bundle: .statusUI)
+                    .font(.callout.weight(.medium))
+            }
+            if let message = row.item.subtitle {
+                Text(message)
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .textSelection(.enabled)
+            }
+            if row.kind == .active {
+                ServiceNotificationButton(serviceID: row.item.id, scope: row.scope)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+private struct ServiceNotificationButton: View {
+    @Environment(NotificationManager.self) private var notificationManager
+    let serviceID: String
+    let scope: ServiceScope
+
+    var body: some View {
+        let enabled = notificationManager.hasNotificationsEnabled(for: serviceID, in: scope)
+        Button {
+            notificationManager.toggleNotificationsEnabled(for: serviceID, in: scope)
+        } label: {
+            Label {
+                Text(enabled ? "Notification on" : "Notify when restored", bundle: .statusUI)
+            } icon: {
+                Image(systemName: enabled ? "bell.badge.fill" : "bell")
+            }
+        }
+        .buttonStyle(.glass)
+        .controlSize(.small)
+        .accessibilityValue(Text(enabled ? "On" : "Off", bundle: .statusUI))
+        .help(Text(enabled ? "Stop notifying when this service is restored" : "Notify when this service is restored", bundle: .statusUI))
+    }
+}
+
+private struct DashboardFooter: View {
+    let lastUpdated: Date?
+
+    var body: some View {
+        HStack {
+            if let lastUpdated {
+                Text("Checked \(lastUpdated, format: .dateTime.hour().minute())", bundle: .statusUI)
+            }
+            Spacer(minLength: 4)
+            Link(destination: URL(string: "https://www.apple.com/support/systemstatus/")!) {
+                Text("Apple System Status", bundle: .statusUI)
+            }
+        }
+        .font(.caption)
+        .foregroundStyle(.secondary)
     }
 }
 
 #if DEBUG
-#Preview("Dashboard") {
-    RootView()
-        .environment(RootViewModel.preview)
-        .frame(width: 600, height: 700, alignment: .top)
+import StatusCore
+
+#Preview("Category tabs") {
+    DashboardView(viewModel: try! .preview(with: [
+        .customer: .customerNoIssues(), .developer: .developerNoIssues()
+    ]))
+        .frame(width: RootView.minWidth)
+        .windowChrome()
+        .environment(NotificationManager())
+}
+
+#Preview("Expanded incident") {
+    IncidentRow(
+        row: ServiceOverview.Row(item: DetailGroup.activeIssuesPreview.items[0], scope: .developer, kind: .active),
+        showScope: true,
+        isExpanded: .constant(true)
+    )
+    .environment(NotificationManager())
+    .padding(20)
+    .frame(width: 368)
+    .background(Color(nsColor: .windowBackgroundColor))
+}
+
+#Preview("Issues and maintenance") {
+    DashboardView(viewModel: try! .preview(with: [
+        .customer: .customerThreeOngoingIssues(), .developer: .developerOneScheduledIssue()
+    ]))
+        .frame(width: RootView.minWidth)
+        .windowChrome()
+        .environment(NotificationManager())
+}
+
+#Preview("Unable to load") {
+    DashboardView(viewModel: RootViewModel(dashboard: DashboardViewModel(with: .failure("Offline"))))
+        .frame(width: RootView.minWidth, height: 560)
+        .windowChrome()
 }
 #endif
