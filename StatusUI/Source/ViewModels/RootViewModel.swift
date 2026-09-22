@@ -8,7 +8,7 @@
 
 import Foundation
 import Combine
-import os.log
+import OSLog
 import StatusCore
 
 public final class RootViewModel: ObservableObject {
@@ -21,7 +21,7 @@ public final class RootViewModel: ObservableObject {
     
     public var showSettingsMenu: () -> Void = { }
     
-    private let log = OSLog(subsystem: StatusUI.subsystemName, category: String(describing: RootViewModel.self))
+    private let logger = Logger(subsystem: StatusUI.subsystemName, category: String(describing: RootViewModel.self))
     
     let checkers: [ServiceScope: StatusChecker]
     let updateInterval: TimeInterval
@@ -50,7 +50,7 @@ public final class RootViewModel: ObservableObject {
     public func startPeriodicUpdates() {
         guard updateTimer == nil else { return }
 
-        os_log("%{public}@", log: log, type: .debug, #function)
+        logger.debug("\(#function, privacy: .public)")
 
         updateTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true, block: { [weak self] _ in
             self?.refresh(nil)
@@ -61,7 +61,7 @@ public final class RootViewModel: ObservableObject {
     }
     
     public func stopPeriodicUpdates() {
-        os_log("%{public}@", log: log, type: .debug, #function)
+        logger.debug("\(#function, privacy: .public)")
         
         updateTimer?.invalidate()
         updateTimer = nil
@@ -70,7 +70,7 @@ public final class RootViewModel: ObservableObject {
     private var inFlightRefresh: Cancellable?
     
     public func refresh(_ completion: (() -> Void)? = nil) {
-        os_log("%{public}@", log: log, type: .debug, #function)
+        logger.debug("\(#function, privacy: .public)")
         
         inFlightRefresh?.cancel()
         inFlightRefresh = nil
@@ -83,7 +83,7 @@ public final class RootViewModel: ObservableObject {
             guard let self = self else { return }
             
             if case .failure(let error) = result {
-                os_log("Status check failed with error: %{public}@", log: self.log, type: .error, String(describing: error))
+                logger.error("Status check failed with error: \(String(describing: error), privacy: .public)")
                 
                 self.dashboard = DashboardViewModel(with: .failure(String(describing: error)))
             }

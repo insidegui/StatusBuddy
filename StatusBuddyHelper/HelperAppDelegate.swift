@@ -7,12 +7,12 @@
 //
 
 import Cocoa
-import os.log
+import OSLog
 
 @main
 final class HelperAppDelegate: NSObject, NSApplicationDelegate {
     
-    private let log = OSLog(subsystem: "tech.buddysoftware.StatusBuddyHelper", category: String(describing: HelperAppDelegate.self))
+    private let logger = Logger(subsystem: "tech.buddysoftware.StatusBuddyHelper", category: String(describing: HelperAppDelegate.self))
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let config = NSWorkspace.OpenConfiguration()
@@ -24,9 +24,9 @@ final class HelperAppDelegate: NSObject, NSApplicationDelegate {
             at: Bundle.main.mainAppBundleURL,
             configuration: config) { _, error in
                 if let error = error {
-                    os_log("Failed to launch main app: %{public}@", log: self.log, type: .fault, String(describing: error))
+                    self.logger.fault("Failed to launch main app: \(String(describing: error), privacy: .public)")
                 } else {
-                    os_log("Main app launched successfully", log: self.log, type: .info)
+                    self.logger.info("Main app launched successfully")
                 }
                 
                 DispatchQueue.main.async { NSApp?.terminate(nil) }

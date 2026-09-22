@@ -8,7 +8,7 @@
 
 import Foundation
 import UserNotifications
-import os.log
+import OSLog
 
 public struct ServiceRestoredNotification: Identifiable, Hashable {
     public let id: String
@@ -23,7 +23,7 @@ public protocol NotificationPresenter: AnyObject {
 
 public final class DefaultNotificationPresenter: NSObject, NotificationPresenter, UNUserNotificationCenterDelegate {
     
-    private let log = OSLog(subsystem: StatusUI.subsystemName, category: String(describing: DefaultNotificationPresenter.self))
+    private let logger = Logger(subsystem: StatusUI.subsystemName, category: String(describing: DefaultNotificationPresenter.self))
     
     public var enableTimeSensitiveNotifications: Bool = false
     
@@ -48,7 +48,7 @@ public final class DefaultNotificationPresenter: NSObject, NotificationPresenter
             guard let self = self else { return }
             
             if let error = error {
-                os_log("Failed to request notification presentation: %{public}@", log: self.log, type: .error, String(describing: error))
+                logger.error("Failed to request notification presentation: \(String(describing: error), privacy: .public)")
             }
         }
     }
@@ -66,9 +66,9 @@ public final class DefaultNotificationPresenter: NSObject, NotificationPresenter
             guard let self = self else { return }
             
             if let error = error {
-                os_log("Error requesting notification authorization: %{public}@", log: self.log, type: .debug, String(describing: error))
+                logger.debug("Error requesting notification authorization: \(String(describing: error), privacy: .public)")
             } else {
-                os_log("Notification authorization status = %{public}@", log: self.log, type: .debug, String(describing: result))
+                logger.debug("Notification authorization status = \(String(describing: result), privacy: .public)")
             }
         }
     }

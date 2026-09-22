@@ -9,7 +9,7 @@
 import Foundation
 import StatusCore
 import Combine
-import os.log
+import OSLog
 
 public final class NotificationManager: ObservableObject {
     
@@ -19,7 +19,7 @@ public final class NotificationManager: ObservableObject {
         let serviceName: String
     }
     
-    private let log = OSLog(subsystem: StatusUI.subsystemName, category: String(describing: NotificationManager.self))
+    private let logger = Logger(subsystem: StatusUI.subsystemName, category: String(describing: NotificationManager.self))
     
     private lazy var cancellables = Set<AnyCancellable>()
 
@@ -48,12 +48,12 @@ public final class NotificationManager: ObservableObject {
         if let registrationIndex = registrations.firstIndex(where: { $0.serviceName == serviceName && $0.scope == scope }) {
             registrations.remove(at: registrationIndex)
             
-            os_log("Removed notification registration for %{public}@", log: self.log, type: .debug, serviceName)
+            logger.debug("Removed notification registration for \(serviceName, privacy: .public)")
         } else {
             let newRegistration = Registration(scope: scope, serviceName: serviceName)
             registrations.append(newRegistration)
             
-            os_log("Created notification registration for %{public}@", log: self.log, type: .debug, serviceName)
+            logger.debug("Created notification registration for \(serviceName, privacy: .public)")
         }
     }
     
@@ -67,7 +67,7 @@ public final class NotificationManager: ObservableObject {
     }
     
     private func processUpdatedResponses(_ responses: [ServiceScope: StatusResponse], oldValue: [ServiceScope: StatusResponse]) {
-        os_log("%{public}@", log: log, type: .debug, #function)
+        logger.debug("\(#function, privacy: .public)")
 
         let oldStates = servicesPendingNotification(in: oldValue)
         let newStates = servicesPendingNotification(in: responses)
@@ -82,7 +82,7 @@ public final class NotificationManager: ObservableObject {
         
         guard !notifications.isEmpty else { return }
         
-        os_log("Produced %{public}d service restored notification(s)", log: self.log, type: .debug, notifications.count)
+        logger.debug("Produced \(notifications.count) service restored notification(s)")
         
         notifications.forEach { notification in
             presenter.present(notification)

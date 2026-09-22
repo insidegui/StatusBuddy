@@ -9,7 +9,6 @@
 import Foundation
 import Combine
 import JavaScriptCore
-import os.log
 
 public final class AppleStatusChecker: StatusChecker {
     
@@ -22,8 +21,6 @@ public final class AppleStatusChecker: StatusChecker {
         case JSON
         case JSONCallback(JSContext)
     }
-
-    private let log = OSLog(subsystem: StatusCore.subsystemName, category: String(describing: AppleStatusChecker.self))
 
     let endpoint: URL
     let format: ResponseFormat

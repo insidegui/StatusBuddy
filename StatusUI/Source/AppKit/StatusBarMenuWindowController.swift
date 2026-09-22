@@ -6,12 +6,12 @@
 //
 
 import AppKit
-import os.log
+import OSLog
 
 @MainActor
 public final class StatusBarMenuWindowController: NSWindowController {
     
-    private let log = OSLog(subsystem: StatusUI.subsystemName, category: String(describing: StatusBarMenuWindowController.self))
+    private let logger = Logger(subsystem: StatusUI.subsystemName, category: String(describing: StatusBarMenuWindowController.self))
     
     public let statusItem: NSStatusItem?
     
@@ -69,7 +69,7 @@ public final class StatusBarMenuWindowController: NSWindowController {
         NSAnimationContext.beginGrouping()
         NSAnimationContext.current.completionHandler = {
             guard self.visibilityToken == token else {
-                os_log("Close cancelled by visibility token race", log: self.log, type: .debug)
+                self.logger.debug("Close cancelled by visibility token race")
                 self.window?.alphaValue = 1
                 return
             }
@@ -90,7 +90,7 @@ public final class StatusBarMenuWindowController: NSWindowController {
     
     @objc private func repositionWindow() {
         guard let referenceWindow = statusItem?.button?.window, let window = window else {
-            os_log("Couldn't find reference window for repositioning status bar menu window, centering instead", log: self.log, type: .debug)
+            logger.debug("Couldn't find reference window for repositioning status bar menu window, centering instead")
             self.window?.center()
             return
         }
