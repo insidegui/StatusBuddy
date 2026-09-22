@@ -14,7 +14,7 @@ struct DashboardView: View {
             category: category
         )
         .frame(maxWidth: .infinity)
-        .padding(Self.padding)
+        .contentMargins(Self.padding, for: .scrollContent)
         .safeAreaInset(edge: .top, spacing: -Self.padding) {
             VStack(spacing: 12) {
                 DashboardHeader(viewModel: viewModel)
@@ -33,8 +33,14 @@ struct DashboardView: View {
             }
             .padding([.top, .leading, .trailing], Self.padding)
             .padding(.bottom, Self.padding / 2)
-//            .background(Color.red, in: .rect)
+            .variableBlurBackdrop(edge: .top)
         }
+        .safeAreaInset(edge: .bottom, spacing: -Self.padding) {
+            DashboardFooter(lastUpdated: viewModel.lastUpdated)
+                .padding(Self.padding)
+                .variableBlurBackdrop(edge: .bottom)
+        }
+        .compositingGroup()
     }
 }
 
