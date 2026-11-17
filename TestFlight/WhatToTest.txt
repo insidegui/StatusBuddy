@@ -1,1 +1,1 @@
-Addresses an issue that caused excessive CPU usage in the background in macOS 27.
+Just making sure the beta doesn't expire.
