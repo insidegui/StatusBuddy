@@ -115,15 +115,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private var imageForCurrentStatus: NSImage? {
-        NSImage(named: .init("statusbutton"))
-    }
+    private lazy var statusButtonImage: NSImage? = {
+        let image = NSImage(named: "statusbutton")?.copy() as? NSImage
+        image?.size = NSSize(width: 20, height: 20)
+        return image
+    }()
+
+    private lazy var badgedStatusButtonImage = statusButtonImage?.addingIssueBadge(
+        layoutDirection: statusItem.button?.userInterfaceLayoutDirection ?? .leftToRight
+    )
 
     private func updateButton() {
         guard let button = statusItem.button else { return }
 
-        button.image = imageForCurrentStatus
-        button.image?.size = NSSize(width: 20, height: 20)
+        button.image = statusButtonImage
         button.action = #selector(toggleUI)
     }
 
@@ -131,37 +136,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         didSet {
             guard issueBadgeVisible != oldValue else { return }
 
-            updateBadge()
+            statusItem.button?.image = issueBadgeVisible ? badgedStatusButtonImage : statusButtonImage
         }
-    }
-
-    private lazy var badgeView: NSTextField = {
-        let v = NSTextField(labelWithString: "!")
-        
-        v.font = .systemFont(ofSize: 12, weight: .bold)
-        v.textColor = .labelColor
-        v.translatesAutoresizingMaskIntoConstraints = false
-        let s = NSShadow()
-        s.shadowColor = NSColor(named: "IssueBadgeColor")
-        s.shadowBlurRadius = 1
-        s.shadowOffset = .zero
-        v.shadow = s
-
-        return v
-    }()
-
-    private func updateBadge() {
-        guard let button = statusItem.button else { return }
-
-        if badgeView.superview == nil {
-            button.addSubview(badgeView)
-            NSLayoutConstraint.activate([
-                badgeView.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: 0),
-                badgeView.bottomAnchor.constraint(equalTo: button.bottomAnchor, constant: 0),
-            ])
-        }
-
-        badgeView.isHidden = !issueBadgeVisible
     }
 
     @objc func toggleUI(_ sender: Any?) {
