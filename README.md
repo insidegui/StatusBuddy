@@ -1,23 +1,16 @@
-<img src="./images/StatusBuddy-Icon-2021.png" width="128">
+<img src="./images/StatusBuddy-Icon-2021.png" width="128" alt="StatusBuddy app icon">
 
 # StatusBuddy
 
-Keep track of Apple's developer and consumer system statuses right in your menu bar.
+StatusBuddy shows the status of Apple services in your Mac’s menu bar. It brings together Apple’s developer and customer system status dashboards, so you can check services such as App Store Connect, TestFlight, iCloud, and Apple Music in one place.
 
-StatusBuddy is a simple app that shows an icon on your Mac's menu bar. When an Apple service is having issues, the icon shows an exclamation mark, and you can click it to see what's going on.
+An exclamation mark appears on the menu bar icon when Apple reports an active issue. Click the icon to see which services are affected, check scheduled maintenance, or review recently resolved issues. Expand an active issue to read Apple’s report and choose **Notify when restored** to get a notification when the service is back online.
 
-While a service is experiencing issues, you may also click the notification icon to the right of the service's name to be notified when the service goes back to normal.
+<img src="./images/StatusBuddy-Screenshot-2026.webp" width="240" alt="StatusBuddy service status dashboard">
 
-The app will show the same issues Apple reports in their official system status dashboards for developers and consumers, so it includes both developer services such as App Store Connect and TestFlight and consumer services such as Apple Music and TV+.
+## Download
 
-<img src="./images/StatusBuddy-Screenshot-2026.webp" width="240">
+StatusBuddy 3.0 requires macOS Tahoe 26 or later.
 
-# Download
-
-StatusBuddy is available for free. If you prefer, you can pay any amount you'd like in order to support its continued development on Gumroad, using the link below.
-
-[You can always get the latest build on Gumroad](https://statusbuddy.app).
-
-[You may also get the latest StatusBuddy beta on TestFlight](https://testflight.apple.com/join/MK6zSKdG) (requires macOS Monterey and the TestFlight app installed).
-
-**StatusBuddy requires macOS Big Sur or later**
+- [Download StatusBuddy on Gumroad](https://statusbuddy.app). It’s free, with an optional contribution to support development.
+- [Join the StatusBuddy beta on TestFlight](https://testflight.apple.com/join/MK6zSKdG). Open the invitation on your Mac with the TestFlight app installed.
